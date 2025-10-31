@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Signup | FreshBite Kitchen</title>
+  <link rel="stylesheet" href="signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="signup-header">
+    <div class="navbar">
+      <a href="admin-dashboard.html" class="logo-link">
+        <img src="images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
+        <span>FreshBite Admin</span>
+      </a>
+      <nav class="nav-right">
+        <ul>
+          <li><a href="home.html" class="nav-link">Home</a></li>
+          <li><a href="login.html" class="nav-link">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Signup Container -->
+  <div class="signup-container">
+    <div class="signup-box">
+      <img src="images/logo_sample.jpeg" alt="FreshBite Logo" class="signup-logo">
+      <h1>Admin <span>Signup</span></h1>
+      <p>Register a new admin account to manage FreshBite operations.</p>
+
+      <form id="adminSignupForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Admin Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your FreshBite email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Create a password" required minlength="8">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+
+        <button type="submit" class="signup-btn">Create Admin Account</button>
+        <p class="switch-text">Already have access? <a href="login.html">Login here</a></p>
+      </form>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
