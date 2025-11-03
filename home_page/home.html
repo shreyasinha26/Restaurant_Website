@@ -23,9 +23,17 @@
       <ul>
         <li><a href="home.html" class="active">Home</a></li>
         <li><a href="menu.html">Menu</a></li>
-        <li><a href="diet-info.html">Diet Info</a></li>
+        <li><a href="reservation.html">Table Reservation</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="admin-login.html">Admin Login</a></li>
+
+        <!-- Dropdown Menu -->
+        <li class="dropdown">
+          <a href="#" class="dropbtn">Login ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="customer_login.html">Users</a></li>
+            <li><a href="login.html">Admin</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </header>
@@ -49,7 +57,7 @@
     </section>
 
 <!-- About Section -->
-<section class="about">
+<section class="about" id="about">
   <div class="about-container">
     <div class="about-text">
       <h2>About <span>FreshBite Kitchen</span></h2>
@@ -80,7 +88,7 @@
 
 <!-- Specialities Section -->
 
-    <section class="specialties">
+    <section class="specialties" id="specialties">
   <h2>Our <span>Specialties</span></h2>
   <div class="specialty-grid">
     <div class="specialty-card">
@@ -162,10 +170,6 @@
   </div>
 </section>
 
-
-
-
-
 <!-- Reviews Section -->
 <section class="reviews">
   <h2>What Our <span>Customers Say</span></h2>
@@ -202,11 +206,13 @@
   <footer>
     <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
     <nav>
-      <a href="#">About Us</a> |
-      <a href="#">Location</a> |
-      <a href="#">Privacy Policy</a>
+      <a href="#about">About Us</a> |
+      <a href="#specialties">Specialties</a> |
+      <a href="#hero">Back to top</a>
     </nav>
   </footer>
+
+  <script src="home.js"></script>
 
 </body>
 </html>
