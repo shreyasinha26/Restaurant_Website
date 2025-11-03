@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | FreshBite Kitchen</title>
+  <link rel="stylesheet" href="admin_dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="admin-header">
+    <div class="navbar">
+      <a href="home.html" class="logo-link">
+        <img src="images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
+        <span>FreshBite Admin</span>
+      </a>
+      <nav class="nav-right">
+        <ul>
+          <li><a href="home.html" class="nav-link">View Site</a></li>
+          <li><a href="login.html" class="nav-link logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Dashboard -->
+  <div class="admin-container">
+    <h1>Menu Management Dashboard</h1>
+    
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Today's Menu</h3>
+        <p id="today-menu-count">0 items</p>
+      </div>
+      <div class="card">
+        <h3>Total Menu Items</h3>
+        <p id="total-menu-count">0 items</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Specials</h3>
+        <p id="specials-count">0 items</p>
+      </div>
+    </div>
+    </div>  
+</body>
+</html>
