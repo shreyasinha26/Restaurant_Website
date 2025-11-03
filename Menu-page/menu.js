@@ -14,18 +14,26 @@ document.addEventListener("DOMContentLoaded", function () {
       noItemsMessage.style.display = "none";
     }
     // Filter items by category
-    const visibleItems =
-      filteredCategory === "all"
-        ? items
-        : items.filter(
-            (item) =>
-              item.category &&
-              item.category.toLowerCase() === filteredCategory.toLowerCase()
-          );
-
+    let visibleItems;
+      if (filteredCategory === "all") {
+          visibleItems = items;
+      } else if (filteredCategory === "healthy") {
+    // Show items that have any dietary restrictions
+    visibleItems = items.filter(
+        (item) => item.dietary && item.dietary.length > 0
+        );
+      } else {
+   // Filter by regular category
+    visibleItems = items.filter(
+      (item) =>
+      item.category &&
+      item.category.toLowerCase() === filteredCategory.toLowerCase()
+      );
+    }
+    
     if (visibleItems.length === 0) {
       menuContainer.innerHTML =
-        '<p style="text-align:center; color:#555;">No items found in this category.</p>';
+     '<p style="text-align:center; color:#555; grid-column: 1 / -1; padding: 40px;">No items found in this category.</p>';
       return;
     }
     // Create cards
@@ -34,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       card.className = "menu-item";
       card.innerHTML = `
         <div class="item-image">
-          <img src="${item.image || "images/default.jpg"}" alt="${item.name}">
+        <img src="${item.image || "images/default.jpg"}" alt="${item.name}" onerror="this.src='images/default.jpg'">
           ${item.category ? `<span class="badge">${item.category}</span>` : ""}
         </div>
         <div class="item-info">
@@ -42,12 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
           <p>${item.description}</p>
           <p class="price">€${item.price ? item.price.toFixed(2) : "0.00"}</p>
           ${
-            item.dietary && item.dietary.length > 0
-              ? `<p class="dietary"><strong>Dietary:</strong> ${item.dietary.join(
-                  ", "
-                )}</p>`
-              : ""
-          }
+          item.dietary && item.dietary.length > 0
+            ? `<p class="dietary" style="margin-top: 8px; font-size: 0.8rem; color: #ff7b00; font-weight: 600;">
+                <strong>Dietary:</strong> ${item.dietary.join(", ")}
+              </p>`
+           : ""
+        }
         </div>
       `;
       menuContainer.appendChild(card);
