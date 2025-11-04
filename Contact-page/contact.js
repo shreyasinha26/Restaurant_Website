@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         espoo: {
             phone: "+358 40 123 4569",
-            address: "Tapiontori 3, 02100 Espoo",
+            address: "Tapiontori 4, 02100 Espoo",
             hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
         },
         tampere: {
             phone: "+358 40 123 4570",
-            address: "Hämeenkatu 19, 33100 Tampere",
+            address: "Hämeenkatu 30, 33100 Tampere",
             hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
         }
     };
