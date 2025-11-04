@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         tampere: {
             phone: "+358 40 123 4570",
-            address: "Hämeenkatu 19, 33100 Tampere",
+            address: "Hämeenkatu 18, 33100 Tampere",
             hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
         }
     };
