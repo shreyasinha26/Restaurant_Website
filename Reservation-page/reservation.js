@@ -1,4 +1,4 @@
-// reservation.js
+// ---------- reservation.js (Enhanced) ----------
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
@@ -6,25 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const guestWarning = document.querySelector(".guest-warning");
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
+  const submitBtn = form.querySelector("button[type='submit']");
 
-  // 🔹 1. Hide warning initially
-  guestWarning.style.display = "none";
+  // 🔹 1. Hide guest warning initially
+  if (guestWarning) guestWarning.style.display = "none";
 
-  // 🔹 2. Restrict reservation date to today and future
+  // 🔹 2. Restrict reservation date (today and future)
   const today = new Date().toISOString().split("T")[0];
   dateInput.setAttribute("min", today);
 
-  // 🔹 3. Warn if guest count > 9 (shouldn’t happen due to select options)
+  // 🔹 3. Restrict time selection (restaurant hours)
+  timeInput.setAttribute("min", "10:00");
+  timeInput.setAttribute("max", "22:00");
+
+  // 🔹 4. Warn if guest count > 9
   guestsSelect.addEventListener("change", () => {
     const guestCount = parseInt(guestsSelect.value);
-    if (guestCount > 9) {
-      guestWarning.style.display = "block";
-    } else {
-      guestWarning.style.display = "none";
-    }
+    guestWarning.style.display = guestCount > 9 ? "block" : "none";
   });
 
-  // 🔹 4. Form submission handler
+  // 🔹 5. Form submission
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -37,35 +38,58 @@ document.addEventListener("DOMContentLoaded", () => {
     const time = timeInput.value;
     const requests = document.getElementById("requests").value.trim();
 
-    // 🔹 Simple validation
-    if (!name || !email || !phone || !guests || !date || !time) {
-      alert("Please fill in all required fields.");
+    // ---------- VALIDATION ----------
+    const errors = [];
+
+    // Name validation
+    if (!name) errors.push("Full name is required.");
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+      errors.push("A valid email address is required.");
+    }
+
+    // Phone validation — 10 digits only
+    const phonePattern = /^\d{10}$/;
+    if (!phone || !phonePattern.test(phone)) {
+      errors.push("Phone number must be 10 digits.");
+    }
+
+    // Other fields
+    if (!guests) errors.push("Please select the number of guests.");
+    if (!date) errors.push("Please choose a reservation date.");
+    if (!time) errors.push("Please select a time between 10:00–22:00.");
+
+    // If validation fails
+    if (errors.length > 0) {
+      alert("⚠️ Please fix the following:\n\n" + errors.join("\n"));
       return;
     }
 
-    // 🔹 Confirm reservation
+    // ---------- CONFIRMATION ----------
     const confirmationMessage = `
-      Reservation Details:
-      -------------------------
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Guests: ${guests}
-      Date: ${date}
-      Time: ${time}
-      Special Requests: ${requests || "None"}
+Reservation Details:
+-------------------------
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Guests: ${guests}
+Date: ${date}
+Time: ${time}
+Special Requests: ${requests || "None"}
     `;
 
     const confirmBooking = confirm(
-      "Confirm your reservation?\n\n" + confirmationMessage
+      "Please confirm your reservation:\n\n" + confirmationMessage
     );
 
     if (confirmBooking) {
-      // Simulate saving reservation
       alert("✅ Your table has been reserved successfully!");
       form.reset();
     } else {
-      alert("Reservation canceled.");
+      alert("❌ Reservation canceled.");
     }
   });
 });
+
