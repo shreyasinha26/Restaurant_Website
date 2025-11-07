@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshBite Kitchen | Order Online</title>
+  <link rel="stylesheet" href="menu.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="home.html">
+        <img src="images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" />
+      </a>
+      <span>FreshBite Kitchen</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="reservation.html">Table Reservation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Admin Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Menu Section -->
+  <section class="menu">
+    <div class="menu-header">
+      <h1>Order <span>Online</span></h1>
+      <div class="underline"></div>
+      <p>Explore our handcrafted meals and order your favorites — fresh, fast, and flavorful!</p>
+    </div>
+
+    <!-- Today's Special Section -->
+<section class="todays-special">
+  <h2>Today’s Special</h2>
+
+  <div class="special-items">
+    <div class="special-item">
+      <img src="images/mushroom-pasta.jpg" alt="Creamy Mushroom Pasta">
+      <div class="special-info">
+        <h3>Creamy Mushroom Pasta</h3>
+        <p>Fresh pasta tossed in a rich mushroom and parmesan sauce.</p>
+        <span class="price">€14.90</span>
+        <button class="add-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="special-item">
+      <img src="images/greek-salad.jpg" alt="Mediterranean Salad">
+      <div class="special-info">
+        <h3>Mediterranean Salad</h3>
+        <p>Crisp greens with olives, feta cheese, and lemon vinaigrette.</p>
+        <span class="price">€9.50</span>
+        <button class="add-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="special-item">
+      <img src="images/mango-smoothie.jpg" alt="Mango Smoothie">
+      <div class="special-info">
+        <h3>Mango Smoothie</h3>
+        <p>Refreshing tropical blend — sweet, cool, and full of energy.</p>
+        <span class="price">€5.50</span>
+        <button class="add-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+    <!-- Category Dropdown -->
+    <section class="menu-category-select">
+      <h2> Choose a Category</h2>
+      <p class="category-subtitle">Find your favorite meals by type</p>
+      <div class="category-dropdown">
+        <select id="menuCategory">
+          <option value="all">All Categories</option>
+          <option value="burgers">Burgers</option>
+          <option value="pizzas">Pizzas</option>
+          <option value="salads">Salads</option>
+          <option value="finnish">Finnish Specialties</option>
+          <option value="healthy">Healthy Options</option>
+          <option value="drinks">Drinks</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Menu Items -->
+<div class="menu-items">
+
+  <!-- Burgers -->
+  <div class="menu-category" id="burgers">
+    <h2>Burgers</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/Classic_Beef_Burger.jpeg" alt="Classic Beef Burger"></div>
+        <div class="item-info">
+          <h3>Classic Beef Burger</h3>
+          <p>Juicy beef patty with lettuce, tomato, onion, and our special sauce.</p>
+          <div class="price">€12.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/double_cheese_burger.jpeg" alt="Double Cheese Burger"></div>
+        <div class="item-info">
+          <h3>Double Cheese Burger</h3>
+          <p>Two beef patties with double cheese, pickles, and tangy sauce.</p>
+          <div class="price">€15.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/crispy_chicken_burger.webp" alt="Crispy Chicken Burger"></div>
+        <div class="item-info">
+          <h3>Crispy Chicken Burger</h3>
+          <p>Breaded chicken fillet with coleslaw and mayo on a brioche bun.</p>
+          <div class="price">€13.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/veggie_burger.jpg" alt="Veggie Delight Burger"></div>
+        <div class="item-info">
+          <h3>Veggie Delight Burger</h3>
+          <p>Plant-based patty with avocado, sprouts, and vegan mayo.</p>
+          <div class="price">€11.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/jalapeno-burger.jpg" alt="Spicy Jalapeno Burger"></div>
+        <div class="item-info">
+          <h3>Spicy Jalapeño Burger</h3>
+          <p>Loaded with fiery jalapeños, cheese, and spicy sauce.</p>
+          <div class="price">€13.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/bbq-burger.jpg" alt="BBQ Bacon Burger"></div>
+        <div class="item-info">
+          <h3>BBQ Bacon Burger</h3>
+          <p>Smoky BBQ sauce, crispy bacon, cheddar cheese, and grilled onions.</p>
+          <div class="price">€14.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pizzas -->
+  <div class="menu-category" id="pizzas">
+    <h2>Pizzas</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/margherita_pizza.jpg" alt="Margherita Pizza"></div>
+        <div class="item-info">
+          <h3>Margherita</h3>
+          <p>Classic tomato sauce, mozzarella, and fresh basil.</p>
+          <div class="price">€14.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/pepproni_pizza.jpeg" alt="Pepperoni Pizza"></div>
+        <div class="item-info">
+          <h3>Pepperoni</h3>
+          <p>Tomato sauce, mozzarella, and spicy pepperoni slices.</p>
+          <div class="price">€16.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/hawaiian_pizza.jpg" alt="Hawaiian Pizza"></div>
+        <div class="item-info">
+          <h3>Hawaiian</h3>
+          <p>Ham, pineapple, mozzarella, and tomato sauce.</p>
+          <div class="price">€15.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/veggie_pizza.jpg" alt="Vegetarian Pizza"></div>
+        <div class="item-info">
+          <h3>Vegetarian Supreme</h3>
+          <p>Bell peppers, mushrooms, olives, onions, and tomatoes.</p>
+          <div class="price">€15.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/bbq_pizza.jpg" alt="BBQ Chicken Pizza"></div>
+        <div class="item-info">
+          <h3>BBQ Chicken</h3>
+          <p>Grilled chicken, BBQ sauce, red onions, and mozzarella.</p>
+          <div class="price">€17.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/four-cheese.jpg" alt="Four Cheese Pizza"></div>
+        <div class="item-info">
+          <h3>Four Cheese</h3>
+          <p>Mozzarella, cheddar, parmesan, and gorgonzola blend.</p>
+          <div class="price">€16.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Salads -->
+  <div class="menu-category" id="salads">
+    <h2>Salads</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/ceasae_salad.jpg" alt="Caesar Salad"></div>
+        <div class="item-info">
+          <h3>Classic Caesar</h3>
+          <p>Romaine lettuce, croutons, parmesan, and creamy Caesar dressing.</p>
+          <div class="price">€10.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/greek_salad.jpg" alt="Greek Salad"></div>
+        <div class="item-info">
+          <h3>Greek Salad</h3>
+          <p>Cucumbers, tomatoes, olives, feta cheese, and olive oil dressing.</p>
+          <div class="price">€11.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/quinoa_salad.webp" alt="Quinoa Salad"></div>
+        <div class="item-info">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Quinoa, roasted vegetables, avocado, and lemon-tahini dressing.</p>
+          <div class="price">€12.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/tuna_salad.jpg" alt="Tuna Salad"></div>
+        <div class="item-info">
+          <h3>Tuna Salad</h3>
+          <p>Mixed greens with tuna, corn, boiled egg, and light dressing.</p>
+          <div class="price">€12.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finnish Specialties -->
+  <div class="menu-category" id="finnish">
+    <h2>Finnish Specialties</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/salmon_soup.jpg" alt="Finnish Salmon Soup"></div>
+        <div class="item-info">
+          <h3>Finnish Salmon Soup</h3>
+          <p>Traditional Lohikeitto with salmon, potatoes, and dill.</p>
+          <div class="price">€14.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/meatballs.webp" alt="Finnish Meatballs"></div>
+        <div class="item-info">
+          <h3>Finnish Meatballs</h3>
+          <p>Lihapullat with mashed potatoes, lingonberry jam, and gravy.</p>
+          <div class="price">€16.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/karelian_pasties.jpg" alt="Karelian Pasties"></div>
+        <div class="item-info">
+          <h3>Karelian Pasties</h3>
+          <p>Traditional rice-filled pastries with egg butter.</p>
+          <div class="price">€8.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/reindeer_stew.jpg" alt="Reindeer Stew"></div>
+        <div class="item-info">
+          <h3>Reindeer Stew</h3>
+          <p>Slow-cooked reindeer with root vegetables and herbs.</p>
+          <div class="price">€18.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Healthy Options -->
+  <div class="menu-category" id="healthy">
+    <h2>Healthy Options</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/budha_bowl.jpg" alt="Buddha Bowl"></div>
+        <div class="item-info">
+          <h3>Rainbow Buddha Bowl</h3>
+          <p>Quinoa, roasted sweet potatoes, kale, avocado, and tahini dressing.</p>
+          <div class="price">€13.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/grilled_salmon.jpg" alt="Grilled Salmon"></div>
+        <div class="item-info">
+          <h3>Grilled Salmon</h3>
+          <p>Atlantic salmon with steamed vegetables and lemon herb sauce.</p>
+          <div class="price">€17.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/veggie_wrap.png" alt="Veggie Wrap"></div>
+        <div class="item-info">
+          <h3>Mediterranean Veggie Wrap</h3>
+          <p>Hummus, roasted vegetables, feta, and spinach in a whole wheat wrap.</p>
+          <div class="price">€10.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/berry-bowl.jpg" alt="Smoothie Bowl"></div>
+        <div class="item-info">
+          <h3>Berry Smoothie Bowl</h3>
+          <p>Mixed berries, granola, coconut flakes, and chia seeds.</p>
+          <div class="price">€9.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drinks -->
+  <div class="menu-category" id="drinks">
+    <h2>Drinks</h2>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-image"><img src="images/coffee.jpg" alt="Coffee"></div>
+        <div class="item-info">
+          <h3>Finnish Coffee</h3>
+          <p>Traditional Finnish brew served black or with milk.</p>
+          <div class="price">€3.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/orange_juice.jpg" alt="Orange Juice"></div>
+        <div class="item-info">
+          <h3>Fresh Orange Juice</h3>
+          <p>Freshly squeezed orange juice.</p>
+          <div class="price">€4.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/berry_smoothie.jpg" alt="Berry Smoothie"></div>
+        <div class="item-info">
+          <h3>Berry Blast Smoothie</h3>
+          <p>Mixed berries, banana, yogurt, and honey.</p>
+          <div class="price">€6.50</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/mango-lassi.jpg" alt="Mango Lassi"></div>
+        <div class="item-info">
+          <h3>Mango Lassi</h3>
+          <p>Refreshing yogurt-based mango drink.</p>
+          <div class="price">€5.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="item-image"><img src="images/ice-tea.jpg" alt="Iced Tea"></div>
+        <div class="item-info">
+          <h3>Lemon Iced Tea</h3>
+          <p>Chilled tea with lemon and mint.</p>
+          <div class="price">€4.00</div>
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- Floating Cart Button -->
+  <div class="floating-cart">
+    🛒
+  </div>
+
+  <!-- Static Cart Sidebar -->
+  <aside class="cart-sidebar">
+    <h3>Your Cart</h3>
+    <div class="cart-items">
+      <p>No items added yet.</p>
+    </div>
+    <div class="cart-total">
+      <span>Total:</span> <strong>€0.00</strong>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+  </aside>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
+  </footer>
+  <script src="menu.js"></script>
+</body>
+</html>
