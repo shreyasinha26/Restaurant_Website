@@ -20,11 +20,19 @@
 
     <nav>
       <ul>
-        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html" class="active">Home</a></li>
         <li><a href="menu.html">Menu</a></li>
         <li><a href="reservation.html">Table Reservation</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-        <li><a href="login.html">Admin Login</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <!-- Dropdown Menu -->
+        <li class="dropdown">
+          <a href="#" class="dropbtn">Login ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="customer_login.html">Users</a></li>
+            <li><a href="login.html">Admin</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </header>
