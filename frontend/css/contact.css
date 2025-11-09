@@ -69,7 +69,7 @@ nav a.active {
 /* ----- Hero Section ----- */
 .contact-hero {
   background: linear-gradient(rgba(27, 27, 27, 0.7), rgba(27, 27, 27, 0.7)), 
-              url('images/get_img.jpg') center/cover no-repeat;
+              url('../images/get_img.jpg') center/cover no-repeat;
   height: 50vh;
   display: flex;
   align-items: center;
