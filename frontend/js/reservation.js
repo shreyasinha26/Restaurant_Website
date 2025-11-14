@@ -1,4 +1,4 @@
-// ---------- reservation.js (Final Enhanced Version) ----------
+// ---------- reservation.js (FINAL CLEAN VERSION) ----------
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
@@ -8,89 +8,59 @@ document.addEventListener("DOMContentLoaded", () => {
   const timeInput = document.getElementById("time");
 
   // Hide guest warning initially
-  if (guestWarning) guestWarning.style.display = "none";
+  guestWarning.style.display = "none";
 
-  // Restrict date (today and future)
+  // Restrict date to today + future
   const today = new Date().toISOString().split("T")[0];
   dateInput.min = today;
 
-  // Restaurant opening hours
+  // Restrict time to restaurant hours
   timeInput.min = "10:00";
   timeInput.max = "22:00";
 
-  // Show guest warning above 9
+  // Show guest warning if > 9 (not allowed)
   guestsSelect.addEventListener("change", () => {
     const guestCount = parseInt(guestsSelect.value);
     guestWarning.style.display = guestCount > 9 ? "block" : "none";
   });
 
-  // Handle form submission
-  form.addEventListener("submit", (event) => {
+  // ---------- SUBMIT FORM ----------
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const guests = guestsSelect.value;
-    const date = dateInput.value;
-    const time = timeInput.value;
-    const requests = document.getElementById("requests").value.trim();
+    // Gather reservation data
+    const reservationData = {
+      full_name: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      guests: document.getElementById("guests").value,
+      date: document.getElementById("date").value,
+      time: document.getElementById("time").value,
+      notes: document.getElementById("requests").value.trim(),
+    };
 
-    // Collect validation errors
-    const errors = [];
+    // ---------- SEND TO BACKEND ----------
+    try {
+      const response = await fetch("http://127.0.0.1:5000/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reservationData),
+      });
 
-    // Name
-    if (!name) errors.push("Full name is required.");
+      const result = await response.json();
 
-    // Email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailPattern.test(email)) {
-      errors.push("Please enter a valid email address.");
-    }
+      if (!response.ok) {
+        alert("❌ Please fix the following:\n\n" + result.errors.join("\n"));
+        return;
+      }
 
-    // Phone (allow spaces but must be 10 digits total)
-    const numericPhone = phone.replace(/\D/g, "");
-    if (numericPhone.length !== 10) {
-      errors.push("Phone number must be exactly 10 digits.");
-    }
-
-    // Guests
-    if (!guests) errors.push("Please select number of guests.");
-
-    // Date
-    if (!date) errors.push("Please choose a reservation date.");
-
-    // Time
-    if (!time) {
-      errors.push("Please select a reservation time.");
-    } else if (time < "10:00" || time > "22:00") {
-      errors.push("Reservations are available between 10:00 and 22:00.");
-    }
-
-    // Show errors
-    if (errors.length > 0) {
-      alert("Please fix the following:\n\n" + errors.join("\n"));
-      return;
-    }
-
-    // Confirmation message
-    const confirmText =
-      "Please confirm your reservation:\n\n" +
-      "Name: " + name + "\n" +
-      "Email: " + email + "\n" +
-      "Phone: " + phone + "\n" +
-      "Guests: " + guests + "\n" +
-      "Date: " + date + "\n" +
-      "Time: " + time + "\n" +
-      "Special Requests: " + (requests || "None");
-
-    const confirmBooking = confirm(confirmText);
-
-    if (confirmBooking) {
-      alert("✅ Your table has been reserved successfully!");
+      // Successful reservation
+      alert("✅ Reservation confirmed!\nReservation ID: " + result.reservation_id);
       form.reset();
-    } else {
-      alert("Reservation canceled.");
+
+    } catch (error) {
+      alert("⚠ Server not responding. Please start Flask backend.");
     }
   });
 });
+
