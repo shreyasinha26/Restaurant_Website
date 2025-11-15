@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | FreshBite Kitchen</title>
+  <link rel="stylesheet" href="../css/admin-dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="admin-header">
+    <div class="navbar">
+      <a href="home.html" class="logo-link">
+        <img src="../images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
+        <span>FreshBite Admin</span>
+      </a>
+      <nav class="nav-right">
+        <ul>
+          <li><a href="home.html" class="nav-link">View Site</a></li>
+          <li><a href="menu.html" class="nav-link">Menu</a></li>
+          <li><a href="login.html" class="nav-link logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Dashboard -->
+  <div class="admin-container">
+    <h1>Menu Management Dashboard</h1>
+    
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Today's Menu</h3>
+        <p id="today-menu-count">0 items</p>
+      </div>
+      <div class="card">
+        <h3>Total Menu Items</h3>
+        <p id="total-menu-count">0 items</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Specials</h3>
+        <p id="specials-count">0 items</p>
+      </div>
+    </div>
+
+    <div class="menu-management">
+      <div class="section-header">
+        <h2>Manage Menu Items</h2>
+        <button class="btn-primary" id="add-item-btn">+ Add New Item</button>
+      </div>
+
+      <div class="menu-items-list" id="menu-items-container">
+        <!-- Menu items will be loaded here dynamically -->
+      </div>
+    </div>
+
+    <!-- Add/Edit Item Modal -->
+    <div class="modal" id="item-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title">Add Menu Item</h2>
+        <form id="item-form">
+          <input type="hidden" id="item-id">
+          <div class="form-group">
+            <label for="item-name">Item Name</label>
+            <input type="text" id="item-name" required>
+          </div>
+          <div class="form-group">
+            <label for="item-description">Description</label>
+            <textarea id="item-description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="item-price">Price (€)</label>
+            <input type="number" id="item-price" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label for="item-category">Category</label>
+            <select id="item-category" required>
+              <option value="">Select Category</option>
+              <option value="burgers">Burgers</option>
+              <option value="pizzas">Pizzas</option>
+              <option value="salads">Salads</option>
+              <option value="finnish">Finnish Specialties</option>
+              <option value="healthy">Healthy Options</option>
+              <option value="drinks">Drinks</option>
+            </select>
+          </div>
+                <div class="form-group">
+                <label>Dietary Restrictions</label>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="dietary" value="vegan"> Vegan</label>
+                    <label><input type="checkbox" name="dietary" value="gluten-free"> Gluten-Free</label>
+                    <label><input type="checkbox" name="dietary" value="dairy-free"> Dairy-Free</label>
+                    <label><input type="checkbox" name="dietary" value="soy-free"> Soy-Free</label>
+                    <label><input type="checkbox" name="dietary" value="egg-free"> Egg-Free</label>
+                    <label><input type="checkbox" name="dietary" value="keto"> Keto</label>
+                    <label><input type="checkbox" name="dietary" value="low-carb"> Low-Carb</label>
+                    <label><input type="checkbox" name="dietary" value="sugar-free"> Sugar-Free</label>
+                </div>
+
+          </div>
+          <div class="form-group">
+            <label for="item-image">Image URL</label>
+            <input type="text" id="item-image">
+          </div>
+          <div class="form-group">
+            <label for="item-day">Available Day (for lunch menu)</label>
+            <select id="item-day">
+              <option value="">Any day</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Save Item</button>
+            <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../js/admin-dashboard.js"></script>
+</body>
+</html>

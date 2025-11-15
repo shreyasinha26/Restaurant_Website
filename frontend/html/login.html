@@ -46,6 +46,15 @@
       <p class="small-text">Don't have an account? <a href="signup.html" id="switchToSignup">Sign Up</a></p>
     </form>
   </div>
-<script src="login.js"></script>
+
+<script>
+    // Redirect to admin dashboard on form submit
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // prevent default form submission
+      // Redirect to admin dashboard
+      window.location.href = 'admin-dashboard.html';
+    });
+  </script>
 </body>
 </html>
