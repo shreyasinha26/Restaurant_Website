@@ -1,0 +1,2 @@
+MONGO_URI = "mongodb+srv://hnjrwl_db_user:Honey12345@cluster0.w8sfktk.mongodb.net/?retryWrites=true&w=majority"
+DB_NAME = "freshbite_db"
