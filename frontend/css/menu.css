@@ -357,14 +357,23 @@ nav a:hover, nav a.active {
   background: #e06a00;
 }
 
-/* ---------- Footer ---------- */
+/* ----- Footer ----- */
 footer {
-  text-align: center;
-  padding: 20px;
   background: #1b1b1b;
   color: #ccc;
+  text-align: center;
+  padding: 20px;
   font-size: 0.9rem;
-  margin-top: 50px;
+}
+
+footer nav a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer nav a:hover {
+  color: #ff7b00;
 }
 
 /* ---------- Floating Cart Button ---------- */
