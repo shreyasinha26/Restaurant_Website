@@ -17,3 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   applyTranslations();
 });
+
+// This script enables language switching functionality on the website.

@@ -115,3 +115,5 @@ const translations = {
     footer_top: "Takaisin ylös"
   }
 };
+
+// This script contains translation data for bilingual support (English and Finnish) on the website.    
