@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FreshBite Kitchen | Healthy & Delicious Food</title>
+  <title data-i18n="page_title">FreshBite Kitchen | Healthy & Delicious Food</title>
   <link rel="stylesheet" href="../css/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="images/icon.ico" type="image/x-icon">
@@ -16,26 +16,30 @@
       <a href="home.html">
         <img src="../images/logo_sample.jpeg" alt="FreshBite Kitchen logo" />
       </a>
-      <span>FreshBite Kitchen</span>
+      <span data-i18n="logo_text">FreshBite Kitchen</span>
     </div>
 
     <nav>
       <ul>
-        <li><a href="home.html" class="active">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="reservation.html">Table Reservation</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="find-us.html">Find Us</a></li>
+        <li><a data-i18n="nav_home" href="home.html" class="active">Home</a></li>
+        <li><a data-i18n="nav_menu" href="menu.html">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="reservation.html">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="contact.html">Contact</a></li>
+        <li><a data-i18n="nav_findus" href="find-us.html">Find Us</a></li>
 
 
 
         <!-- Dropdown Menu -->
         <li class="dropdown">
-          <a href="#" class="dropbtn">Login ▾</a>
+          <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a href="customer_login.html">Users</a></li>
-            <li><a href="login.html">Admin</a></li>
+            <li><a href="customer_login.html" data-i18n="login_user">Users</a></li>
+            <li><a href="login.html" data-i18n="login_admin">Admin</a></li>
           </ul>
+        </li>
+        <!-- LANGUAGE SWITCH -->
+        <li class="lang-switcher">
+          <button id="lang-switch">FI / EN</button>
         </li>
       </ul>
     </nav>
@@ -49,8 +53,8 @@
       </video>
 
       <div class="hero-content">
-        <h1>Welcome to <span>FreshBite Kitchen</span></h1>
-        <p>Healthy, delicious, and crafted with care — every meal made fresh for you.</p>
+        <h1 data-i18n="hero_title">Welcome to <span>FreshBite Kitchen</span></h1>
+        <p data-i18n="hero_text">Healthy, delicious, and crafted with care — every meal made fresh for you.</p>
       </div>
 
       <a href="#about" class="scroll-down" aria-label="Scroll to content">
@@ -64,21 +68,21 @@
 <section class="about" id="about">
   <div class="about-container">
     <div class="about-text">
-      <h2>About <span>FreshBite Kitchen</span></h2>
-      <p>
+      <h2 data-i18n="about_title">About <span>FreshBite Kitchen</span></h2>
+      <p data-i18n="about_text1">
         At FreshBite Kitchen, we blend nutrition and taste to give you the best of both worlds.
         Every dish is designed by expert chefs and nutritionists to keep you full of energy and joy.
       </p>
-      <p>
+      <p data-i18n="about_text2">
         We are passionate about healthy eating and take pride in sourcing 100% fresh and organic ingredients. 
         Our menu caters to vegan, gluten-free, and health-conscious customers.
       </p>
-      <p>
+      <p data-i18n="about_text3">
         Currently, we serve our delicious meals in <strong>Helsinki, Turku, Espoo, and Tampere</strong>, 
         with plans to expand further. Whether you want a fresh salad, hearty vegan bowl, or healthy juice, 
         we bring nutritious meals straight to your doorstep.
       </p>
-      <p>
+      <p data-i18n="about_text4">
         Our mission is to make healthy eating easy, enjoyable, and accessible for everyone.
         We believe good food fuels not just the body, but also the mind and soul.
       </p>
@@ -93,34 +97,34 @@
 <!-- Specialities Section -->
 
     <section class="specialties" id="specialties">
-  <h2>Our <span>Specialties</span></h2>
+  <h2 data-i18n="specialties_title">Our <span>Specialties</span></h2>
   <div class="specialty-grid">
     <div class="specialty-card">
       <img src="../images/burger.jpg" alt="Burgers">
       <div class="specialty-info">
-        <h3>Burgers</h3>
-        <p>Juicy, freshly prepared burgers with a variety of toppings for every taste.</p>
+        <h3 data-i18n="specialty_burger">Burgers</h3>
+        <p data-i18n="specialty_burger_text">Juicy, freshly prepared burgers with a variety of toppings for every taste.</p>
       </div>
     </div>
     <div class="specialty-card">
       <img src="../images/pizza.jpg" alt="Pizzas">
       <div class="specialty-info">
-        <h3>Pizzas</h3>
-        <p>Wood-fired, cheesy pizzas made from the freshest ingredients.</p>
+        <h3 data-i18n="specialty_pizza">Pizzas</h3>
+        <p data-i18n="specialty_pizza_text">Wood-fired, cheesy pizzas made from the freshest ingredients.</p>
       </div>
     </div>
     <div class="specialty-card">
       <img src="../images/drinks.jpg" alt="Drinks">
       <div class="specialty-info">
-        <h3>Drinks</h3>
-        <p>Refreshing cold-pressed juices, smoothies, and classic beverages.</p>
+        <h3 data-i18n="specialty_drinks">Drinks</h3>
+        <p data-i18n="specialty_drinks_text">Refreshing cold-pressed juices, smoothies, and classic beverages.</p>
       </div>
     </div>
     <div class="specialty-card">
       <img src="../images/salads.jpg" alt="Salads">
       <div class="specialty-info">
-        <h3>Salads</h3>
-        <p>Healthy and colorful salads packed with fresh vegetables and protein.</p>
+        <h3 data-i18n="specialty_salads">Salads</h3>
+        <p data-i18n="specialty_salads_text">Healthy and colorful salads packed with fresh vegetables and protein.</p>
       </div>
     </div>
   </div>
@@ -130,7 +134,7 @@
 
 <!-- Why choose us -->
 <section class="why-choose">
-  <h2>Why <span>Choose Us</span></h2>
+  <h2 data-i18n="why_choose_us">Why <span>Choose Us</span></h2>
   <div class="choose-columns">
 
     <!-- Left Column -->
@@ -138,16 +142,16 @@
       <div class="choose-item">
         <img src="../images/fresh.jpg" alt="Fresh Ingredients">
         <div class="choose-text">
-          <h3>100% Fresh Ingredients</h3>
-          <p>We use only fresh, organic ingredients for all our meals.</p>
+          <h3 data-i18n="fresh_ingredients>100% Fresh Ingredients</h3>
+          <p data-i18n="fresh_ingredients_text">We use only fresh, organic ingredients for all our meals.</p>
         </div>
       </div>
 
       <div class="choose-item">
         <img src="../images/chef.jpg" alt="Expert Chefs">
         <div class="choose-text">
-          <h3>Expert Chefs</h3>
-          <p>Our chefs craft each dish to perfection with nutritional care.</p>
+          <h3 data-i18n="expert_chefs">Expert Chefs</h3>
+          <p data-i18n="expert_chefs_text">Our chefs craft each dish to perfection with nutritional care.</p>
         </div>
       </div>
     </div>
@@ -157,16 +161,16 @@
       <div class="choose-item">
         <img src="../images/gluten.png" alt="Vegan & Gluten-Free">
         <div class="choose-text">
-          <h3>Vegan & Gluten-Free</h3>
-          <p>Options for all diets without compromising taste.</p>
+          <h3  data-i18n="vegan_gluten">Vegan & Gluten-Free</h3>
+          <p data-i18n="vegan_gluten_text">Options for all diets without compromising taste.</p>
         </div>
       </div>
 
       <div class="choose-item">
         <img src="../images/delivery.jpg" alt="Fast Delivery">
         <div class="choose-text">
-          <h3>Fast Delivery</h3>
-          <p>Enjoy your meal quickly and safely, right at your doorstep.</p>
+          <h3 data-i18n="fast_delivery">Fast Delivery</h3>
+          <p data-i18n="fast_delivery_text">Enjoy your meal quickly and safely, right at your doorstep.</p>
         </div>
       </div>
     </div>
@@ -176,28 +180,28 @@
 
 <!-- Reviews Section -->
 <section class="reviews">
-  <h2>What Our <span>Customers Say</span></h2>
+  <h2 data-i18n="reviews_title">What Our <span>Customers Say</span></h2>
   <div class="review-grid">
 
     <!-- Review 1 -->
     <div class="review-card">
       <img src="../images/customer1.jpg" alt="Sofia" class="review-photo">
-      <p>“The best healthy restaurant in town! Every bite feels fresh and full of flavor.”</p>
-      <h4>– Sofia, Helsinki</h4>
+      <p data-i18n="review_1_text">“The best healthy restaurant in town! Every bite feels fresh and full of flavor.”</p>
+      <h4 data-i18n="review_1_name">– Sofia, Helsinki</h4>
     </div>
 
     <!-- Review 2 -->
     <div class="review-card">
       <img src="../images/customer2.jpg" alt="Liam" class="review-photo">
-      <p>“Fast delivery, amazing taste, and the vegan options are incredible!”</p>
-      <h4>– Liam, Turku</h4>
+      <p data-i18n="review_1_text" data-i18n="review_2_text">“Fast delivery, amazing taste, and the vegan options are incredible!”</p>
+      <h4 data-i18n="review_2_name">– Liam, Turku</h4>
     </div>
 
     <!-- Review 3 -->
     <div class="review-card">
       <img src="../images/customer3.jpg" alt="Emma" class="review-photo">
-      <p>“Fresh ingredients, beautiful presentation, and friendly staff. Highly recommend!”</p>
-      <h4>– Emma, Espoo</h4>
+      <p data-i18n="review_3_text">“Fresh ingredients, beautiful presentation, and friendly staff. Highly recommend!”</p>
+      <h4 data-i18n="review_3_name">– Emma, Espoo</h4>
     </div>
 
   </div>
@@ -208,15 +212,18 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
+    <p data-i18n="footer_text">© 2025 FreshBite Kitchen | All Rights Reserved</p>
     <nav>
-      <a href="#about">About Us</a> |
-      <a href="#specialties">Specialties</a> |
-      <a href="#hero">Back to top</a>
+      <a href="#about" data-i18n="footer_about">About Us</a> |
+      <a href="#specialties" data-i18n="footer_specialties">Specialties</a> |
+      <a href="#hero" data-i18n="footer_top">Back to top</a>
     </nav>
   </footer>
 
   <script src="../js/home.js"></script>
+  <script src="../js/translations.js"></script>
+  <script src="../js/language.js"></script>
+
 
 </body>
 </html>
