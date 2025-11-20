@@ -1,3 +1,4 @@
+// This script contains translation data for bilingual support (English and Finnish) on the website. 
 const translations = {
   en: {
     page_title: "FreshBite Kitchen | Healthy & Delicious Food",
@@ -7,6 +8,7 @@ const translations = {
     nav_menu: "Menu",
     nav_reservation: "Table Reservation",
     nav_contact: "Contact",
+    nav_findus: "Find Us",
     login: "Login ▾",
     login_user: "Users",
     login_admin: "Admin",
@@ -116,4 +118,4 @@ const translations = {
   }
 };
 
-// This script contains translation data for bilingual support (English and Finnish) on the website.    
+   

@@ -88,11 +88,6 @@ nav a.active {
   color: #fff;
 }
 
-
-
-
-
-
 /* ----- Hero Video ----- */
 .hero-video {
   position: relative;
@@ -184,6 +179,8 @@ nav a.active {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   object-fit: cover;
 }
+
+/* ----- Specialties Section ----- */
 
 .specialties {
   text-align: center;

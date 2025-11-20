@@ -1,3 +1,4 @@
+// This script enables language switching functionality on the website.
 document.addEventListener("DOMContentLoaded", () => {
   const switchBtn = document.getElementById("lang-switch");
   let currentLang = localStorage.getItem("lang") || "en";
@@ -18,4 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTranslations();
 });
 
-// This script enables language switching functionality on the website.
+
