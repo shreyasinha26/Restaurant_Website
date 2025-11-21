@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #fffaf0;
@@ -12,19 +16,17 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- Header ---------- */
-header {
-  width: 100%;
-  padding: 15px 40px;
-  background: #1b1b1b;
+/* ---------- Header (copied from home.css) ---------- */
+.site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px 48px;
+  background: #1b1b1b;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-  border-bottom: 2px solid #ff7b00;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
 }
 
 .logo {
@@ -34,8 +36,8 @@ header {
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ff7b00;
@@ -44,27 +46,88 @@ header {
 .logo span {
   color: #ff7b00;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
+/* Language Switch */
+.lang-switcher {
+  margin-right: 15px;
+}
+
+.lang-switcher button {
+  background-color: #f7f3e9 !important; /* OFF-CREAM */
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-switcher button:hover {
+  background-color: #eee3cc !important;
+}
+
+/* Navigation */
 nav ul {
   display: flex;
   list-style: none;
-  gap: 15px;
+  gap: 18px;
 }
 
 nav a {
   color: #f1f1f1;
   text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: 0.3s;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;  /* bold as in home */
 }
 
-nav a:hover, nav a.active {
+nav a:hover,
+nav a.active {
   background: #ff7b00;
   color: #fff;
+}
+
+/* ----- Dropdown Menu (same as home) ----- */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: #1b1b1b;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 14px;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background-color: #ff7b00;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
 }
 
 /* ---------- Menu Header ---------- */
@@ -366,16 +429,6 @@ footer {
   font-size: 0.9rem;
 }
 
-footer nav a {
-  color: #ccc;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-footer nav a:hover {
-  color: #ff7b00;
-}
-
 /* ---------- Floating Cart Button ---------- */
 .floating-cart {
   position: fixed;
@@ -398,88 +451,38 @@ footer nav a:hover {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 768px) {
-  header {
+@media (max-width: 900px) {
+  .site-header {
     padding: 12px 20px;
     flex-direction: column;
     gap: 15px;
   }
-  
+
   nav ul {
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .menu {
     padding: 40px 15px;
   }
-  
+
   .todays-special {
     padding: 30px 20px;
     margin: 30px auto;
   }
-  
+
   .special-items {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .items-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cart-sidebar {
     width: 100%;
   }
 }
-
-/* ----- Dropdown Menu ----- */
-.dropdown {
-  position: relative;
-}
-
-.dropbtn {
-  cursor: pointer;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 35px;
-  left: 0;
-  background-color: #1b1b1b;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  border-radius: 6px;
-  z-index: 10;
-}
-
-.dropdown-content li {
-  list-style: none;
-}
-
-.dropdown-content a {
-  color: #fff;
-  padding: 10px 14px;
-  display: block;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.dropdown-content a:hover {
-  background-color: #ff7b00;
-}
-
-.dropdown.active .dropdown-content {
-  display: block;
-}
-
-#about,
-#specialties,
-#hero {
-  scroll-margin-top: 80px; /* height of sticky header */
-}
-
-
-/* ----- Base ----- */
