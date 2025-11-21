@@ -1,8 +1,12 @@
 // Translation data for EN / FI
 const translations = {
   en: {
+    // ----- Generic / Home -----
     page_title: "FreshBite Kitchen | Healthy & Delicious Food",
     page_title_menu: "FreshBite Kitchen | Order Online",
+    page_title_reservation: "FreshBite Kitchen | Table Reservation",
+    page_title_contact: "FreshBite Kitchen | Contact Us",
+    page_title_findus: "FreshBite Kitchen | Find Us",
 
     logo_text: "FreshBite Kitchen",
 
@@ -119,23 +123,18 @@ const translations = {
     menu_burger_classic_title: "Classic Beef Burger",
     menu_burger_classic_desc:
       "Juicy beef patty with lettuce, tomato, onion, and our special sauce.",
-
     menu_burger_doublecheese_title: "Double Cheese Burger",
     menu_burger_doublecheese_desc:
       "Two beef patties with double cheese, pickles, and tangy sauce.",
-
     menu_burger_crispychicken_title: "Crispy Chicken Burger",
     menu_burger_crispychicken_desc:
       "Breaded chicken fillet with coleslaw and mayo on a brioche bun.",
-
     menu_burger_veggie_title: "Veggie Delight Burger",
     menu_burger_veggie_desc:
       "Plant-based patty with avocado, sprouts, and vegan mayo.",
-
     menu_burger_jalapeno_title: "Spicy Jalapeño Burger",
     menu_burger_jalapeno_desc:
       "Loaded with fiery jalapeños, cheese, and spicy sauce.",
-
     menu_burger_bbq_title: "BBQ Bacon Burger",
     menu_burger_bbq_desc:
       "Smoky BBQ sauce, crispy bacon, cheddar cheese, and grilled onions.",
@@ -144,23 +143,18 @@ const translations = {
     menu_pizza_margherita_title: "Margherita",
     menu_pizza_margherita_desc:
       "Classic tomato sauce, mozzarella, and fresh basil.",
-
     menu_pizza_pepperoni_title: "Pepperoni",
     menu_pizza_pepperoni_desc:
       "Tomato sauce, mozzarella, and spicy pepperoni slices.",
-
     menu_pizza_hawaiian_title: "Hawaiian",
     menu_pizza_hawaiian_desc:
       "Ham, pineapple, mozzarella, and tomato sauce.",
-
     menu_pizza_veggie_title: "Vegetarian Supreme",
     menu_pizza_veggie_desc:
       "Bell peppers, mushrooms, olives, onions, and tomatoes.",
-
     menu_pizza_bbq_title: "BBQ Chicken",
     menu_pizza_bbq_desc:
       "Grilled chicken, BBQ sauce, red onions, and mozzarella.",
-
     menu_pizza_fourcheese_title: "Four Cheese",
     menu_pizza_fourcheese_desc:
       "Mozzarella, cheddar, parmesan, and gorgonzola blend.",
@@ -169,15 +163,12 @@ const translations = {
     menu_salad_caesar_title: "Classic Caesar",
     menu_salad_caesar_desc:
       "Romaine lettuce, croutons, parmesan, and creamy Caesar dressing.",
-
     menu_salad_greek_title: "Greek Salad",
     menu_salad_greek_desc:
       "Cucumbers, tomatoes, olives, feta cheese, and olive oil dressing.",
-
     menu_salad_quinoa_title: "Quinoa Power Bowl",
     menu_salad_quinoa_desc:
       "Quinoa, roasted vegetables, avocado, and lemon-tahini dressing.",
-
     menu_salad_tuna_title: "Tuna Salad",
     menu_salad_tuna_desc:
       "Mixed greens with tuna, corn, boiled egg, and light dressing.",
@@ -186,15 +177,12 @@ const translations = {
     menu_finnish_salmonsoup_title: "Finnish Salmon Soup",
     menu_finnish_salmonsoup_desc:
       "Traditional Lohikeitto with salmon, potatoes, and dill.",
-
     menu_finnish_meatballs_title: "Finnish Meatballs",
     menu_finnish_meatballs_desc:
       "Lihapullat with mashed potatoes, lingonberry jam, and gravy.",
-
     menu_finnish_karelian_title: "Karelian Pasties",
     menu_finnish_karelian_desc:
       "Traditional rice-filled pastries with egg butter.",
-
     menu_finnish_reindeer_title: "Reindeer Stew",
     menu_finnish_reindeer_desc:
       "Slow-cooked reindeer with root vegetables and herbs.",
@@ -203,15 +191,12 @@ const translations = {
     menu_healthy_buddha_title: "Rainbow Buddha Bowl",
     menu_healthy_buddha_desc:
       "Quinoa, roasted sweet potatoes, kale, avocado, and tahini dressing.",
-
     menu_healthy_salmon_title: "Grilled Salmon",
     menu_healthy_salmon_desc:
       "Atlantic salmon with steamed vegetables and lemon herb sauce.",
-
     menu_healthy_wrap_title: "Mediterranean Veggie Wrap",
     menu_healthy_wrap_desc:
       "Hummus, roasted vegetables, feta, and spinach in a whole wheat wrap.",
-
     menu_healthy_berrybowl_title: "Berry Smoothie Bowl",
     menu_healthy_berrybowl_desc:
       "Mixed berries, granola, coconut flakes, and chia seeds.",
@@ -220,28 +205,21 @@ const translations = {
     menu_drink_coffee_title: "Finnish Coffee",
     menu_drink_coffee_desc:
       "Traditional Finnish brew served black or with milk.",
-
     menu_drink_orange_title: "Fresh Orange Juice",
     menu_drink_orange_desc: "Freshly squeezed orange juice.",
-
     menu_drink_berry_title: "Berry Blast Smoothie",
     menu_drink_berry_desc:
       "Mixed berries, banana, yogurt, and honey.",
-
     menu_drink_lassi_title: "Mango Lassi",
     menu_drink_lassi_desc:
       "Refreshing yogurt-based mango drink.",
-
     menu_drink_icetea_title: "Lemon Iced Tea",
     menu_drink_icetea_desc:
       "Chilled tea with lemon and mint.",
 
     /* ===== Reservation page (EN) ===== */
-    page_title_reservation: "FreshBite Kitchen | Table Reservation",
-
     reservation_hero_title: "Reserve Your Table <span>Effortlessly</span>",
     reservation_hero_text: "Enjoy a smooth and easy online table reservation.",
-
     reservation_guidelines_title: "Reservation Guidelines",
     reservation_guideline_1:
       "Only one person from a group can reserve a table online.",
@@ -251,7 +229,6 @@ const translations = {
       "Choose your preferred date and time for the reservation.",
     reservation_guideline_4:
       "If you do not arrive within 1 hour of the reserved time, your reservation will be canceled.",
-
     reservation_form_title: "Reserve a Table",
     reservation_label_name: "Full Name",
     reservation_label_email: "Email",
@@ -262,14 +239,80 @@ const translations = {
     reservation_label_requests: "Special Requests",
     reservation_guest_warning: "Groups over 9 cannot reserve online.",
     reservation_submit_btn: "Reserve Table",
-
     reservation_footer_location: "Location (Open in HSL)",
-    reservation_footer_privacy: "Privacy Policy"
+    reservation_footer_privacy: "Privacy Policy",
+
+    // ===== Contact page (EN) =====
+    contact_hero_title: "Get in <span>Touch</span>",
+    contact_hero_text:
+      "We'd love to hear from you. Reach out with any questions or feedback.",
+    contact_info_title: "Contact Information",
+    contact_locations_title: "Our Locations",
+    contact_locations_hki: "Helsinki: Aleksanterinkatu 15, 00100",
+    contact_locations_turku: "Turku: Aurakatu 8, 20100",
+    contact_locations_espoo: "Espoo: Tapiontori 4, 02100",
+    contact_locations_tre: "Tampere: Hämeenkatu 30, 33100",
+    contact_phone_title: "Phone Numbers",
+    contact_phone_hki: "Helsinki: +358 40 123 4567",
+    contact_phone_turku: "Turku: +358 40 123 4568",
+    contact_phone_espoo: "Espoo: +358 40 123 4569",
+    contact_phone_tre: "Tampere: +358 40 123 4570",
+    contact_email_title: "Email",
+    contact_email_general: "General Inquiries: info@freshbitekitchen.fi",
+    contact_email_reservations:
+      "Reservations: reservations@freshbitekitchen.fi",
+    contact_email_feedback: "Feedback: feedback@freshbitekitchen.fi",
+    contact_hours_title: "Opening Hours",
+    contact_hours_weekdays: "Monday - Thursday: 11:00 - 22:00",
+    contact_hours_weekend: "Friday - Saturday: 11:00 - 23:00",
+    contact_hours_sun: "Sunday: 12:00 - 21:00",
+    contact_form_title: "Send us a Message",
+    contact_form_label_name: "Full Name",
+    contact_form_label_email: "Email Address",
+    contact_form_label_phone: "Phone Number",
+    contact_form_label_location: "Preferred Location",
+    contact_form_label_subject: "Subject",
+    contact_form_label_message: "Message",
+    contact_form_placeholder_name: "Your full name",
+    contact_form_placeholder_email: "Your email address",
+    contact_form_placeholder_phone: "Your phone number",
+    contact_form_placeholder_location: "Select a location",
+    contact_form_placeholder_subject: "Message subject",
+    contact_form_placeholder_message: "Your message...",
+    contact_location_option_hki: "Helsinki",
+    contact_location_option_turku: "Turku",
+    contact_location_option_espoo: "Espoo",
+    contact_location_option_tre: "Tampere",
+    contact_form_submit: "Send Message",
+    contact_faq_title: "Frequently Asked Questions",
+    faq_q1: "Do you offer delivery?",
+    faq_a1:
+      "Yes! We offer delivery through our partners Wolt and Foodora in all our locations.",
+    faq_q2: "Are you open on holidays?",
+    faq_a2:
+      "We are open on most holidays with reduced hours. Please check our social media for specific holiday schedules.",
+    faq_q3: "Do you accommodate dietary restrictions?",
+    faq_a3:
+      "Absolutely! We offer vegetarian, vegan, and gluten-free options. Just let us know about your dietary needs.",
+    faq_q4: "Can I host events at your restaurant?",
+    faq_a4:
+      "Yes, we offer private dining and event hosting. Contact us for more information about group bookings.",
+
+    // ===== Find Us page (EN) =====
+    findus_hero_title: "Find <span>FreshBite Kitchen</span>",
+    findus_hero_text: "Your favorite place is just a tap away!",
+    google_maps: "Google Maps",
+    hsl_journey: "HSL Journey Planner",
+    apple_maps: "Apple Maps",
   },
 
   fi: {
+    // ----- Generic / Home -----
     page_title: "FreshBite Kitchen | Terveellistä ja herkullista ruokaa",
     page_title_menu: "FreshBite Kitchen | Tilaa verkossa",
+    page_title_reservation: "FreshBite Kitchen | Pöytävaraus",
+    page_title_contact: "FreshBite Kitchen | Yhteystiedot",
+    page_title_findus: "FreshBite Kitchen | Löydä meidät",
 
     logo_text: "FreshBite Kitchen",
 
@@ -348,11 +391,9 @@ const translations = {
     menu_main_title: "Tilaa <span>verkossa</span>",
     menu_main_subtitle:
       "Tutustu käsintehtyihin annoksiimme ja tilaa omat suosikkisi – tuoreina, nopeasti ja maukkaasti!",
-
     menu_choose_category_title: "Valitse kategoria",
     menu_choose_category_subtitle:
       "Löydä suosikkiannoksesi tyypin mukaan",
-
     cat_all: "Kaikki kategoriat",
     cat_burgers: "Hampurilaiset",
     cat_pizzas: "Pizzat",
@@ -360,10 +401,8 @@ const translations = {
     cat_finnish: "Suomalaiset erikoisuudet",
     cat_healthy: "Terveelliset vaihtoehdot",
     cat_drinks: "Juomat",
-
     menu_finnish_title: "Suomalaiset erikoisuudet",
     menu_healthy_title: "Terveelliset vaihtoehdot",
-
     menu_btn_add_to_cart: "Lisää ostoskoriin",
 
     cart_title: "Ostoskori",
@@ -375,11 +414,9 @@ const translations = {
     menu_special_mushroom_title: "Kermainen sienipasta",
     menu_special_mushroom_desc:
       "Tuoretta pastaa, sekoitettuna täyteläiseen sieni- ja parmesaanikastikkeeseen.",
-
     menu_special_mediterranean_title: "Välimerellinen salaatti",
     menu_special_mediterranean_desc:
       "Rapea salaattipohja, oliiveja, fetajuustoa ja sitruunavinegrettiä.",
-
     menu_special_mango_title: "Mangosmoothie",
     menu_special_mango_desc:
       "Raikas trooppinen juoma – makea, viileä ja energinen.",
@@ -388,23 +425,18 @@ const translations = {
     menu_burger_classic_title: "Klassinen naudanlihaburgeri",
     menu_burger_classic_desc:
       "Mehevä naudanpihvi salaatilla, tomaatilla, sipulilla ja talon kastikkeella.",
-
     menu_burger_doublecheese_title: "Tuplajuustoburgeri",
     menu_burger_doublecheese_desc:
       "Kaksi naudanpihviä, tuplajuusto, suolakurkut ja pirteä kastike.",
-
     menu_burger_crispychicken_title: "Rapea kanaburgeri",
     menu_burger_crispychicken_desc:
       "Paneroitu kananfilee coleslaw-salaatilla ja majoneesilla briossisämpylällä.",
-
     menu_burger_veggie_title: "Kasvisherkku-burgeri",
     menu_burger_veggie_desc:
       "Kasvipohjainen pihvi, avokadoa, versoja ja vegaanista majoneesia.",
-
     menu_burger_jalapeno_title: "Tulinen jalapenoburgeri",
     menu_burger_jalapeno_desc:
       "Täynnä tulisia jalapenoja, juustoa ja mausteista kastiketta.",
-
     menu_burger_bbq_title: "BBQ-pekoniburgeri",
     menu_burger_bbq_desc:
       "Savunmakuinen BBQ-kastike, rapea pekoni, cheddar ja grillatut sipulit.",
@@ -413,23 +445,18 @@ const translations = {
     menu_pizza_margherita_title: "Margherita",
     menu_pizza_margherita_desc:
       "Klassinen tomaattikastike, mozzarella ja tuore basilika.",
-
     menu_pizza_pepperoni_title: "Pepperoni",
     menu_pizza_pepperoni_desc:
       "Tomaattikastike, mozzarella ja tuliset pepperonisiivut.",
-
     menu_pizza_hawaiian_title: "Havaiji",
     menu_pizza_hawaiian_desc:
       "Kinkkua, ananasta, mozzarellaa ja tomaattikastiketta.",
-
     menu_pizza_veggie_title: "Kasvispizza Supreme",
     menu_pizza_veggie_desc:
       "Paprikaa, sieniä, oliiveja, sipulia ja tomaattia.",
-
     menu_pizza_bbq_title: "BBQ-kanapizza",
     menu_pizza_bbq_desc:
       "Grillattua kanaa, BBQ-kastiketta, punasipulia ja mozzarellaa.",
-
     menu_pizza_fourcheese_title: "Neljä juustoa",
     menu_pizza_fourcheese_desc:
       "Mozzarella-, cheddar-, parmesan- ja gorgonzola-juustojen sekoitus.",
@@ -438,15 +465,12 @@ const translations = {
     menu_salad_caesar_title: "Klassinen Caesar-salaatti",
     menu_salad_caesar_desc:
       "Roomansalaattia, krutonkeja, parmesaania ja kermainen Caesar-kastike.",
-
     menu_salad_greek_title: "Kreikkalainen salaatti",
     menu_salad_greek_desc:
       "Kurkkuja, tomaatteja, oliiveja, fetaa ja oliiviöljykastike.",
-
     menu_salad_quinoa_title: "Quinoa Power Bowl",
     menu_salad_quinoa_desc:
       "Quinoaa, paahdettuja kasviksia, avokadoa ja sitruuna-tahinikastike.",
-
     menu_salad_tuna_title: "Tonnikalasalaatti",
     menu_salad_tuna_desc:
       "Sekasalaattia, tonnikalaa, maissia, keitettyä munaa ja kevyt kastike.",
@@ -455,15 +479,12 @@ const translations = {
     menu_finnish_salmonsoup_title: "Suomalainen lohikeitto",
     menu_finnish_salmonsoup_desc:
       "Perinteinen lohikeitto lohella, perunoilla ja tillillä.",
-
     menu_finnish_meatballs_title: "Suomalaiset lihapullat",
     menu_finnish_meatballs_desc:
       "Lihapullia perunamuusilla, puolukkahillolla ja kastikkeella.",
-
     menu_finnish_karelian_title: "Karjalanpiirakat",
     menu_finnish_karelian_desc:
       "Perinteisiä riisipiirakoita munavoin kanssa.",
-
     menu_finnish_reindeer_title: "Poropata",
     menu_finnish_reindeer_desc:
       "Hitaasti haudutettua poroa juureksilla ja yrteillä.",
@@ -472,15 +493,12 @@ const translations = {
     menu_healthy_buddha_title: "Värikäs Buddha Bowl",
     menu_healthy_buddha_desc:
       "Quinoaa, paahdettua bataattia, lehtikaalia, avokadoa ja tahinikastike.",
-
     menu_healthy_salmon_title: "Grillattu lohi",
     menu_healthy_salmon_desc:
       "Atlantin lohta höyrytetyillä kasviksilla ja sitruuna-yrttikastikkeella.",
-
     menu_healthy_wrap_title: "Välimerellinen kasviswrap",
     menu_healthy_wrap_desc:
       "Hummusta, paahdettuja kasviksia, fetaa ja pinaattia täysjyväwrapissa.",
-
     menu_healthy_berrybowl_title: "Marjasmoothie Bowl",
     menu_healthy_berrybowl_desc:
       "Sekamarjoja, granolaa, kookoshiutaleita ja chia-siemeniä.",
@@ -489,29 +507,22 @@ const translations = {
     menu_drink_coffee_title: "Suomalainen kahvi",
     menu_drink_coffee_desc:
       "Perinteinen suomalainen kahvi mustana tai maidolla.",
-
     menu_drink_orange_title: "Tuore appelsiinimehu",
     menu_drink_orange_desc: "Tuorepuristettua appelsiinimehua.",
-
     menu_drink_berry_title: "Berry Blast -smoothie",
     menu_drink_berry_desc:
       "Sekamarjoja, banaania, jogurttia ja hunajaa.",
-
     menu_drink_lassi_title: "Mango lassi",
     menu_drink_lassi_desc:
       "Raikas jogurttipohjainen mangojuoma.",
-
     menu_drink_icetea_title: "Sitruunajäätee",
     menu_drink_icetea_desc:
       "Viilennetty tee sitruunalla ja mintulla.",
 
     /* ===== Reservation page (FI) ===== */
-    page_title_reservation: "FreshBite Kitchen | Pöytävaraus",
-
     reservation_hero_title: "Varaa pöytäsi <span>vaivattomasti</span>",
     reservation_hero_text:
       "Nauti sujuvasta ja helposta pöytävarauksesta verkossa.",
-
     reservation_guidelines_title: "Varausohjeet",
     reservation_guideline_1:
       "Vain yksi henkilö ryhmästä voi varata pöydän verkossa.",
@@ -521,7 +532,6 @@ const translations = {
       "Valitse sinulle sopiva päivämäärä ja kellonaika varaukselle.",
     reservation_guideline_4:
       "Jos et saavu tunnin sisällä varatusta ajasta, varaus perutaan.",
-
     reservation_form_title: "Varaa pöytä",
     reservation_label_name: "Koko nimi",
     reservation_label_email: "Sähköposti",
@@ -533,8 +543,70 @@ const translations = {
     reservation_guest_warning:
       "Yli 9 hengen ryhmät eivät voi varata pöytää verkossa.",
     reservation_submit_btn: "Varaa pöytä",
-
     reservation_footer_location: "Sijainti (avaa HSL:ssä)",
-    reservation_footer_privacy: "Tietosuojakäytäntö"
-  }
+    reservation_footer_privacy: "Tietosuojakäytäntö",
+
+    // ===== Contact page (FI) =====
+    contact_hero_title: "Ota meihin <span>yhteyttä</span>",
+    contact_hero_text:
+      "Kuulemme mielellämme sinusta. Ota yhteyttä kysymyksissä tai palautteessa.",
+    contact_info_title: "Yhteystiedot",
+    contact_locations_title: "Toimipisteemme",
+    contact_locations_hki: "Helsinki: Aleksanterinkatu 15, 00100",
+    contact_locations_turku: "Turku: Aurakatu 8, 20100",
+    contact_locations_espoo: "Espoo: Tapiontori 4, 02100",
+    contact_locations_tre: "Tampere: Hämeenkatu 30, 33100",
+    contact_phone_title: "Puhelinnumerot",
+    contact_phone_hki: "Helsinki: +358 40 123 4567",
+    contact_phone_turku: "Turku: +358 40 123 4568",
+    contact_phone_espoo: "Espoo: +358 40 123 4569",
+    contact_phone_tre: "Tampere: +358 40 123 4570",
+    contact_email_title: "Sähköposti",
+    contact_email_general: "Yleiset kyselyt: info@freshbitekitchen.fi",
+    contact_email_reservations:
+      "Varaukset: reservations@freshbitekitchen.fi",
+    contact_email_feedback: "Palaute: feedback@freshbitekitchen.fi",
+    contact_hours_title: "Aukioloajat",
+    contact_hours_weekdays: "Maanantai – torstai: 11.00 – 22.00",
+    contact_hours_weekend: "Perjantai – lauantai: 11.00 – 23.00",
+    contact_hours_sun: "Sunnuntai: 12.00 – 21.00",
+    contact_form_title: "Lähetä viesti",
+    contact_form_label_name: "Koko nimi",
+    contact_form_label_email: "Sähköpostiosoite",
+    contact_form_label_phone: "Puhelinnumero",
+    contact_form_label_location: "Toivottu toimipiste",
+    contact_form_label_subject: "Aihe",
+    contact_form_label_message: "Viesti",
+    contact_form_placeholder_name: "Koko nimesi",
+    contact_form_placeholder_email: "Sähköpostiosoitteesi",
+    contact_form_placeholder_phone: "Puhelinnumerosi",
+    contact_form_placeholder_location: "Valitse toimipiste",
+    contact_form_placeholder_subject: "Viestin aihe",
+    contact_form_placeholder_message: "Viestisi...",
+    contact_location_option_hki: "Helsinki",
+    contact_location_option_turku: "Turku",
+    contact_location_option_espoo: "Espoo",
+    contact_location_option_tre: "Tampere",
+    contact_form_submit: "Lähetä viesti",
+    contact_faq_title: "Usein kysytyt kysymykset",
+    faq_q1: "Tarjoatteko kotiinkuljetusta?",
+    faq_a1:
+      "Kyllä! Tarjoamme kotiinkuljetuksen yhteistyökumppaneidemme Woltin ja Foodoran kautta kaikissa toimipisteissämme.",
+    faq_q2: "Oletteko auki juhlapyhinä?",
+    faq_a2:
+      "Olemme auki useimpina juhlapyhinä lyhennetyin aukioloajoin. Tarkista tarkemmat tiedot sosiaalisen median kanavistamme.",
+    faq_q3: "Huomioitteko erityisruokavaliot?",
+    faq_a3:
+      "Ehdottomasti! Tarjoamme kasvis-, vegaani- ja gluteenittomia vaihtoehtoja. Kerrothan meille erityistarpeistasi.",
+    faq_q4: "Voinko järjestää tilaisuuden ravintolassanne?",
+    faq_a4:
+      "Kyllä, tarjoamme yksityistilaisuuksia ja juhlapaketteja. Ota yhteyttä saadaksesi lisätietoja ryhmävarauksista.",
+
+    // ===== Find Us page (FI) =====
+    findus_hero_title: "Löydä <span>FreshBite Kitchen</span>",
+    findus_hero_text: "Lempiravintolasi on vain napautuksen päässä!",
+    google_maps: "Google Maps",
+    hsl_journey: "HSL-reittiopas",
+    apple_maps: "Apple Maps",
+  },
 };

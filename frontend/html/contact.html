@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshBite Kitchen | Contact Us</title>
+  <!-- make title translatable -->
+  <title data-i18n="page_title_contact">FreshBite Kitchen | Contact Us</title>
   <link rel="stylesheet" href="../css/contact.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="../images/icon.ico" type="image/x-icon">
@@ -15,24 +16,31 @@
       <a href="home.html">
         <img src="../images/logo_sample.jpeg" alt="FreshBite Kitchen logo">
       </a>
-      <span>FreshBite Kitchen</span>
+      <!-- make logo text translatable -->
+      <span data-i18n="logo_text">FreshBite Kitchen</span>
     </div>
 
     <nav>
       <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="reservation.html">Table Reservation</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-        <li><a href="find-us.html">Find Us</a></li>
+        <!-- add data-i18n the same way as home -->
+        <li><a href="home.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
+        <li><a href="reservation.html" data-i18n="nav_reservation">Table Reservation</a></li>
+        <li><a href="contact.html" class="active" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="find-us.html" data-i18n="nav_findus">Find Us</a></li>
 
         <!-- Dropdown Menu -->
         <li class="dropdown">
-          <a href="#" class="dropbtn">Login ▾</a>
+          <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a href="customer_login.html">Users</a></li>
-            <li><a href="login.html">Admin</a></li>
+            <li><a href="customer_login.html" data-i18n="login_user">Users</a></li>
+            <li><a href="login.html" data-i18n="login_admin">Admin</a></li>
           </ul>
+        </li>
+
+        <!-- Language switcher like home -->
+        <li class="lang-switcher">
+          <button id="lang-switch">FI / EN</button>
         </li>
       </ul>
     </nav>
@@ -41,8 +49,10 @@
   <!-- Hero Section -->
   <section class="contact-hero">
     <div class="hero-content">
-      <h1>Get in <span>Touch</span></h1>
-      <p>We'd love to hear from you. Reach out with any questions or feedback.</p>
+      <h1 data-i18n="contact_hero_title">Get in <span>Touch</span></h1>
+      <p data-i18n="contact_hero_text">
+        We'd love to hear from you. Reach out with any questions or feedback.
+      </p>
     </div>
   </section>
 
@@ -51,91 +61,128 @@
     <div class="contact-container">
       <!-- Contact Info -->
       <div class="contact-info">
-        <h2>Contact Information</h2>
+        <h2 data-i18n="contact_info_title">Contact Information</h2>
+
         <div class="info-item">
           <div class="icon">📍</div>
           <div class="info-content">
-            <h3>Our Locations</h3>
-            <p>Helsinki: Aleksanterinkatu 15, 00100</p>
-            <p>Turku: Aurakatu 8, 20100</p>
-            <p>Espoo: Tapiontori 4, 02100</p>
-            <p>Tampere: Hämeenkatu 30, 33100</p>
+            <h3 data-i18n="contact_locations_title">Our Locations</h3>
+            <p data-i18n="contact_locations_hki">Helsinki: Aleksanterinkatu 15, 00100</p>
+            <p data-i18n="contact_locations_turku">Turku: Aurakatu 8, 20100</p>
+            <p data-i18n="contact_locations_espoo">Espoo: Tapiontori 4, 02100</p>
+            <p data-i18n="contact_locations_tre">Tampere: Hämeenkatu 30, 33100</p>
           </div>
         </div>
 
         <div class="info-item">
           <div class="icon">📞</div>
           <div class="info-content">
-            <h3>Phone Numbers</h3>
-            <p>Helsinki: +358 40 123 4567</p>
-            <p>Turku: +358 40 123 4568</p>
-            <p>Espoo: +358 40 123 4569</p>
-            <p>Tampere: +358 40 123 4570</p>
+            <h3 data-i18n="contact_phone_title">Phone Numbers</h3>
+            <p data-i18n="contact_phone_hki">Helsinki: +358 40 123 4567</p>
+            <p data-i18n="contact_phone_turku">Turku: +358 40 123 4568</p>
+            <p data-i18n="contact_phone_espoo">Espoo: +358 40 123 4569</p>
+            <p data-i18n="contact_phone_tre">Tampere: +358 40 123 4570</p>
           </div>
         </div>
 
         <div class="info-item">
           <div class="icon">✉️</div>
           <div class="info-content">
-            <h3>Email</h3>
-            <p>General Inquiries: info@freshbitekitchen.fi</p>
-            <p>Reservations: reservations@freshbitekitchen.fi</p>
-            <p>Feedback: feedback@freshbitekitchen.fi</p>
+            <h3 data-i18n="contact_email_title">Email</h3>
+            <p data-i18n="contact_email_general">General Inquiries: info@freshbitekitchen.fi</p>
+            <p data-i18n="contact_email_reservations">Reservations: reservations@freshbitekitchen.fi</p>
+            <p data-i18n="contact_email_feedback">Feedback: feedback@freshbitekitchen.fi</p>
           </div>
         </div>
 
         <div class="info-item">
           <div class="icon">🕒</div>
           <div class="info-content">
-            <h3>Opening Hours</h3>
-            <p>Monday - Thursday: 11:00 - 22:00</p>
-            <p>Friday - Saturday: 11:00 - 23:00</p>
-            <p>Sunday: 12:00 - 21:00</p>
+            <h3 data-i18n="contact_hours_title">Opening Hours</h3>
+            <p data-i18n="contact_hours_weekdays">Monday - Thursday: 11:00 - 22:00</p>
+            <p data-i18n="contact_hours_weekend">Friday - Saturday: 11:00 - 23:00</p>
+            <p data-i18n="contact_hours_sun">Sunday: 12:00 - 21:00</p>
           </div>
         </div>
       </div>
 
       <!-- Contact Form -->
       <div class="contact-form">
-        <h2>Send us a Message</h2>
+        <h2 data-i18n="contact_form_title">Send us a Message</h2>
         <form id="contactForm">
           <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required>
+            <label for="name" data-i18n="contact_form_label_name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your full name"
+              data-i18n-placeholder="contact_form_placeholder_name"
+              required
+            >
           </div>
 
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Your email address" required>
+            <label for="email" data-i18n="contact_form_label_email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your email address"
+              data-i18n-placeholder="contact_form_placeholder_email"
+              required
+            >
           </div>
 
           <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+            <label for="phone" data-i18n="contact_form_label_phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Your phone number"
+              data-i18n-placeholder="contact_form_placeholder_phone"
+            >
           </div>
 
           <div class="form-group">
-            <label for="location">Preferred Location</label>
+            <label for="location" data-i18n="contact_form_label_location">Preferred Location</label>
             <select id="location" name="location" required>
-              <option value="">Select a location</option>
-              <option value="helsinki">Helsinki</option>
-              <option value="turku">Turku</option>
-              <option value="espoo">Espoo</option>
-              <option value="tampere">Tampere</option>
+              <option value="" data-i18n="contact_form_placeholder_location">Select a location</option>
+              <option value="helsinki" data-i18n="contact_location_option_hki">Helsinki</option>
+              <option value="turku" data-i18n="contact_location_option_turku">Turku</option>
+              <option value="espoo" data-i18n="contact_location_option_espoo">Espoo</option>
+              <option value="tampere" data-i18n="contact_location_option_tre">Tampere</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Message subject" required>
+            <label for="subject" data-i18n="contact_form_label_subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Message subject"
+              data-i18n-placeholder="contact_form_placeholder_subject"
+              required
+            >
           </div>
 
           <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Your message..." rows="5" required></textarea>
+            <label for="message" data-i18n="contact_form_label_message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Your message..."
+              rows="5"
+              data-i18n-placeholder="contact_form_placeholder_message"
+              required
+            ></textarea>
           </div>
 
-          <button type="submit" class="submit-btn">Send Message</button>
+          <button type="submit" class="submit-btn" data-i18n="contact_form_submit">
+            Send Message
+          </button>
         </form>
       </div>
     </div>
@@ -144,23 +191,31 @@
   <!-- FAQ Section -->
   <section class="faq-section">
     <div class="faq-container">
-      <h2>Frequently Asked Questions</h2>
+      <h2 data-i18n="contact_faq_title">Frequently Asked Questions</h2>
       <div class="faq-grid">
         <div class="faq-item">
-          <h3>Do you offer delivery?</h3>
-          <p>Yes! We offer delivery through our partners Wolt and Foodora in all our locations.</p>
+          <h3 data-i18n="faq_q1">Do you offer delivery?</h3>
+          <p data-i18n="faq_a1">
+            Yes! We offer delivery through our partners Wolt and Foodora in all our locations.
+          </p>
         </div>
         <div class="faq-item">
-          <h3>Are you open on holidays?</h3>
-          <p>We are open on most holidays with reduced hours. Please check our social media for specific holiday schedules.</p>
+          <h3 data-i18n="faq_q2">Are you open on holidays?</h3>
+          <p data-i18n="faq_a2">
+            We are open on most holidays with reduced hours. Please check our social media for specific holiday schedules.
+          </p>
         </div>
         <div class="faq-item">
-          <h3>Do you accommodate dietary restrictions?</h3>
-          <p>Absolutely! We offer vegetarian, vegan, and gluten-free options. Just let us know about your dietary needs.</p>
+          <h3 data-i18n="faq_q3">Do you accommodate dietary restrictions?</h3>
+          <p data-i18n="faq_a3">
+            Absolutely! We offer vegetarian, vegan, and gluten-free options. Just let us know about your dietary needs.
+          </p>
         </div>
         <div class="faq-item">
-          <h3>Can I host events at your restaurant?</h3>
-          <p>Yes, we offer private dining and event hosting. Contact us for more information about group bookings.</p>
+          <h3 data-i18n="faq_q4">Can I host events at your restaurant?</h3>
+          <p data-i18n="faq_a4">
+            Yes, we offer private dining and event hosting. Contact us for more information about group bookings.
+          </p>
         </div>
       </div>
     </div>
@@ -168,9 +223,12 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
+    <!-- reuse same footer_text key as home -->
+    <p data-i18n="footer_text">© 2025 FreshBite Kitchen | All Rights Reserved</p>
   </footer>
-  <script src="../js/contact.js"></script>
   <script src="../js/home.js"></script>
+  <script src="../js/contact.js"></script>
+  <script src="../js/translations.js"></script>
+  <script src="../js/language.js"></script>
 </body>
 </html>
