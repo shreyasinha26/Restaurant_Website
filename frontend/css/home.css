@@ -49,6 +49,25 @@ body {
   font-size: 0.95rem;
 }
 
+/* Language Switch */
+
+.lang-switcher {
+    margin-right: 15px;
+}
+.lang-switcher button:hover {
+    background-color: #eee3cc !important;
+}
+.lang-switcher button {
+    background-color: #f7f3e9 !important; /* OFF-CREAM */
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Navigation */
 nav ul {
   display: flex;
   list-style: none;
@@ -68,11 +87,6 @@ nav a.active {
   background: #ff7b00;
   color: #fff;
 }
-
-
-
-
-
 
 /* ----- Hero Video ----- */
 .hero-video {
@@ -165,6 +179,8 @@ nav a.active {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   object-fit: cover;
 }
+
+/* ----- Specialties Section ----- */
 
 .specialties {
   text-align: center;
