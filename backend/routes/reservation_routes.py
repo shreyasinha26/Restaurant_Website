@@ -6,9 +6,6 @@ from database.db import get_reservations_collection
 reservation_bp = Blueprint("reservation_bp", __name__)
 
 def parse_date_time(date_str, time_str):
-    """
-    Combine date (YYYY-MM-DD) and time (HH:MM) into a Python datetime.
-    """
     try:
         return datetime.fromisoformat(f"{date_str}T{time_str}")
     except Exception:
@@ -23,8 +20,8 @@ def create_reservation():
     email = data.get("email", "").strip()
     phone = data.get("phone", "").strip()
     guests = data.get("guests")
-    date = data.get("date")      # "2025-11-07"
-    time = data.get("time")      # "18:30"
+    date = data.get("date")      
+    time = data.get("time")      
     notes = data.get("notes", "").strip()
 
     errors = []
