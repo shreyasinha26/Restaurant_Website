@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreshBite Kitchen | Find Us</title>
+
+  <link rel="stylesheet" href="../css/find-us.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="home.html">
+        <img src="../images/logo_sample.jpeg" alt="FreshBite Kitchen logo" />
+      </a>
+      <span data-i18n="logo_text">FreshBite Kitchen</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a data-i18n="nav_home" href="home.html">Home</a></li>
+        <li><a data-i18n="nav_menu" href="menu.html">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="reservation.html">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="contact.html">Contact</a></li>
+        <li><a data-i18n="nav_findus" href="find-us.html" class="active">Find Us</a></li>
+
+        <!-- Dropdown Menu -->
+        <li class="dropdown">
+          <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
+          <ul class="dropdown-content">
+            <li><a data-i18n="login_user" href="customer_login.html">Users</a></li>
+            <li><a data-i18n="login_admin" href="login.html">Admin</a></li>
+          </ul>
+        </li>
+
+        <!-- Language Switch -->
+        <li class="lang-switcher">
+          <button id="lang-switch">FI / EN</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero section -->
+  <section class="hero-section">
+    <div class="overlay"></div>
+    <img class="hero-image" src="../images/map.jpg" alt="Find FreshBite" />
+    <div class="hero-text">
+      <h1 data-i18n="findus_hero_title">Find <span>FreshBite Kitchen</span></h1>
+      <p data-i18n="findus_hero_text">Your favorite place is just a tap away!</p>
+    </div>
+  </section>
+
+  <!-- Options -->
+  <div class="map-options">
+
+    <!-- Google Maps -->
+    <a class="map-btn google" target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=FreshBite+Kitchen+Aleksanterinkatu+15+Helsinki">
+      <img src="../images/google-map.jpg" class="map-icon" alt="Google Maps" />
+      <span data-i18n="google_maps">Google Maps</span>
+    </a>
+
+    <!-- HSL Journey Planner -->
+    <a class="map-btn hsl" target="_blank" href="https://www.hsl.fi/en">
+      <img src="../images/hsl.jpg" class="map-icon" alt="HSL Journey Planner" />
+      <span data-i18n="hsl_journey">HSL Journey Planner</span>
+    </a>
+
+    <!-- Apple Maps -->
+    <a class="map-btn apple" target="_blank"
+      href="https://maps.apple.com/?q=FreshBite+Kitchen">
+      <img src="../images/apple-maps.jpg" class="map-icon" alt="Apple Maps" />
+      <span data-i18n="apple_maps">Apple Maps</span>
+    </a>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p data-i18n="footer_text">© 2025 FreshBite Kitchen | All Rights Reserved</p>
+  </footer>
+
+  <script src="../js/find-us.js"></script>
+  <script src="../js/home.js"></script>
+  <script src="../js/translations.js"></script>
+  <script src="../js/language.js"></script>
+</body>
+</html>

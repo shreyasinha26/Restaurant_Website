@@ -1,0 +1,90 @@
+[
+  {
+    "category": "specials",
+    "day": "monday",
+    "description": "Fresh pasta tossed in a rich mushroom and parmesan sauce",
+    "dietary": ["vegetarian"],
+    "id": 1,
+    "image": "/static/images/mushroom-pasta.jpg",
+    "is_special": true,
+    "name": "Creamy Mushroom Pasta",
+    "price": 14.9
+  },
+  {
+    "category": "burgers",
+    "day": "monday",
+    "description": "Juicy beef patty with lettuce, tomato, onion, and our special sauce",
+    "dietary": [],
+    "id": 3,
+    "image": "/static/images/Classic_Beef_Burger.jpeg",
+    "is_special": false,
+    "name": "Classic Beef Burger",
+    "price": 12.5
+  },
+  {
+    "category": "salads",
+    "day": "tuesday", 
+    "description": "Crisp greens with olives, feta cheese, and lemon vinaigrette",
+    "dietary": ["vegetarian"],
+    "id": 2,
+    "image": "/static/images/greek_salad.jpg",
+    "is_special": true,
+    "name": "Mediterranean Salad",
+    "price": 9.5
+  },
+  {
+    "category": "burgers",
+    "day": "wednesday",
+    "description": "Juicy beef patty with lettuce, tomato, onion, and our special sauce", 
+    "dietary": [],
+    "id": 4,
+    "image": "/static/images/Classic_Beef_Burger.jpeg",
+    "is_special": false,
+    "name": "Classic Beef Burger",
+    "price": 12.5
+  },
+  {
+    "category": "pizzas",
+    "day": "thursday",
+    "description": "Classic tomato sauce, mozzarella, and fresh basil",
+    "dietary": ["vegetarian"],
+    "id": 5, 
+    "image": "/static/images/margherita_pizza.jpg",
+    "is_special": false,
+    "name": "Margherita Pizza",
+    "price": 14.0
+  },
+  {
+    "category": "finnish",
+    "day": "friday",
+    "description": "Traditional Lohikeitto with salmon, potatoes, and dill",
+    "dietary": [],
+    "id": 6,
+    "image": "/static/images/salmon_soup.jpg",
+    "is_special": true,
+    "name": "Finnish Salmon Soup", 
+    "price": 14.5
+  },
+  {
+    "category": "healthy",
+    "day": "saturday",
+    "description": "Quinoa, roasted sweet potatoes, kale, avocado, and tahini dressing",
+    "dietary": ["vegan", "gluten-free"],
+    "id": 7,
+    "image": "/static/images/budha_bowl.jpg",
+    "is_special": false,
+    "name": "Rainbow Buddha Bowl",
+    "price": 13.5
+  },
+  {
+    "category": "drinks", 
+    "day": "sunday",
+    "description": "Mixed berries, banana, yogurt, and honey",
+    "dietary": ["vegetarian"],
+    "id": 8,
+    "image": "/static/images/berry_smoothie.jpg",
+    "is_special": false,
+    "name": "Berry Blast Smoothie",
+    "price": 6.5
+  }
+]

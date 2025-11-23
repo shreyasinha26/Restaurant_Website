@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreshBite Kitchen | Table Reservation</title>
+  <link rel="stylesheet" href="../static/css/reservation.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="home.html">
+        <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen logo" />
+      </a>
+      <span>FreshBite Kitchen</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservation.html">Table Reservation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <!-- Dropdown Menu -->
+        <li class="dropdown">
+          <a href="#" class="dropbtn">Login ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="customer_login.html">Users</a></li>
+            <li><a href="login.html">Admin</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Image -->
+  <section class="hero-section">
+    <img class="hero-image" src="../static/images/table.png" alt="Table Reservation" />
+    <div class="hero-content">
+      <h1>Reserve Your Table <span>Effortlessly</span></h1>
+      <p>Enjoy a smooth and easy online table reservation.</p>
+    </div>
+  </section>
+
+  <!-- Table Reservation Section -->
+  <section class="table-reservation">
+    <div class="reservation-container">
+
+      <!-- Left Side: Instructions -->
+      <div class="reservation-text">
+        <h2>Reservation Guidelines</h2>
+        <ul>
+          <li>Only one person from a group can reserve a table online.</li>
+          <li>Groups larger than 9 people cannot reserve a table online.</li>
+          <li>Choose your preferred date and time for the reservation.</li>
+          <li>If you do not arrive within 1 hour of the reserved time, your reservation will be canceled.</li>
+        </ul>
+      </div>
+
+      <!-- Right Side: Reservation Form -->
+      <div class="reservation-form">
+        <h2>Reserve a Table</h2>
+        <form>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+
+          <label for="guests">Number of Guests</label>
+          <select id="guests" name="guests" required>
+            <option value="">Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <span class="guest-warning">Groups over 9 cannot reserve online.</span>
+
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time" required>
+
+          <label for="requests">Special Requests</label>
+          <textarea id="requests" name="requests" placeholder="Any special requests"></textarea>
+
+          <button type="submit">Reserve Table</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
+    <nav>
+      <a href="#">About Us</a> |
+      <a href="#">Location</a> |
+      <a href="#">Privacy Policy</a>
+    </nav>
+  </footer>
+
+  <script src="../static/js/home.js"></script>
+</body>
+</html>
