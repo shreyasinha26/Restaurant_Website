@@ -11,6 +11,25 @@ body {
   min-height: 100vh;
 }
 
+/* Language Switch */
+.lang-switcher {
+  margin-right: 15px;
+}
+
+.lang-switcher button:hover {
+  background-color: #eee3cc !important;
+}
+
+.lang-switcher button {
+  background-color: #f7f3e9 !important; /* OFF-CREAM */
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}   /* <-- THIS was missing! */
+
 /* ----- Navbar ----- */
 .login-header {
   width: 100%;
@@ -46,7 +65,7 @@ body {
 }
 
 .logo-link span {
-  color: #ff7b00; /* same as home page logo text */
+  color: #ff7b00;
   font-weight: 700;
   font-size: 1rem;
 }
@@ -61,7 +80,7 @@ nav ul li {
 
 .nav-link {
   text-decoration: none;
-  color: #f1f1f1; /* white like home page */
+  color: #f1f1f1;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 6px;
@@ -70,10 +89,9 @@ nav ul li {
 
 .nav-link:hover,
 .nav-link.active {
-  background: #ff7b00; /* orange highlight */
+  background: #ff7b00;
   color: #fff;
 }
-
 
 /* ----- Login Container ----- */
 .login-wrapper {

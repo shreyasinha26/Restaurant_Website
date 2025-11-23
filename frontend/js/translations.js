@@ -32,7 +32,7 @@ const translations = {
     about_text2:
       "We are passionate about healthy eating and take pride in sourcing 100% fresh and organic ingredients.",
     about_text3:
-      "Currently, we serve our delicious meals in Helsinki, Turku, Espoo, and Tampere.",
+      "Currently, we serve our delicious meals in Helsinki.",
     about_text4:
       "Our mission is to make healthy eating easy, enjoyable, and accessible for everyone.",
 
@@ -70,10 +70,10 @@ const translations = {
     review_1_name: "– Sofia, Helsinki",
     review_2_text:
       "“Fast delivery, amazing taste, and the vegan options are incredible!”",
-    review_2_name: "– Liam, Turku",
+    review_2_name: "– Liam, Helsinki",
     review_3_text:
       "“Fresh ingredients, beautiful presentation, and friendly staff. Highly recommend!”",
-    review_3_name: "– Emma, Espoo",
+    review_3_name: "– Emma, Helsinki",
 
     footer_text: "© 2025 FreshBite Kitchen | All Rights Reserved",
     footer_about: "About Us",
@@ -249,14 +249,8 @@ const translations = {
     contact_info_title: "Contact Information",
     contact_locations_title: "Our Locations",
     contact_locations_hki: "Helsinki: Aleksanterinkatu 15, 00100",
-    contact_locations_turku: "Turku: Aurakatu 8, 20100",
-    contact_locations_espoo: "Espoo: Tapiontori 4, 02100",
-    contact_locations_tre: "Tampere: Hämeenkatu 30, 33100",
-    contact_phone_title: "Phone Numbers",
+    contact_phone_title: "Phone Number",
     contact_phone_hki: "Helsinki: +358 40 123 4567",
-    contact_phone_turku: "Turku: +358 40 123 4568",
-    contact_phone_espoo: "Espoo: +358 40 123 4569",
-    contact_phone_tre: "Tampere: +358 40 123 4570",
     contact_email_title: "Email",
     contact_email_general: "General Inquiries: info@freshbitekitchen.fi",
     contact_email_reservations:
@@ -304,6 +298,20 @@ const translations = {
     google_maps: "Google Maps",
     hsl_journey: "HSL Journey Planner",
     apple_maps: "Apple Maps",
+
+        // ----- Login page (EN) -----
+    admin_access: "Admin Access Portal",
+    login_email_label: "Email",
+    login_email_placeholder: "Enter your email",
+    login_password_label: "Password",
+    login_password_placeholder: "Enter your password",
+    login_button: "Login",
+    login_no_account: "Don't have an account?",
+    login_signup: "Sign Up",
+
+        // ----- Customer login page (EN) -----
+    page_title_customer_login: "FreshBite Kitchen | Customer Login",
+    customer_access: "Customer Login Portal",
   },
 
   fi: {
@@ -317,13 +325,13 @@ const translations = {
     logo_text: "FreshBite Kitchen",
 
     nav_home: "Etusivu",
-    nav_menu: "Menu",
+    nav_menu: "Ruokalista",
     nav_reservation: "Pöytävaraus",
     nav_contact: "Yhteystiedot",
     nav_findus: "Löydä meidät",
     login: "Kirjaudu ▾",
     login_user: "Käyttäjät",
-    login_admin: "Admin",
+    login_admin: "Ylläpito",
 
     hero_title: "Tervetuloa FreshBite-keittiöön",
     hero_text:
@@ -338,7 +346,7 @@ const translations = {
     about_text2:
       "Olemme intohimoisia terveellisen ruokavalion puolesta ja käytämme vain 100 % tuoreita ja luomuaineksia.",
     about_text3:
-      "Tällä hetkellä toimitamme herkullisia aterioitamme Helsingissä, Turussa, Espoossa ja Tampereella.",
+      "Tällä hetkellä toimitamme herkullisia aterioitamme Helsingissä.",
     about_text4:
       "Tavoitteemme on tehdä terveellisestä ruokavaliosta helppoa, nautittavaa ja saavutettavaa kaikille.",
 
@@ -376,10 +384,10 @@ const translations = {
     review_1_name: "– Sofia, Helsinki",
     review_2_text:
       "“Nopea toimitus, upea maku ja vegaaniset vaihtoehdot ovat uskomattomia!”",
-    review_2_name: "– Liam, Turku",
+    review_2_name: "– Liam, Helsinki",
     review_3_text:
       "“Tuoreet ainekset, kaunis esillepano ja ystävällinen henkilökunta. Suosittelen lämpimästi!”",
-    review_3_name: "– Emma, Espoo",
+    review_3_name: "– Emma, Helsinki",
 
     footer_text:
       "© 2025 FreshBite Kitchen | Kaikki oikeudet pidätetään",
@@ -553,14 +561,8 @@ const translations = {
     contact_info_title: "Yhteystiedot",
     contact_locations_title: "Toimipisteemme",
     contact_locations_hki: "Helsinki: Aleksanterinkatu 15, 00100",
-    contact_locations_turku: "Turku: Aurakatu 8, 20100",
-    contact_locations_espoo: "Espoo: Tapiontori 4, 02100",
-    contact_locations_tre: "Tampere: Hämeenkatu 30, 33100",
     contact_phone_title: "Puhelinnumerot",
     contact_phone_hki: "Helsinki: +358 40 123 4567",
-    contact_phone_turku: "Turku: +358 40 123 4568",
-    contact_phone_espoo: "Espoo: +358 40 123 4569",
-    contact_phone_tre: "Tampere: +358 40 123 4570",
     contact_email_title: "Sähköposti",
     contact_email_general: "Yleiset kyselyt: info@freshbitekitchen.fi",
     contact_email_reservations:
@@ -584,9 +586,6 @@ const translations = {
     contact_form_placeholder_subject: "Viestin aihe",
     contact_form_placeholder_message: "Viestisi...",
     contact_location_option_hki: "Helsinki",
-    contact_location_option_turku: "Turku",
-    contact_location_option_espoo: "Espoo",
-    contact_location_option_tre: "Tampere",
     contact_form_submit: "Lähetä viesti",
     contact_faq_title: "Usein kysytyt kysymykset",
     faq_q1: "Tarjoatteko kotiinkuljetusta?",
@@ -608,5 +607,20 @@ const translations = {
     google_maps: "Google Maps",
     hsl_journey: "HSL-reittiopas",
     apple_maps: "Apple Maps",
+
+        // ----- Login page (FI) -----
+    admin_access: "Ylläpitäjän kirjautumissivu",
+    login_email_label: "Sähköposti",
+    login_email_placeholder: "Syötä sähköpostisi",
+    login_password_label: "Salasana",
+    login_password_placeholder: "Syötä salasanasi",
+    login_button: "Kirjaudu",
+    login_no_account: "Eikö sinulla ole tiliä?",
+    login_signup: "Rekisteröidy",
+
+        // ----- Customer login page (FI) -----
+    page_title_customer_login: "FreshBite Kitchen | Asiakkaan kirjautuminen",
+    customer_access: "Asiakkaan kirjautumissivu",
+ 
   },
 };

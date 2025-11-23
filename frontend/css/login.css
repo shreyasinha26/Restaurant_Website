@@ -10,7 +10,23 @@ body {
   background: linear-gradient(to right, #1b1b1b, #ff7b00);
   min-height: 100vh;
 }
+/* Language Switch */
 
+.lang-switcher {
+    margin-right: 15px;
+}
+.lang-switcher button:hover {
+    background-color: #eee3cc !important;
+}
+.lang-switcher button {
+    background-color: #f7f3e9 !important; /* OFF-CREAM */
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
 /* ----- Navbar ----- */
 .login-header {
   width: 100%;
