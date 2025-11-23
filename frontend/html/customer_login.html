@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshBite Kitchen</title>
+  <title data-i18n="page_title_customer_login">FreshBite Kitchen | Customer Login</title>
   <link rel="stylesheet" href="../css/customer_login.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="../images/icon.ico" type="image/x-icon">
@@ -19,7 +19,12 @@
       </a>
       <nav>
         <ul>
-          <li><a href="home.html" class="nav-link">Home</a></li>
+          <li><a href="home.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+
+          <!-- LANGUAGE SWITCH -->
+          <li class="lang-switcher">
+            <button id="lang-switch">FI / EN</button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -30,22 +35,41 @@
     <div class="login-logo">
       <img src="../images/logo_sample.jpeg" alt="FreshBite Kitchen Logo">
       <h2>FreshBite Kitchen</h2>
-        <p>Customer Login Portal</p>
+      <p data-i18n="customer_access">Customer Login Portal</p>
     </div>
 
     <form class="form active" id="loginForm">
       <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+        <label for="email" data-i18n="login_email_label">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          data-i18n-placeholder="login_email_placeholder"
+          required
+        >
       </div>
       <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <label for="password" data-i18n="login_password_label">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          data-i18n-placeholder="login_password_placeholder"
+          required
+        >
       </div>
-      <button type="submit" class="btn">Login</button>
-      <p class="small-text">Don't have an account? <a href="customers_signup.html" id="switchToSignup">Sign Up</a></p>
+      <button type="submit" class="btn" data-i18n="login_button">Login</button>
+      <p class="small-text" data-i18n="login_no_account">
+        Don't have an account?
+        <a href="customers_signup.html" id="switchToSignup" data-i18n="login_signup">Sign Up</a>
+      </p>
     </form>
   </div>
-<script src="../js/login.js"></script>
+
+  <!-- Scripts -->
+  <script src="../js/translations.js"></script>
+  <script src="../js/language.js"></script>
+  <script src="../js/login.js"></script>
 </body>
 </html>

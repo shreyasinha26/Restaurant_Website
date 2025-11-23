@@ -298,6 +298,20 @@ const translations = {
     google_maps: "Google Maps",
     hsl_journey: "HSL Journey Planner",
     apple_maps: "Apple Maps",
+
+        // ----- Login page (EN) -----
+    admin_access: "Admin Access Portal",
+    login_email_label: "Email",
+    login_email_placeholder: "Enter your email",
+    login_password_label: "Password",
+    login_password_placeholder: "Enter your password",
+    login_button: "Login",
+    login_no_account: "Don't have an account?",
+    login_signup: "Sign Up",
+
+        // ----- Customer login page (EN) -----
+    page_title_customer_login: "FreshBite Kitchen | Customer Login",
+    customer_access: "Customer Login Portal",
   },
 
   fi: {
@@ -593,5 +607,20 @@ const translations = {
     google_maps: "Google Maps",
     hsl_journey: "HSL-reittiopas",
     apple_maps: "Apple Maps",
+
+        // ----- Login page (FI) -----
+    admin_access: "Ylläpitäjän kirjautumissivu",
+    login_email_label: "Sähköposti",
+    login_email_placeholder: "Syötä sähköpostisi",
+    login_password_label: "Salasana",
+    login_password_placeholder: "Syötä salasanasi",
+    login_button: "Kirjaudu",
+    login_no_account: "Eikö sinulla ole tiliä?",
+    login_signup: "Rekisteröidy",
+
+        // ----- Customer login page (FI) -----
+    page_title_customer_login: "FreshBite Kitchen | Asiakkaan kirjautuminen",
+    customer_access: "Asiakkaan kirjautumissivu",
+ 
   },
 };
