@@ -64,7 +64,6 @@ def create_reservation():
         "guests": guests,
         "date_time": dt,
         "notes": notes,
-        "status": "pending",     # pending / confirmed / seated / cancelled
         "created_at": now,
         "updated_at": now,
     }
@@ -97,7 +96,6 @@ def list_reservations():
             "guests": doc.get("guests"),
             "date_time": doc.get("date_time").isoformat() if doc.get("date_time") else None,
             "notes": doc.get("notes", ""),
-            "status": doc.get("status", "pending"),
             "created_at": doc.get("created_at").isoformat() if doc.get("created_at") else None,
         })
 

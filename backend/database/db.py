@@ -11,4 +11,6 @@ def get_reservations_collection():
 def get_contact_collection():
     return db["contact_messages"]
 
+def get_admins_collection():
+    return db["admin_login"]
 

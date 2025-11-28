@@ -306,8 +306,6 @@ const translations = {
     login_password_label: "Password",
     login_password_placeholder: "Enter your password",
     login_button: "Login",
-    login_no_account: "Don't have an account?",
-    login_signup: "Sign Up",
 
         // ----- Customer login page (EN) -----
     page_title_customer_login: "FreshBite Kitchen | Customer Login",
@@ -615,8 +613,6 @@ const translations = {
     login_password_label: "Salasana",
     login_password_placeholder: "Syötä salasanasi",
     login_button: "Kirjaudu",
-    login_no_account: "Eikö sinulla ole tiliä?",
-    login_signup: "Rekisteröidy",
 
         // ----- Customer login page (FI) -----
     page_title_customer_login: "FreshBite Kitchen | Asiakkaan kirjautuminen",
