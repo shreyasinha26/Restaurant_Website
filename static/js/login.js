@@ -31,6 +31,19 @@ function clearError(input) {
     input.style.borderColor = '#ddd';
 }
 
+// Function to clear all input fields
+function clearInputFields() {
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    
+    if (email) email.value = '';
+    if (password) password.value = '';
+    
+    // Also clear any error messages
+    clearError(email);
+    clearError(password);
+}
+
 // Function to show loading state
 function setLoading(button, isLoading) {
     if (isLoading) {
@@ -129,11 +142,14 @@ loginForm.addEventListener('submit', async function(e) {
                 }, 1000);
                 
             } else {
+                // Login failed - clear input fields and show error
                 showMessage(data.error || 'Login failed!', true);
+                clearInputFields(); // Clear fields on failed login
             }
         } catch (error) {
             console.error('Login error:', error);
             showMessage('An error occurred during login. Please try again.', true);
+            clearInputFields(); // Clear fields on error
         } finally {
             setLoading(loginButton, false);
         }
@@ -162,34 +178,26 @@ document.addEventListener('DOMContentLoaded', function() {
     checkAuthStatus();
 });
 
-
-// In login.js - Update the checkAuthStatus function
 async function checkAuthStatus() {
     try {
         const token = localStorage.getItem('auth_token');
-        if (!token) {
-            return; // No token, stay on login page
-        }
-
-        // Verify token with server
-        const response = await fetch('/api/current-user', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            credentials: 'include'
-        });
-        
-        if (response.ok) {
-            // User is already logged in, redirect to dashboard
-            console.log("User already logged in, redirecting to dashboard");
-            window.location.href = '/customer_dashboard';
-        } else {
-            // Token is invalid, clear it
-            console.log("Invalid token, clearing storage");
-            localStorage.removeItem('auth_token');
-            localStorage.removeItem('user');
-            // Stay on login page
+        if (token) {
+            const response = await fetch('/api/current-user', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            
+            if (response.ok) {
+                // User is already logged in, redirect to dashboard
+                window.location.href = '/customer_dashboard';
+            } else {
+                // Token is invalid, clear it
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user');
+            }
         }
     } catch (error) {
         console.error('Auth check failed:', error);
