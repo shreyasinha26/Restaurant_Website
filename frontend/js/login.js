@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // ------------ SEND REQUEST TO BACKEND ------------
         try {
-            const response = await fetch("http://127.0.0.1:5000/admin/login", {
+            const response = await fetch("http://127.0.0.1:5001/admin/login", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json" 
