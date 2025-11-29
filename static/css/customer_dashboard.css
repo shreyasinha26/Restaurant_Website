@@ -189,3 +189,35 @@ body {
     font-size: 3rem;
   }
 }
+
+/* Mobile Menu Styles */
+.mobile-menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-right ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        background: #1b1b1b;
+        border-radius: 8px;
+        padding: 15px;
+        flex-direction: column;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        min-width: 150px;
+    }
+    
+    .nav-right ul.show {
+        display: flex;
+    }
+    
+    .nav-right ul li {
+        margin: 5px 0;
+    }
+}

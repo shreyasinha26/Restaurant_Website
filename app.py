@@ -5,18 +5,44 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
 from flask import Flask, render_template
-from pymongo import MongoClient
+from mongoengine import connect
 import os, json
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
+    
+    # Configuration
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'dev-secret-key-change-in-production'
+    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'jwt-secret-key-change-this-too'
 
-    # Add CORS headers manually
+    # MongoDB setup with MongoEngine
+    MONGO_URI = os.environ.get('MONGO_URI') or 'mongodb+srv://hnjrwl_db_user:Honey12345@cluster0.w8sfktk.mongodb.net/freshbite_db?retryWrites=true&w=majority'
+    MONGO_DBNAME = os.environ.get('MONGO_DBNAME') or 'freshbite_db'
+    
+    # Connect using MongoEngine
+    connect(
+        db=MONGO_DBNAME,
+        host=MONGO_URI,
+        alias='default'
+    )
+    
+    # Keep existing PyMongo connection for compatibility with your existing code
+    from pymongo import MongoClient
+    client = MongoClient(MONGO_URI)
+    db = client.get_database(MONGO_DBNAME)
+    app.mongo_client = client
+    app.mongo_db = db
+
+    # Add CORS headers manually and use flask-cors for better handling
+    CORS(app, supports_credentials=True, origins=['http://localhost:5000'])
+    
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5000')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
         response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
         return response
 
     # HTML routes (same as before)
@@ -60,22 +86,19 @@ def create_app():
     def signup():
         return render_template('signup.html')
 
-    # MongoDB setup
-    # You can override via environment variable MONGO_URI and MONGO_DBNAME
-    # Default: uses the credentials you provided earlier
-    MONGO_URI = os.environ.get('MONGO_URI') or 'mongodb+srv://hnjrwl_db_user:Honey12345@cluster0.w8sfktk.mongodb.net/?appName=Cluster0'
-    MONGO_DBNAME = os.environ.get('MONGO_DBNAME') or 'freshbite_db'
-
-    client = MongoClient(MONGO_URI)
-    db = client.get_database(MONGO_DBNAME)
-    app.mongo_client = client
-    app.mongo_db = db
+    @app.route('/find_us')
+    def find_us():
+        return render_template('find_us.html')
 
     # Register Blueprints
     from routes.menu_routes import menu_bp
     app.register_blueprint(menu_bp)
+    
+    # Register Authentication Blueprints
+    from routes.auth_routes import auth_bp
+    app.register_blueprint(auth_bp)
 
-    # Seed DB if empty using local JSON file
+    # Seed DB if empty using local JSON file (using PyMongo for compatibility)
     try:
         col = db['menu_items']
         if col.count_documents({}) == 0:
