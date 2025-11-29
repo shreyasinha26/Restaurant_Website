@@ -11,7 +11,7 @@ function showError(element, message) {
     element.innerHTML = `<div class="error-message">${message}</div>`;
 }
 
-// FUNCTION THAT WAS MISSING - Add this!
+
 // Function to fetch and display today's menu
 async function loadTodaysMenu() {
     try {
