@@ -1,7 +1,5 @@
-// ---------- find-us.js ----------
 
 document.addEventListener("DOMContentLoaded", () => {
-
   // Log for debugging
   console.log("Find-Us page loaded ✔");
 
@@ -20,8 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fix dropdown behaviour ONLY on this page (Safari issue fix too)
-  const dropBtn = document.querySelector(".dropbtn");
-  const dropContent = document.querySelector(".dropdown-content");
-
-  });
+  // (Dropdown behaviour is handled globally in home.js / nav, so nothing else needed here.)
+});

@@ -293,8 +293,40 @@ const translations = {
       "Yes, we offer private dining and event hosting. Contact us for more information about group bookings.",
 
     // ===== Find Us page (EN) =====
+    findus_hero_pill: "City Center • Helsinki",
     findus_hero_title: "Find <span>FreshBite Kitchen</span>",
-    findus_hero_text: "Your favorite place is just a tap away!",
+    findus_hero_text: "Easy to reach by tram, bus, or on foot.",
+
+    findus_map_title: "See us on the map",
+    findus_map_text: "Explore the area and find the best way to reach us.",
+    findus_map_note: "Tip: Zoom in to see nearby tram and bus stops.",
+
+    findus_visit_title: "Visit us in Helsinki",
+    findus_visit_text: "We’re right in the heart of the city, close to shops and transport.",
+    findus_address_label: "Address",
+    findus_area_label: "Area",
+    findus_area_value: "City center, near Stockmann",
+    findus_public_label: "Public transport",
+    findus_public_value: "Trams and buses via Keskuskatu / Aleksanterinkatu",
+
+    findus_hours_title: "Opening hours",
+    findus_hours_mon_thu_label: "Mon–Thu",
+    findus_hours_fri_sat_label: "Fri–Sat",
+    findus_hours_sun_label: "Sunday",
+    findus_hours_note: "Public holidays may have special opening times.",
+
+    findus_directions_title: "Get directions",
+    findus_directions_text: "Choose your favourite app for step-by-step navigation.",
+
+    findus_travel_title: "How to get here",
+    findus_travel_text: "Whether you’re coming by tram, bus, or car, getting to FreshBite Kitchen is simple.",
+    findus_tram_title: "By tram",
+    findus_tram_text: "Several tram lines stop within a short walk. Check HSL Journey Planner for the fastest route.",
+    findus_bus_title: "By bus",
+    findus_bus_text: "Many bus lines serve the city center. Get off near Aleksanterinkatu or Keskuskatu stops.",
+    findus_car_title: "By car",
+    findus_car_text: "Nearby parking garages are available in the city center. Follow your map app for parking options.",
+
     google_maps: "Google Maps",
     hsl_journey: "HSL Journey Planner",
     apple_maps: "Apple Maps",
@@ -599,9 +631,41 @@ const translations = {
     faq_a4:
       "Kyllä, tarjoamme yksityistilaisuuksia ja juhlapaketteja. Ota yhteyttä saadaksesi lisätietoja ryhmävarauksista.",
 
-    // ===== Find Us page (FI) =====
-    findus_hero_title: "Löydä <span>FreshBite Kitchen</span>",
-    findus_hero_text: "Lempiravintolasi on vain napautuksen päässä!",
+    /// ===== Find Us page (FI) =====
+    findus_hero_pill: "Keskusta • Helsinki",
+    findus_hero_title: "Löydä <span>FreshBite keittiö</span>",
+    findus_hero_text: "Helppo tulla raitiovaunulla, bussilla tai kävellen.",
+
+    findus_map_title: "Näe sijaintimme kartalla",
+    findus_map_text: "Tutki aluetta ja löydä sinulle sopivin reitti.",
+    findus_map_note: "Vinkki: zoomaa sisään nähdäksesi lähimmät pysäkit.",
+
+    findus_visit_title: "Vieraile Helsingissä",
+    findus_visit_text: "Olemme aivan keskustassa, lähellä kauppoja ja liikenneyhteyksiä.",
+    findus_address_label: "Osoite",
+    findus_area_label: "Alue",
+    findus_area_value: "Keskusta, lähellä Stockmannia",
+    findus_public_label: "Joukkoliikenne",
+    findus_public_value: "Raitiovaunut ja bussit pysähtyvät Keskuskadun / Aleksanterinkadun lähellä.",
+
+    findus_hours_title: "Aukioloajat",
+    findus_hours_mon_thu_label: "Ma–To",
+    findus_hours_fri_sat_label: "Pe–La",
+    findus_hours_sun_label: "Sunnuntai",
+    findus_hours_note: "Juhlapyhinä aukioloajat voivat poiketa.",
+
+    findus_directions_title: "Reittiohjeet",
+    findus_directions_text: "Valitse suosikkisovelluksesi askel askeleelta -ohjeille.",
+
+    findus_travel_title: "Miten pääset perille",
+    findus_travel_text: "Tulitpa raitiovaunulla, bussilla tai autolla, FreshBite Kitchenille on helppo tulla.",
+    findus_tram_title: "Raitiovaunulla",
+    findus_tram_text: "Useat raitiovaunulinjat pysähtyvät kävelymatkan päässä. Tarkista tarkka reitti HSL-reittioppaasta.",
+    findus_bus_title: "Bussilla",
+    findus_bus_text: "Monet bussilinjat palvelevat keskustaa. Jää pois Aleksanterinkadun tai Keskuskadun pysäkeillä.",
+    findus_car_title: "Autolla",
+    findus_car_text: "Lähialueella on useita pysäköintihalleja. Seuraa karttasovellustasi pysäköintipaikkojen löytämiseksi.",
+
     google_maps: "Google Maps",
     hsl_journey: "HSL-reittiopas",
     apple_maps: "Apple Maps",
