@@ -6,14 +6,14 @@
   <title data-i18n="page_title">FreshBite Kitchen | Healthy & Delicious Food</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}" type="image/x-icon">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
     <div class="logo">
-      <a href="home.html">
+      <a href="/">
         <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" />
       </a>
       <span data-i18n="logo_text">FreshBite Kitchen</span>
@@ -21,18 +21,18 @@
 
     <nav>
       <ul>
-        <li><a data-i18n="nav_home" href="home.html" class="active">Home</a></li>
-        <li><a data-i18n="nav_menu" href="menu.html">Menu</a></li>
-        <li><a data-i18n="nav_reservation" href="reservation.html">Table Reservation</a></li>
-        <li><a data-i18n="nav_contact" href="contact.html">Contact</a></li>
+        <li><a data-i18n="nav_home" href="/" class="active">Home</a></li>
+        <li><a data-i18n="nav_menu" href="/menu">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="/reservation">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="/contact">Contact</a></li>
         <li><a data-i18n="nav_findus" href="find-us.html">Find Us</a></li>
 
         <!-- Dropdown -->
         <li class="dropdown">
           <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a href="customer_login.html" data-i18n="login_user">Users</a></li>
-            <li><a href="login.html" data-i18n="login_admin">Admin</a></li>
+            <li><a href="/customer_login" data-i18n="login_user">Users</a></li>
+            <li><a href="/login" data-i18n="login_admin">Admin</a></li>
           </ul>
         </li>
 
@@ -48,7 +48,7 @@
     <!-- Hero / Video -->
     <section class="hero-video" id="hero">
       <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../static/images/restaurant.mp4" type="video/mp4" />
+        <source src="{{ url_for('static', filename='images/restaurant.mp4') }}" type="video/mp4" />
       </video>
 
       <div class="hero-content">
@@ -88,7 +88,7 @@
           </p>
         </div>
         <div class="about-image">
-          <img src="../static/images/kitchen.jpg" alt="FreshBite Kitchen">
+          <img src="{{ url_for('static', filename='images/kitchen.jpg') }}"alt="FreshBite Kitchen">
         </div>
       </div>
     </section>
@@ -98,28 +98,28 @@
       <h2 data-i18n="specialties_title">Our <span>Specialties</span></h2>
       <div class="specialty-grid">
         <div class="specialty-card">
-          <img src="../static/images/burger.jpg" alt="Burgers">
+          <img src="{{ url_for('static', filename='images/burger.jpg') }}" alt="Burgers">
           <div class="specialty-info">
             <h3 data-i18n="specialty_burger">Burgers</h3>
             <p data-i18n="specialty_burger_text">Juicy, freshly prepared burgers with a variety of toppings for every taste.</p>
           </div>
         </div>
         <div class="specialty-card">
-          <img src="../static/images/pizza.jpg" alt="Pizzas">
+          <img src="{{ url_for('static', filename='images/pizza.jpg') }}" alt="Pizzas">
           <div class="specialty-info">
             <h3 data-i18n="specialty_pizza">Pizzas</h3>
             <p data-i18n="specialty_pizza_text">Wood-fired, cheesy pizzas made from the freshest ingredients.</p>
           </div>
         </div>
         <div class="specialty-card">
-          <img src="../static/images/drinks.jpg" alt="Drinks">
+          <img src="{{ url_for('static', filename='images/drinks.jpg') }}" alt="Drinks">
           <div class="specialty-info">
             <h3 data-i18n="specialty_drinks">Drinks</h3>
             <p data-i18n="specialty_drinks_text">Refreshing cold-pressed juices, smoothies, and classic beverages.</p>
           </div>
         </div>
         <div class="specialty-card">
-          <img src="../static/images/salads.jpg" alt="Salads">
+          <img src="{{ url_for('static', filename='images/salads.jpg') }}"alt="Salads">
           <div class="specialty-info">
             <h3 data-i18n="specialty_salads">Salads</h3>
             <p data-i18n="specialty_salads_text">Healthy and colorful salads packed with fresh vegetables and protein.</p>
@@ -134,14 +134,14 @@
       <div class="choose-columns">
         <div class="choose-column">
           <div class="choose-item">
-            <img src="../static/images/fresh.jpg" alt="Fresh Ingredients">
+            <img src="{{ url_for('static', filename='images/fresh.jpg') }}" alt="Fresh Ingredients">
             <div class="choose-text">
               <h3 data-i18n="fresh_ingredients">100% Fresh Ingredients</h3>
               <p data-i18n="fresh_ingredients_text">We use only fresh, organic ingredients for all our meals.</p>
             </div>
           </div>
           <div class="choose-item">
-            <img src="../static/images/chef.jpg" alt="Expert Chefs">
+            <img src="{{ url_for('static', filename='images/chef.jpg') }}"  alt="Expert Chefs">
             <div class="choose-text">
               <h3 data-i18n="expert_chefs">Expert Chefs</h3>
               <p data-i18n="expert_chefs_text">Our chefs craft each dish to perfection with nutritional care.</p>
@@ -150,14 +150,14 @@
         </div>
         <div class="choose-column">
           <div class="choose-item">
-            <img src="../static/images/gluten.png" alt="Vegan & Gluten-Free">
+            <img src="{{ url_for('static', filename='images/gluten.png') }}"alt="Vegan & Gluten-Free">
             <div class="choose-text">
               <h3 data-i18n="vegan_gluten">Vegan & Gluten-Free</h3>
               <p data-i18n="vegan_gluten_text">Options for all diets without compromising taste.</p>
             </div>
           </div>
           <div class="choose-item">
-            <img src="../static/images/delivery.jpg" alt="Fast Delivery">
+            <img src="{{ url_for('static', filename='images/delivery.jpg') }}" alt="Fast Delivery">
             <div class="choose-text">
               <h3 data-i18n="fast_delivery">Fast Delivery</h3>
               <p data-i18n="fast_delivery_text">Enjoy your meal quickly and safely, right at your doorstep.</p>
@@ -172,17 +172,17 @@
       <h2 data-i18n="reviews_title">What Our <span>Customers Say</span></h2>
       <div class="review-grid">
         <div class="review-card">
-          <img src="../static/images/customer1.jpg" alt="Sofia" class="review-photo">
+          <img src="{{ url_for('static', filename='images/customer1.jpg') }}" alt="Sofia" class="review-photo">
           <p data-i18n="review_1_text">“The best healthy restaurant in town! Every bite feels fresh and full of flavor.”</p>
           <h4 data-i18n="review_1_name">– Sofia, Helsinki</h4>
         </div>
         <div class="review-card">
-          <img src="../static/images/customer2.jpg" alt="Liam" class="review-photo">
+          <img src="{{ url_for('static', filename='images/customer2.jpg') }}" alt="Liam" class="review-photo">
           <p data-i18n="review_2_text">“Fast delivery, amazing taste, and the vegan options are incredible!”</p>
           <h4 data-i18n="review_2_name">– Liam, Turku</h4>
         </div>
         <div class="review-card">
-          <img src="../static/images/customer3.jpg" alt="Emma" class="review-photo">
+          <img src="{{ url_for('static', filename='images/customer3.jpg') }}" alt="Emma" class="review-photo">
           <p data-i18n="review_3_text">“Fresh ingredients, beautiful presentation, and friendly staff. Highly recommend!”</p>
           <h4 data-i18n="review_3_name">– Emma, Espoo</h4>
         </div>

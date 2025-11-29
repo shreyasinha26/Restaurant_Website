@@ -6,44 +6,52 @@
   <title>FreshBite Kitchen | Our Menu</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}" type="image/x-icon">
 </head>
 <body>
-  <!-- Header -->
-  <header>
+
+  <!-- Header - EXACT COPY FROM YOUR SPECIFICATION -->
+  <header class="site-header">
     <div class="logo">
       <a href="/">
-        
         <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" />
       </a>
-      <span>FreshBite Kitchen</span>
+      <span data-i18n="logo_text">FreshBite Kitchen</span>
     </div>
-   <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/menu" class="active">Menu</a></li>
-        <li><a href="/reservation">Table Reservation</a></li>
-        <li><a href="/contact">Contact</a></li>
 
-        <!-- Dropdown Menu -->
+    <nav>
+      <ul>
+        <li><a data-i18n="nav_home" href="/">Home</a></li>
+        <li><a data-i18n="nav_menu" href="/menu" class="active">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="/reservation">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="/contact">Contact</a></li>
+        <li><a data-i18n="nav_findus" href="/find_us">Find Us</a></li>
+
+        <!-- Dropdown -->
         <li class="dropdown">
-          <a href="#" class="dropbtn">Login ▾</a>
+          <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a href="/customer_login">Users</a></li>
-            <li><a href="/login">Admin</a></li>
+            <li><a href="/customer_login" data-i18n="login_user">Users</a></li>
+            <li><a href="/login" data-i18n="login_admin">Admin</a></li>
           </ul>
+        </li>
+
+        <!-- LANGUAGE SWITCH -->
+        <li class="lang-switcher">
+          <button id="lang-switch">FI / EN</button>
         </li>
       </ul>
     </nav>
   </header>
 
-  <!-- Menu Section -->
-  <section class="menu">
-    <div class="menu-header">
+  <!-- Menu Content -->
+  <main class="menu-main">
+    <!-- Menu Header -->
+    <section class="menu-header">
       <h1>Our <span>Menu</span></h1>
       <div class="underline"></div>
       <p>Discover our delicious selection of dishes made with the finest ingredients.</p>
-    </div>
+    </section>
 
     <!-- Category Filter -->
     <div class="menu-nav">
@@ -52,34 +60,29 @@
       <button class="category-btn" data-category="pizzas">Pizzas</button>
       <button class="category-btn" data-category="salads">Salads</button>
       <button class="category-btn" data-category="finnish">Finnish Specialties</button>
-      <button class="category-btn" data-category="healthy">Dietary Restrictions</button>
+      <button class="category-btn" data-category="healthy">Healthy Options</button>
       <button class="category-btn" data-category="drinks">Drinks</button>
     </div>
 
-    <!-- Dynamic Menu Grid -->
-    <div class="menu-dynamic-container">
+    <!-- Menu Items Container -->
+    <div class="menu-container">
+      <div id="menu-items-container" class="items-grid">
+        <!-- Menu items will be loaded here -->
+        <div class="loading">Loading menu items...</div>
+      </div>
       <p id="no-items-message" style="display:none; text-align:center; margin:30px; color:#555;">
+        No menu items found. Please add items from the Admin Dashboard.
       </p>
-      <div class="items-grid" id="menu-items-container"></div>
     </div>
-  </section>
-  <div class="menu-dynamic-container">
-  <p id="no-items-message" style="display:none; text-align:center; margin:30px; color:#555;">
-    No menu items found. Please add items from the Admin Dashboard.
-  </p>
-  <div class="items-grid" id="menu-items-container">
-    <!-- Menu items will be loaded here -->
-  </div>
-</div>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>© 2025 FreshBite Kitchen | All Rights Reserved</p>
   </footer>
 
-  <!-- External JS File -->
+  <!-- JavaScript -->
   <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
-<script src="{{ url_for('static', filename='js/menu-api.js') }}"></script>
-
+  <script src="{{ url_for('static', filename='js/menu-api.js') }}"></script>
 </body>
 </html>

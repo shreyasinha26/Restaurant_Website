@@ -504,3 +504,49 @@ footer {
   box-shadow: 0 6px 15px rgba(255, 123, 0, 0.4);
 }
 
+/* ----- Dropdown Menu ----- */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: #1b1b1b;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 14px;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background-color: #ff7b00;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Active state for dropdown when open */
+.dropdown.active .dropdown-content {
+  display: block;
+}
