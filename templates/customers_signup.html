@@ -70,5 +70,85 @@
     </div>
   </div>
 <script src="../static/js/signup.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const signupForm = document.getElementById('signup-form');
+    
+    if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errors = validateSignupForm(this);
+            
+            if (Object.keys(errors).length === 0) {
+                this.submit();
+            } else {
+                displayFormErrors(errors);
+            }
+        });
+    }
+
+    function validateSignupForm(form) {
+        const errors = {};
+        const formData = new FormData(form);
+
+        // Name validation
+        const name = formData.get('name') || '';
+        if (!name.trim()) {
+            errors.name = 'Full name is required';
+        }
+
+        // Email validation
+        const email = formData.get('email') || '';
+        if (!email.trim()) {
+            errors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+
+        // Phone validation
+        const phone = formData.get('phone') || '';
+        if (phone && !/^\+?[0-9]{10,15}$/.test(phone.replace(/\s/g, ''))) {
+            errors.phone = 'Please enter a valid phone number';
+        }
+
+        // Password validation
+        const password = formData.get('password') || '';
+        if (!password) {
+            errors.password = 'Password is required';
+        } else if (password.length < 6) {
+            errors.password = 'Password must be at least 6 characters';
+        }
+
+        return errors;
+    }
+
+    function displayFormErrors(errors) {
+        // Clear previous errors
+        document.querySelectorAll('.error-message').forEach(el => el.remove());
+        document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+
+        // Display new errors
+        for (const [field, message] of Object.entries(errors)) {
+            const input = document.querySelector(`[name="${field}"]`);
+            if (input) {
+                input.classList.add('field-error');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.style.color = 'red';
+                errorDiv.style.fontSize = '0.875rem';
+                errorDiv.style.marginTop = '0.25rem';
+                errorDiv.textContent = message;
+                input.parentNode.appendChild(errorDiv);
+            }
+        }
+    }
+});
+</script>
+
+<style>
+.field-error {
+    border-color: #dc2626 !important;
+}
+</style>
 </body>
 </html>
