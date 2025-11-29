@@ -63,12 +63,13 @@ const translations = {
     logo_text: "FreshBite Kitchen",
 
     nav_home: "Etusivu",
-    nav_menu: "Menu",
+    nav_menu: "Valikko",
     nav_reservation: "Pöytävaraus",
     nav_contact: "Yhteystiedot",
+    nav_findus: "Löydä meidät",
     login: "Kirjaudu ▾",
     login_user: "Käyttäjät",
-    login_admin: "Admin",
+    login_admin: "Ylläpitäjä",
 
     hero_title: "Tervetuloa FreshBite-keittiöön",
     hero_text: "Terveellistä, herkullista ja huolella valmistettua — jokainen annos tehdään tuoreena sinulle.",
