@@ -6,7 +6,6 @@ from validators.schemas import UserSchema
 
 class AuthController:
     def __init__(self):
-        # Don't initialize model here, do it in methods
         self._user_model = None
 
     @property

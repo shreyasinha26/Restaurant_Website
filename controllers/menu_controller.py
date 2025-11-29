@@ -4,7 +4,6 @@ from models.menu_model import MenuModel
 
 class MenuController:
     def __init__(self):
-        # Don't initialize model here, do it in methods
         self._menu_model = None
 
     @property
@@ -77,7 +76,7 @@ class MenuController:
             if not data:
                 return jsonify({'error': 'No data provided'}), 400
 
-            # Prepare update fields
+            # Update fields
             update_fields = {}
             if 'name' in data:
                 update_fields['name'] = data['name'].strip()

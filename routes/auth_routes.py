@@ -3,7 +3,6 @@ from controllers.auth_controller import AuthController
 
 auth_bp = Blueprint('auth', __name__)
 
-# Don't initialize controller here, do it in each route
 auth_controller = AuthController()
 
 @auth_bp.route('/api/signup', methods=['POST'])

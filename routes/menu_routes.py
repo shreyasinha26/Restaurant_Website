@@ -3,7 +3,6 @@ from controllers.menu_controller import MenuController
 
 menu_bp = Blueprint('menu_bp', __name__, url_prefix='/api/menu')
 
-# Don't initialize controller here, do it in each route
 menu_controller = MenuController()
 
 @menu_bp.route('/', methods=['GET'])
