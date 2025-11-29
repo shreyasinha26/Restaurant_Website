@@ -50,7 +50,24 @@ body {
   font-weight: 700;
   font-size: 1rem;
 }
+/* Language Switch (same style as other pages) */
+.lang-switcher {
+  margin-left: 15px;
+}
 
+.lang-switcher button {
+  background-color: #f7f3e9;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-switcher button:hover {
+  background-color: #eee3cc;
+}
 .nav-right ul {
   list-style: none;
   display: flex;

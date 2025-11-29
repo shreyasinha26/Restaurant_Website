@@ -342,6 +342,28 @@ const translations = {
         // ----- Customer login page (EN) -----
     page_title_customer_login: "FreshBite Kitchen | Customer Login",
     customer_access: "Customer Login Portal",
+
+    // ===== Customer Dashboard (EN) =====
+    nav_logout: "Logout",
+
+    dashboard_welcome_title: "Welcome to Your Dashboard! 👋",
+    dashboard_welcome_subtitle: "What would you like to do today?",
+
+    dashboard_action_menu_title: "View Menu",
+    dashboard_action_menu_text: "Browse our delicious dishes and place orders",
+
+    dashboard_action_reservation_title: "Make Reservation",
+    dashboard_action_reservation_text: "Book your table online",
+
+    dashboard_action_orders_title: "My Orders",
+    dashboard_action_orders_text: "View your order history and status",
+
+    dashboard_action_myreservations_title: "My Reservations",
+    dashboard_action_myreservations_text: "Manage your table bookings",
+
+    dashboard_empty_title: "Your Dashboard is Ready",
+    dashboard_empty_text:
+      "Start by exploring our menu or making a reservation. Your activity will appear here once you start using our services.",
   },
 
   fi: {
@@ -681,6 +703,28 @@ const translations = {
         // ----- Customer login page (FI) -----
     page_title_customer_login: "FreshBite Kitchen | Asiakkaan kirjautuminen",
     customer_access: "Asiakkaan kirjautumissivu",
+
+        // ===== Customer Dashboard (FI) =====
+    nav_logout: "Kirjaudu ulos",
+
+    dashboard_welcome_title: "Tervetuloa omaan hallintapaneeliisi! 👋",
+    dashboard_welcome_subtitle: "Mitä haluaisit tehdä tänään?",
+
+    dashboard_action_menu_title: "Näytä ruokalista",
+    dashboard_action_menu_text: "Selaa herkullisia annoksiamme ja tee tilauksia",
+
+    dashboard_action_reservation_title: "Tee pöytävaraus",
+    dashboard_action_reservation_text: "Varaa pöytäsi verkossa",
+
+    dashboard_action_orders_title: "Tilaukseni",
+    dashboard_action_orders_text: "Näe tilaushistoriasi ja tilauksen tila",
+
+    dashboard_action_myreservations_title: "Varaukseni",
+    dashboard_action_myreservations_text: "Hallinnoi pöytävarauksiasi",
+
+    dashboard_empty_title: "Hallintapaneelisi on valmis",
+    dashboard_empty_text:
+      "Aloita tutkimalla ruokalistaamme tai tekemällä pöytävarauksen. Aktiviteettisi näkyy täällä, kun alat käyttää palveluitamme.",
  
   },
 };
