@@ -4,43 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="page_title_contact">FreshBite Kitchen | Contact Us</title>
-  <link rel="stylesheet" href="../static/css/contact.css">
+
+  <!-- STATIC CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}" type="image/x-icon">
 </head>
+
 <body>
+
   <!-- Header -->
   <header class="site-header">
     <div class="logo">
-      <a href="home.html">
-        <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen logo">
+      <a href="/">
+        <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen logo">
       </a>
       <span data-i18n="logo_text">FreshBite Kitchen</span>
     </div>
 
     <nav>
       <ul>
-        <li><a href="home.html" data-i18n="nav_home">Home</a></li>
-        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
-        <li><a href="reservation.html" data-i18n="nav_reservation">Table Reservation</a></li>
-        <li><a href="contact.html" class="active" data-i18n="nav_contact">Contact</a></li>
-        <li><a href="find-us.html" data-i18n="nav_findus">Find Us</a></li>
+        <li><a data-i18n="nav_home" href="/">Home</a></li>
+        <li><a data-i18n="nav_menu" href="/menu">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="/reservation">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="/contact" class="active">Contact</a></li>
+        <li><a data-i18n="nav_findus" href="/find-us">Find Us</a></li>
+
 
         <!-- Dropdown Menu -->
         <li class="dropdown">
           <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a href="customer_login.html" data-i18n="login_user">Users</a></li>
-            <li><a href="login.html" data-i18n="login_admin">Admin</a></li>
+            <li><a data-i18n="login_user" href="/customer_login">Users</a></li>
+            <li><a data-i18n="login_admin" href="/login">Admin</a></li>
           </ul>
         </li>
-                <!-- Language switcher like home -->
+
+        <!-- Language Switch -->
         <li class="lang-switcher">
           <button id="lang-switch">FI / EN</button>
         </li>
       </ul>
     </nav>
   </header>
+
 
   <!-- Hero Section -->
   <section class="contact-hero">
@@ -52,9 +59,11 @@
     </div>
   </section>
 
+
   <!-- Contact Section -->
   <section class="contact-section">
     <div class="contact-container">
+
       <!-- Contact Info -->
       <div class="contact-info">
         <h2 data-i18n="contact_info_title">Contact Information</h2>
@@ -96,72 +105,53 @@
         </div>
       </div>
 
+
       <!-- Contact Form -->
       <div class="contact-form">
         <h2 data-i18n="contact_form_title">Send us a Message</h2>
+
         <form id="contactForm">
+
           <div class="form-group">
             <label for="name" data-i18n="contact_form_label_name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your full name"
-              data-i18n-placeholder="contact_form_placeholder_name" required>
+            <input type="text" id="name" required placeholder="Your full name"
+                   data-i18n-placeholder="contact_form_placeholder_name">
           </div>
 
           <div class="form-group">
             <label for="email" data-i18n="contact_form_label_email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your email address"
-              data-i18n-placeholder="contact_form_placeholder_email" required>
+            <input type="email" id="email" required placeholder="Your email address"
+                   data-i18n-placeholder="contact_form_placeholder_email">
           </div>
 
          <div class="form-group">
             <label for="phone" data-i18n="contact_form_label_phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Your phone number"
-              data-i18n-placeholder="contact_form_placeholder_phone"
-            >
+            <input type="tel" id="phone" placeholder="Your phone number"
+                   data-i18n-placeholder="contact_form_placeholder_phone">
           </div>
 
           <div class="form-group">
             <label for="subject" data-i18n="contact_form_label_subject">Subject</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Message subject"
-              data-i18n-placeholder="contact_form_placeholder_subject"
-              required
-            >
+            <input type="text" id="subject" required placeholder="Message subject"
+                   data-i18n-placeholder="contact_form_placeholder_subject">
           </div>
 
           <div class="form-group">
             <label for="message" data-i18n="contact_form_label_message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Your message..."
-              rows="5"
-              data-i18n-placeholder="contact_form_placeholder_message"
-              required
-            ></textarea>
+            <textarea id="message" rows="5" required placeholder="Your message..."
+                      data-i18n-placeholder="contact_form_placeholder_message"></textarea>
           </div>
 
           <button type="submit" class="submit-btn" data-i18n="contact_form_submit">
             Send Message
           </button>
+
         </form>
       </div>
+
     </div>
   </section>
+
 
   <!-- FAQ Section -->
   <section class="faq-section">
@@ -170,40 +160,38 @@
       <div class="faq-grid">
         <div class="faq-item">
           <h3 data-i18n="faq_q1">Do you offer delivery?</h3>
-          <p data-i18n="faq_a1">
-            Yes! We offer delivery through our partners Wolt and Foodora in all our locations.
-          </p>
+          <p data-i18n="faq_a1">Yes! We offer delivery through Wolt and Foodora.</p>
         </div>
+
         <div class="faq-item">
           <h3 data-i18n="faq_q2">Are you open on holidays?</h3>
-          <p data-i18n="faq_a2">
-            We are open on most holidays with reduced hours. Please check our social media for specific holiday schedules.
-          </p>
+          <p data-i18n="faq_a2">We are open most holidays with reduced hours.</p>
         </div>
+
         <div class="faq-item">
           <h3 data-i18n="faq_q3">Do you accommodate dietary restrictions?</h3>
-          <p data-i18n="faq_a3">
-            Absolutely! We offer vegetarian, vegan, and gluten-free options. Just let us know about your dietary needs.
-          </p>
+          <p data-i18n="faq_a3">Yes, we offer vegetarian, vegan, and gluten-free options.</p>
         </div>
+
         <div class="faq-item">
-          <h3 data-i18n="faq_q4">Can I host events at your restaurant?</h3>
-          <p data-i18n="faq_a4">
-            Yes, we offer private dining and event hosting. Contact us for more information about group bookings.
-          </p>
+          <h3 data-i18n="faq_q4">Can I host events?</h3>
+          <p data-i18n="faq_a4">Yes, contact us for private dining and events.</p>
         </div>
       </div>
     </div>
   </section>
 
+
   <!-- Footer -->
   <footer>
-    <!-- reuse same footer_text key as home -->
     <p data-i18n="footer_text">© 2025 FreshBite Kitchen | All Rights Reserved</p>
   </footer>
-  <script src="../static/js/home.js"></script>
-  <script src="../static/js/contact.js"></script>
-  <script src="../static/js/translations.js"></script>
-  <script src="../static/js/language.js"></script>
+
+  <!-- Static JS -->
+  <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
 </body>
 </html>

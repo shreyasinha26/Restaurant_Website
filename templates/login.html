@@ -3,23 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshBite Kitchen | Admin Access</title>
-  <link rel="stylesheet" href="../static/css/login.css">
+  <title data-i18n="admin_access">FreshBite Kitchen | Admin Access</title>
+
+  <!-- STATIC CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+
+  <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}" type="image/x-icon">
 </head>
 <body>
 
   <!-- Navbar -->
   <header class="login-header">
     <div class="navbar">
-      <a href="home.html" class="logo-link">
-        <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
+      <a href="/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen Logo" class="logo-img">
         <span>FreshBite Kitchen</span>
       </a>
       <nav>
         <ul>
-          <li><a href="home.html" class="nav-link">Home</a></li>
+          <li><a href="/" class="nav-link" data-i18n="nav_home">Home</a></li>
+
+          <!-- LANGUAGE SWITCH BUTTON -->
+          <li class="lang-switcher">
+            <button id="lang-switch">FI / EN</button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -28,33 +37,33 @@
   <!-- Login Form -->
   <div class="login-wrapper">
     <div class="login-logo">
-      <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo">
+      <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen Logo">
       <h2>FreshBite Kitchen</h2>
-      <p>Admin Access Portal</p>
+      <p data-i18n="admin_access">Admin Access Portal</p>
     </div>
 
     <form class="form active" id="loginForm">
       <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+        <label for="email" data-i18n="login_email_label">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" data-i18n-placeholder="login_email_placeholder" required>
       </div>
+
       <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <label for="password" data-i18n="login_password_label">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" data-i18n-placeholder="login_password_placeholder" required>
       </div>
-      <button type="submit" class="btn">Login</button>
-      <p class="small-text">Don't have an account? <a href="signup.html" id="switchToSignup">Sign Up</a></p>
+
+      <button type="submit" class="btn" data-i18n="login_button">Login</button>
     </form>
+
+
   </div>
 
-<script>
-    // Redirect to admin dashboard on form submit
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault(); // prevent default form submission
-      // Redirect to admin dashboard
-      window.location.href = 'admin-dashboard.html';
-    });
-  </script>
+  <!-- JS FILES -->
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
 </body>
 </html>
+

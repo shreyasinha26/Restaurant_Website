@@ -82,9 +82,9 @@ def create_app():
     def signup():
         return render_template('signup.html')
 
-    @app.route('/find_us')
-    def find_us():
-        return render_template('find_us.html')
+    @app.route('/find-us')
+    def findus():
+        return render_template('find-us.html')
 
     # Register Blueprints
     from routes.menu_routes import menu_bp
