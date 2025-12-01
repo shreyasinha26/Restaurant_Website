@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBite Kitchen</title>
+  <link rel="stylesheet" href="../static/css/customer_login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="login-header">
+    <div class="navbar">
+      <a href="/" class="logo-link">
+        <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
+        <span>FreshBite Kitchen</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/" class="nav-link">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Form -->
+  <div class="login-wrapper">
+    <div class="login-logo">
+      <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo">
+      <h2>FreshBite Kitchen</h2>
+        <p>Customer Login Portal</p>
+    </div>
+
+    <form class="form active" id="loginForm">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p class="small-text">Don't have an account? <a href="/customers_signup" id="switchToSignup">Sign Up</a></p>
+    </form>
+  </div>
+<script src="../static/js/login.js"></script>
+</body>
+</html>
