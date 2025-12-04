@@ -1,364 +1,185 @@
-// contact.js - Enhanced Contact Page Functionality
+// contact.js — Clean Real-time Validation + Backend Connected
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Form handling and validation
-    const contactForm = document.getElementById("contactForm");
-    const locationSelect = document.getElementById("location");
-    
-    // Auto-populate phone number based on location selection
-    if (locationSelect) {
-        locationSelect.addEventListener("change", function() {
-            updateContactInfo(this.value);
-        });
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+  if (!contactForm) return;
+
+  /* ============================================================
+     CONSTANTS
+  ============================================================ */
+  const BASE_URL = "http://127.0.0.1:5000";
+  const ENDPOINT = "/contact";
+
+  const locationSelect = document.getElementById("location");
+
+  const locationInfo = {
+    helsinki: {
+      phone: "+358 40 123 4567",
+    },
+  };
+
+  if (locationSelect) {
+    locationSelect.addEventListener("change", function () {
+      const phone = document.getElementById("phone");
+      if (locationInfo[this.value]) {
+        phone.value = locationInfo[this.value].phone;
+      }
+      validate(phone);
+    });
+  }
+
+  /* ============================================================
+     REAL-TIME VALIDATION
+  ============================================================ */
+  const requiredInputs = contactForm.querySelectorAll(
+    "input[required], textarea[required], select[required]"
+  );
+
+  requiredInputs.forEach((field) => {
+    field.addEventListener("blur", () => validate(field));
+    field.addEventListener("input", () => validate(field));
+    if (field.tagName === "SELECT") {
+      field.addEventListener("change", () => validate(field));
+    }
+  });
+
+  function validate(field) {
+    const value = field.value.trim();
+    let error = "";
+
+    if (field.hasAttribute("required") && value === "") {
+      error = "This field is required";
     }
 
-    // Contact information mapping
-    const locationInfo = {
-        helsinki: {
-            phone: "+358 40 123 4567",
-            address: "Aleksanterinkatu 15, 00100 Helsinki",
-            hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
-        },
-        turku: {
-            phone: "+358 40 123 4568",
-            address: "Aurakatu 8, 20100 Turku",
-            hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
-        },
-        espoo: {
-            phone: "+358 40 123 4569",
-            address: "Tapiontori 4, 02100 Espoo",
-            hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
-        },
-        tampere: {
-            phone: "+358 40 123 4570",
-            address: "Hämeenkatu 30, 33100 Tampere",
-            hours: "Mon-Thu: 11:00-22:00, Fri-Sat: 11:00-23:00, Sun: 12:00-21:00"
-        }
+    if (!error && field.type === "email" && value !== "") {
+      const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailReg.test(value)) error = "Enter a valid email";
+    }
+
+    if (!error && field.type === "tel" && value !== "") {
+      const phoneReg = /^[+]?[0-9\s\-()]+$/;
+      if (!phoneReg.test(value)) error = "Enter a valid phone number";
+    }
+
+    return showError(field, error);
+  }
+
+  function validateForm() {
+    let ok = true;
+    requiredInputs.forEach((input) => {
+      if (!validate(input)) ok = false;
+    });
+    return ok;
+  }
+
+  function showError(field, msg) {
+    let err = field.parentNode.querySelector(".error-message");
+
+    if (!err) {
+      err = document.createElement("div");
+      err.className = "error-message";
+      field.parentNode.appendChild(err);
+    }
+
+    if (msg) {
+      field.style.borderColor = "#ff4444";
+      err.textContent = msg;
+      err.style.display = "block";
+      return false;
+    }
+
+    field.style.borderColor = "#ddd";
+    err.style.display = "none";
+    return true;
+  }
+
+  /* ============================================================
+     SUBMIT HANDLER (Backend)
+  ============================================================ */
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      notify("Fix errors before submitting.", "error");
+      return;
+    }
+
+    await sendMessage();
+  });
+
+  async function sendMessage() {
+    const submitBtn = contactForm.querySelector(".submit-btn");
+    const originalText = submitBtn.textContent;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    const payload = {
+      name: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      subject: document.getElementById("subject").value.trim(),
+      message: document.getElementById("message").value.trim(),
     };
 
-    function updateContactInfo(location) {
-        const phoneInput = document.getElementById("phone");
-        if (phoneInput && locationInfo[location]) {
-            phoneInput.value = locationInfo[location].phone;
-            phoneInput.setAttribute("data-suggested", "true");
+    try {
+      const res = await fetch(BASE_URL + ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        notify(data.message || "Message failed.", "error");
+      } else {
+        notify("Message sent successfully! 🎉", "success");
+        contactForm.reset();
+      }
+    } catch (err) {
+      notify("Server offline. Please start backend.", "error");
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+
+  /* ============================================================
+     NOTIFICATION SYSTEM
+  ============================================================ */
+  function notify(message, type = "info") {
+    const box = document.createElement("div");
+    box.className = `notification ${type}`;
+    box.innerHTML = `
+      <span>${message}</span>
+      <button>&times;</button>
+    `;
+
+    // CSS once
+    if (!document.querySelector("#notif-style")) {
+      const style = document.createElement("style");
+      style.id = "notif-style";
+      style.textContent = `
+        .notification {
+          position: fixed;
+          top: 20px; right: 20px;
+          background: #333; color: #fff;
+          padding: 15px 20px;
+          border-radius: 8px;
+          display: flex; gap: 10px;
+          animation: fadeIn .3s;
+          z-index: 9999;
         }
+        .notification.success { background: #4caf50; }
+        .notification.error { background: #e74c3c; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      `;
+      document.head.appendChild(style);
     }
 
-    // Form validation and submission
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            
-            if (validateForm()) {
-                submitForm();
-            }
-        });
-
-        // Real-time validation
-        const formInputs = contactForm.querySelectorAll("input, select, textarea");
-        formInputs.forEach(input => {
-            input.addEventListener("blur", function() {
-                validateField(this);
-            });
-            
-            input.addEventListener("input", function() {
-                clearFieldError(this);
-            });
-        });
-    }
-
-    function validateForm() {
-        let isValid = true;
-        const requiredFields = contactForm.querySelectorAll("[required]");
-        
-        requiredFields.forEach(field => {
-            if (!validateField(field)) {
-                isValid = false;
-            }
-        });
-
-        return isValid;
-    }
-
-    function validateField(field) {
-        const value = field.value.trim();
-        let isValid = true;
-        let errorMessage = "";
-
-        // Clear previous error
-        clearFieldError(field);
-
-        // Required field validation
-        if (field.hasAttribute("required") && !value) {
-            errorMessage = "This field is required";
-            isValid = false;
-        } 
-        // Email validation
-        else if (field.type === "email" && value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                errorMessage = "Please enter a valid email address";
-                isValid = false;
-            }
-        }
-        // Phone validation
-        else if (field.type === "tel" && value) {
-            const phoneRegex = /^[\+]?[0-9\s\-\(\)]+$/;
-            if (!phoneRegex.test(value)) {
-                errorMessage = "Please enter a valid phone number";
-                isValid = false;
-            }
-        }
-
-        if (!isValid) {
-            showFieldError(field, errorMessage);
-        }
-
-        return isValid;
-    }
-
-    function showFieldError(field, message) {
-        field.style.borderColor = "#ff4444";
-        
-        // Create or update error message
-        let errorElement = field.parentNode.querySelector(".error-message");
-        if (!errorElement) {
-            errorElement = document.createElement("div");
-            errorElement.className = "error-message";
-            field.parentNode.appendChild(errorElement);
-        }
-        
-        errorElement.textContent = message;
-        errorElement.style.display = "block";
-    }
-
-    function clearFieldError(field) {
-        field.style.borderColor = "#ddd";
-        
-        const errorElement = field.parentNode.querySelector(".error-message");
-        if (errorElement) {
-            errorElement.style.display = "none";
-        }
-    }
-
-    function submitForm() {
-        const submitBtn = contactForm.querySelector(".submit-btn");
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = "Sending...";
-        submitBtn.disabled = true;
-        
-        // Simulate form submission
-        setTimeout(() => {
-            // In a real application, you would send data to a server here
-            const formData = new FormData(contactForm);
-            const formObject = Object.fromEntries(formData.entries());
-            
-            console.log("Form submitted:", formObject);
-            
-            // Show success message
-            showNotification("Message sent successfully! We'll get back to you soon.", "success");
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Restore button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            
-        }, 1500);
-    }
-
-    // Notification system
-    function showNotification(message, type = "info") {
-        const notification = document.createElement("div");
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
-        `;
-        
-        // Add styles if not already added
-        if (!document.querySelector('#notification-styles')) {
-            const styles = document.createElement('style');
-            styles.id = 'notification-styles';
-            styles.textContent = `
-                .notification {
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    padding: 15px 20px;
-                    border-radius: 8px;
-                    color: white;
-                    z-index: 1000;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    max-width: 400px;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                    animation: slideIn 0.3s ease;
-                }
-                .notification.success { background: #4CAF50; }
-                .notification.error { background: #ff4444; }
-                .notification.info { background: #2196F3; }
-                .notification-close {
-                    background: none;
-                    border: none;
-                    color: white;
-                    font-size: 1.2rem;
-                    cursor: pointer;
-                    padding: 0;
-                    width: 20px;
-                    height: 20px;
-                }
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(styles);
-        }
-        
-        document.body.appendChild(notification);
-        
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 5000);
-        
-        // Close button functionality
-        notification.querySelector('.notification-close').addEventListener('click', () => {
-            notification.remove();
-        });
-    }
-
-    // Interactive FAQ section
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Toggle active state
-            this.classList.toggle('active');
-            
-            // Add styles for FAQ interaction
-            if (!document.querySelector('#faq-styles')) {
-                const faqStyles = document.createElement('style');
-                faqStyles.id = 'faq-styles';
-                faqStyles.textContent = `
-                    .faq-item {
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                    }
-                    .faq-item.active {
-                        background: #fff8f0;
-                        border-left: 4px solid #ff7b00;
-                    }
-                    .faq-item p {
-                        max-height: 0;
-                        overflow: hidden;
-                        transition: max-height 0.3s ease;
-                    }
-                    .faq-item.active p {
-                        max-height: 200px;
-                    }
-                `;
-                document.head.appendChild(faqStyles);
-            }
-        });
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Responsive navigation enhancement
-    const header = document.querySelector('.site-header');
-    const nav = document.querySelector('nav');
-    
-    // Add mobile menu toggle for smaller screens
-    function setupMobileMenu() {
-        if (window.innerWidth <= 768 && !document.querySelector('.menu-toggle')) {
-            const menuToggle = document.createElement('button');
-            menuToggle.className = 'menu-toggle';
-            menuToggle.innerHTML = '☰';
-            menuToggle.setAttribute('aria-label', 'Toggle menu');
-            
-            // Add mobile menu styles
-            if (!document.querySelector('#mobile-menu-styles')) {
-                const mobileStyles = document.createElement('style');
-                mobileStyles.id = 'mobile-menu-styles';
-                mobileStyles.textContent = `
-                    .menu-toggle {
-                        display: none;
-                        background: none;
-                        border: none;
-                        color: #ff7b00;
-                        font-size: 1.5rem;
-                        cursor: pointer;
-                        padding: 5px;
-                    }
-                    @media (max-width: 768px) {
-                        .menu-toggle {
-                            display: block;
-                        }
-                        nav ul {
-                            display: none;
-                            position: absolute;
-                            top: 100%;
-                            left: 0;
-                            right: 0;
-                            background: #1b1b1b;
-                            flex-direction: column;
-                            padding: 20px;
-                        }
-                        nav ul.show {
-                            display: flex;
-                        }
-                    }
-                `;
-                document.head.appendChild(mobileStyles);
-            }
-            
-            header.appendChild(menuToggle);
-            
-            menuToggle.addEventListener('click', function() {
-                nav.querySelector('ul').classList.toggle('show');
-            });
-        }
-    }
-
-    // Initialize mobile menu
-    setupMobileMenu();
-    window.addEventListener('resize', setupMobileMenu);
-
-    // Add loading animation for better UX
-    function addLoadingAnimation() {
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { opacity: 1; }
-                50% { opacity: 0.5; }
-                100% { opacity: 1; }
-            }
-            .loading {
-                animation: pulse 1.5s ease-in-out infinite;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    addLoadingAnimation();
+    document.body.appendChild(box);
+    box.querySelector("button").onclick = () => box.remove();
+    setTimeout(() => box.remove(), 5000);
+  }
 });

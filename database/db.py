@@ -1,16 +1,19 @@
-# db.py
-from pymongo import MongoClient
-from config import MONGO_URI, DB_NAME
+# database/db.py
 
-client = MongoClient(MONGO_URI)
-db = client[DB_NAME]
+from flask import current_app
+
+def get_db():
+    """Return the MongoDB database attached to the Flask app."""
+    return current_app.mongo_db
+
 
 def get_reservations_collection():
-    return db["reservations"]
+    return get_db()["reservations"]
+
 
 def get_contact_collection():
-    return db["contact_messages"]
+    return get_db()["contact_messages"]
+
 
 def get_admins_collection():
-    return db["admin_login"]
-
+    return get_db()["admins"]
