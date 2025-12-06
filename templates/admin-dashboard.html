@@ -20,7 +20,7 @@
         <ul>
           <li><a href="home.html" class="nav-link">View Site</a></li>
           <li><a href="menu.html" class="nav-link">Menu</a></li>
-          <li><a href="login.html" class="nav-link logout">Logout</a></li>
+          <li><a href="#" class="nav-link logout">Logout</a></li>
         </ul>
       </nav>
     </div>
@@ -126,6 +126,88 @@
       </div>
     </div>
   </div>
-  <script src="../static/js/admin-dashboard.js"></script>
+  <!-- Add this script right before the admin-dashboard.js -->
+<script>
+    // Authentication check for admin dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔐 Checking authentication for admin dashboard...');
+        
+        // Get token from localStorage
+        const token = localStorage.getItem('admin_token');
+        
+        if (!token) {
+            console.log('❌ No token found, redirecting to login...');
+            window.location.href = '/login';
+            return;
+        }
+        
+        // Validate token with server
+        fetch('/api/check-auth', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.status === 401) {
+                // Not authenticated
+                throw new Error('Not authenticated');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.authenticated) {
+                console.log('✅ Authentication successful');
+                // Set admin name if element exists
+                const adminNameElement = document.querySelector('.admin-name');
+                if (adminNameElement) {
+                    adminNameElement.textContent = data.admin.name || data.admin.email;
+                }
+                
+                // Update logout link to call logout API
+                const logoutLink = document.querySelector('.logout');
+                if (logoutLink) {
+                    logoutLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+                
+            } else {
+                console.log('❌ Not authenticated');
+                window.location.href = '/login';
+            }
+        })
+        .catch(error => {
+            console.error('❌ Auth check failed:', error);
+            window.location.href = '/login';
+        });
+        
+        // Logout function
+        function logout() {
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(() => {
+                localStorage.removeItem('admin_token');
+                localStorage.removeItem('admin_email');
+                localStorage.removeItem('admin_name');
+                window.location.href = '/login';
+            })
+            .catch(() => {
+                localStorage.clear();
+                window.location.href = '/login';
+            });
+        }
+    });
+</script>
+
+<!-- Your existing admin-dashboard.js -->
+<script src="../static/js/admin-dashboard.js"></script>
 </body>
 </html>
