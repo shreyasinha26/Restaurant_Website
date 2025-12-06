@@ -1,0 +1,515 @@
+/* ------ General Reset ------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fff6eb;
+  color: #2e2e2e;
+}
+
+/* ----- Header ----- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 48px;
+  background: #1b1b1b;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ff7b00;
+}
+
+.logo span {
+  color: #ff7b00;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Language Switch */
+.lang-switcher {
+  margin-right: 15px;
+}
+
+.lang-switcher button {
+  background-color: #f7f3e9 !important;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-switcher button:hover {
+  background-color: #eee3cc !important;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 18px;
+}
+
+nav a {
+  color: #f1f1f1;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+nav a:hover,
+nav a.active {
+  background: #ff7b00;
+  color: #fff;
+}
+
+/* ----- Dropdown Menu ----- */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: #1b1b1b;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.dropdown-content li {
+  list-style: none;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 14px;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background-color: #ff7b00;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+/* ---------- Hero Section ---------- */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 52vh;
+  min-height: 260px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.78) contrast(1.1) saturate(1.08);
+  transform: scale(1.02);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.55)
+  );
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 0 16px;
+  max-width: 640px;
+}
+
+.hero-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.hero-text h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+
+.hero-text span {
+  color: #ffffff;
+}
+
+.hero-text p {
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+/* ---------- Main Layout ---------- */
+.findus-main {
+  padding: 40px 16px 70px;
+}
+
+.findus-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+  gap: 32px;
+}
+
+/* Map Card */
+.map-card {
+  background: #fffdf7;
+  border-radius: 24px;
+  padding: 22px 24px 26px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.map-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+  color: #2e2e2e;
+}
+
+.map-subtext {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.map-frame-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  background: #ddd;
+  min-height: 380px; /* Minimum height */
+  height: 65vh; /* Relative to viewport height */
+  max-height: 500px; /* Maximum height */
+}
+
+.map-frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-note {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #777;
+}
+
+/* Right Column */
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.info-card {
+  background: #fffdf7;
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.info-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: #2e2e2e;
+}
+
+.location-subtext,
+.directions-subtext {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Location details */
+.location-details {
+  margin-top: 4px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.detail-row .label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a36a1f;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.detail-row .value {
+  font-size: 0.94rem;
+  color: #333;
+}
+
+/* Hours */
+.hours-card {
+  background: #fff9ef;
+}
+
+.hours-list {
+  list-style: none;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.06);
+}
+
+.hours-list li:last-child {
+  border-bottom: none;
+}
+
+.hours-list span:first-child {
+  font-weight: 600;
+  color: #3a2a17;
+}
+
+.hours-note {
+  font-size: 0.82rem;
+  color: #777;
+}
+
+/* ---------- Map Options (buttons) ---------- */
+.map-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-start;
+}
+
+.map-btn {
+  flex: 1 1 140px;
+  max-width: 180px;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+  transition: 0.22s ease;
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+}
+
+.map-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+}
+
+.map-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+.map-btn span {
+  font-size: 0.86rem;
+  margin-top: 2px;
+}
+
+/* Colors */
+.google { background: #4285F4; }
+.google:hover { background: #2f63bd; }
+
+.hsl { background: #007ac9; }
+.hsl:hover { background: #005f98; }
+
+.apple { background: #000; }
+.apple:hover { background: #333; }
+
+/* ---------- Travel Section ---------- */
+.travel-section {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 16px;
+}
+
+.travel-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.travel-header h2 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.travel-header p {
+  font-size: 0.94rem;
+  color: #666;
+}
+
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.travel-card {
+  background: #fffdf7;
+  border-radius: 18px;
+  padding: 16px 18px 18px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.travel-card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.travel-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #1b1b1b;
+  color: #ccc;
+  text-align: center;
+  padding: 22px;
+  font-size: 0.9rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .site-header {
+    padding: 10px 20px;
+  }
+
+  .findus-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-column {
+    flex-direction: column;
+  }
+
+  .map-card {
+    order: 1;
+  }
+
+  .info-column {
+    order: 2;
+  }
+
+  .travel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    gap: 10px;
+  }
+
+  .hero-section {
+    height: 45vh;
+  }
+
+  .hero-text h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-text p {
+    font-size: 0.96rem;
+  }
+
+  .map-btn {
+    flex: 1 1 45%;
+    max-width: none;
+  }
+
+  .travel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-section {
+    height: 40vh;
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-pill {
+    font-size: 0.72rem;
+  }
+
+  .map-btn {
+    flex: 1 1 100%;
+    height: 120px;
+  }
+}

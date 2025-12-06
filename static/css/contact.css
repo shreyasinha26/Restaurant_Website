@@ -45,6 +45,25 @@ body {
   font-size: 0.95rem;
 }
 
+/* Language Switch */
+.lang-switcher {
+  margin-right: 15px;
+}
+
+.lang-switcher button {
+  background-color: #f7f3e9 !important; /* OFF-CREAM */
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-switcher button:hover {
+  background-color: #eee3cc !important;
+}
+
 nav ul {
   display: flex;
   list-style: none;
@@ -375,8 +394,27 @@ footer nav a:hover {
 #about,
 #specialties,
 #hero {
-  scroll-margin-top: 80px; /* height of sticky header */
+  scroll-margin-top: 80px; 
 }
 
+/* ----- Inline Form Error Styling (NEW) ----- */
 
-/* ----- Base ----- */
+.error-field {
+  border-color: #ff3b3b !important;
+  background-color: #fff1f1 !important;
+}
+
+.error-message {
+  color: #ff3b3b !important;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-weight: 500;
+  display: none; /* shown dynamically by JS */
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
