@@ -311,9 +311,28 @@ footer {
 #about,
 #specialties,
 #hero {
-  scroll-margin-top: 80px; /* height of sticky header */
+  scroll-margin-top: 80px; 
+}
+
+/* --- Inline Error Styles --- */
+.error-field {
+  border-color: #ff3b3b !important;
+  background-color: #fff1f1 !important;
+}
+
+.error-message {
+  color: #ff3b3b !important;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-weight: 500;
+  display: none;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 
-/* ----- Base ----- */
 
