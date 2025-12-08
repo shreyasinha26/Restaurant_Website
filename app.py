@@ -180,9 +180,9 @@ def create_app():
     # -----------------------------
     # LOGIN API ENDPOINT
     # -----------------------------
-    @app.route("/api/login", methods=["POST"])
+    @app.route("/api/admin/login", methods=["POST"])
     def api_login():
-        """Handle login from frontend"""
+        """Handle admin-login from frontend"""
         try:
             data = request.get_json()
             email = data.get('email', '').strip().lower()
@@ -244,16 +244,100 @@ def create_app():
             response.set_cookie('admin_logged_in', 'true', httponly=True, max_age=24*3600)
             response.set_cookie('admin_token', token, httponly=True, max_age=24*3600)
             
-            print(f"✅ Login successful: {email}")
+            print(f"✅ Admin Login successful: {email}")
             return response, 200
             
         except Exception as e:
-            print(f"🔥 Login error: {e}")
+            print(f"🔥 Admin Login error: {e}")
             return jsonify({
                 "success": False,
                 "message": "Server error during login"
             }), 500
-    
+
+# -----------------------------
+# CUSTOMER LOGIN API ENDPOINT
+# -----------------------------
+    @app.route("/api/customer/login", methods=["POST"])
+    def customer_login_api():
+        """Handle customer login"""
+        try:
+            data = request.get_json()
+            email = data.get('email', '').strip().lower()
+            password = data.get('password', '')
+            
+            print(f"👤 Customer login attempt: {email}")
+            
+            if not email or not password:
+                return jsonify({
+                    "error": "Email and password required"
+                }), 400
+            
+            # Find customer in users collection
+            customer = db.users.find_one({'email': email})
+            
+            if not customer:
+                print(f"❌ Customer not found: {email}")
+                return jsonify({
+                    "error": "Invalid email or password"
+                }), 401
+            
+            # Check password
+            stored_password = customer.get('password', '')
+            
+            # Handle password format (bytes/string)
+            if isinstance(stored_password, bytes):
+                stored_password = stored_password.decode('utf-8')
+            
+            if not bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                return jsonify({
+                    "error": "Invalid email or password"
+                }), 401
+            
+            # Generate customer token
+            payload = {
+                'user_id': str(customer['_id']),
+                'email': email,
+                'role': 'customer',
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
+            }
+            token = jwt.encode(payload, app.config['JWT_SECRET_KEY'], algorithm='HS256')
+            if isinstance(token, bytes):
+                token = token.decode('utf-8')
+            
+            # Set session for customer
+            session['customer_logged_in'] = True
+            session['customer_email'] = email
+            session['customer_name'] = customer.get('full_name', 'Customer')
+            session['customer_id'] = str(customer['_id'])
+            
+            response = jsonify({
+                "success": True,
+                "token": token,
+                "user": {
+                    "email": email,
+                    "full_name": customer.get('full_name', 'Customer'),
+                    "phone": customer.get('phone', ''),
+                    "role": 'customer'
+                }
+            })
+            
+            # Set customer cookies
+            response.set_cookie('customer_token', token, httponly=True, max_age=24*3600)
+            response.set_cookie('customer_email', email, httponly=True, max_age=24*3600)
+            
+            print(f"✅ Customer login successful: {email}")
+            return response, 200
+            
+        except Exception as e:
+            print(f"🔥 Customer login error: {e}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({
+                "error": f"Login failed: {str(e)}"
+            }), 500
+        
+
+#------------- LOGOUT AND AUTH CHECK API ENDPOINTS  -----------------
     @app.route("/api/logout", methods=["POST"])
     def api_logout():
         """Logout endpoint"""
