@@ -13,6 +13,9 @@ function showError(input, message) {
     if (!errorElem || !errorElem.classList.contains('error-msg')) {
         errorElem = document.createElement('div');
         errorElem.className = 'error-msg';
+        errorElem.style.color = '#ff4d4d';
+        errorElem.style.fontSize = '0.8rem';
+        errorElem.style.marginTop = '5px';
         input.parentNode.appendChild(errorElem);
     }
     errorElem.textContent = message;
@@ -28,65 +31,53 @@ function clearError(input) {
     input.style.borderColor = '#ddd';
 }
 
+// Function to clear all input fields
+function clearInputFields() {
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    
+    if (email) email.value = '';
+    if (password) password.value = '';
+    
+    // Also clear any error messages
+    clearError(email);
+    clearError(password);
+}
+
 // Function to show loading state
-function showLoading(show) {
-    const submitBtn = loginForm.querySelector('button[type="submit"]');
-    if (show) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Logging in...';
+function setLoading(button, isLoading) {
+    if (isLoading) {
+        button.disabled = true;
+        button.textContent = 'Logging in...';
+        button.style.opacity = '0.7';
     } else {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Login';
+        button.disabled = false;
+        button.textContent = 'Login';
+        button.style.opacity = '1';
     }
 }
 
-// Check if already logged in
-function checkExistingLogin() {
-    // Check localStorage for token
-    const token = localStorage.getItem('admin_token');
-    if (token && window.location.pathname === '/login') {
-        // Validate token
-        fetch('/api/check-auth', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                // Already logged in, redirect to dashboard
-                window.location.href = '/admin-dashboard';
-            } else {
-                // Invalid token, clear localStorage
-                localStorage.removeItem('admin_token');
-                localStorage.removeItem('admin_email');
-            }
-        })
-        .catch(() => {
-            // Clear localStorage on error
-            localStorage.removeItem('admin_token');
-            localStorage.removeItem('admin_email');
-        });
+// Function to show success/error messages
+function showMessage(message, isError = false) {
+    // Remove existing message
+    const existingMessage = document.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
     }
-}
 
-// Clear any autofilled values
-function clearAutoFill() {
-    const emailField = document.getElementById('email');
-    const passwordField = document.getElementById('password');
-    
-    // Clear values
-    emailField.value = '';
-    passwordField.value = '';
-    
-    // Set autocomplete attributes to prevent browser autofill
-    emailField.setAttribute('autocomplete', 'off');
-    passwordField.setAttribute('autocomplete', 'new-password');
-    
-    // Focus on email field for better UX
-    emailField.focus();
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${isError ? 'error' : 'success'}`;
+    messageDiv.textContent = message;
+    messageDiv.style.padding = '10px';
+    messageDiv.style.borderRadius = '8px';
+    messageDiv.style.marginBottom = '15px';
+    messageDiv.style.textAlign = 'center';
+    messageDiv.style.fontWeight = '600';
+    messageDiv.style.backgroundColor = isError ? '#ffebee' : '#e8f5e8';
+    messageDiv.style.color = isError ? '#c62828' : '#2e7d32';
+    messageDiv.style.border = isError ? '1px solid #ffcdd2' : '1px solid #c8e6c9';
+
+    loginForm.insertBefore(messageDiv, loginForm.firstChild);
 }
 
 // Form submit event
@@ -95,6 +86,7 @@ loginForm.addEventListener('submit', async function(e) {
 
     const email = document.getElementById('email');
     const password = document.getElementById('password');
+    const loginButton = this.querySelector('button[type="submit"]');
     let valid = true;
 
     // Validate email
@@ -116,58 +108,102 @@ loginForm.addEventListener('submit', async function(e) {
         clearError(password);
     }
 
-    // If validation passes
+    // If validation passes, make API call
     if (valid) {
-        showLoading(true);
+        setLoading(loginButton, true);
         
         try {
-            // Send login request to backend
-            const response = await fetch('/api/login', {
+            const loginData = {
+                email: email.value.trim(),
+                password: password.value
+            };
+
+            const response = await fetch('/api/customer/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include', // Important for cookies
-                body: JSON.stringify({
-                    email: email.value.trim(),
-                    password: password.value.trim()
-                })
+                body: JSON.stringify(loginData)
             });
-            
+
             const data = await response.json();
-            
-            showLoading(false);
-            
-            if (data.success) {
-                // Store token in localStorage for JavaScript use
-                if (data.token) {
-                    localStorage.setItem('admin_token', data.token);
-                    localStorage.setItem('admin_email', data.admin.email);
-                    localStorage.setItem('admin_name', data.admin.full_name);
-                }
-            
+
+            if (response.ok) {
+                // Store token and user data in localStorage
+                localStorage.setItem('auth_token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
                 
-                // Redirect to admin dashboard
-                window.location.href = data.redirect || '/admin-dashboard';
+                showMessage('Login successful! Redirecting...', false);
+                
+                // Redirect to dashboard after 1 second
+                setTimeout(() => {
+                    window.location.href = '/customer_dashboard';
+                }, 1000);
+                
             } else {
-                alert('Login failed: ' + (data.message || 'Invalid credentials'));
+                // Login failed - clear input fields and show error
+                showMessage(data.error || 'Login failed!', true);
+                clearInputFields(); // Clear fields on failed login
             }
-            
         } catch (error) {
-            showLoading(false);
             console.error('Login error:', error);
-            alert('Login failed. Please check your connection and try again.');
+            showMessage('An error occurred during login. Please try again.', true);
+            clearInputFields(); // Clear fields on error
+        } finally {
+            setLoading(loginButton, false);
         }
     }
 });
 
-// On page load
-window.addEventListener('DOMContentLoaded', function() {
-    // Check existing login
-    checkExistingLogin();
-    
-    // Clear any auto-filled values
-    clearAutoFill();
-    
+// Real-time validation
+document.getElementById('email').addEventListener('input', function() {
+    if (this.value.trim() !== '' && !isValidEmail(this.value.trim())) {
+        showError(this, 'Please enter a valid email.');
+    } else {
+        clearError(this);
+    }
 });
+
+document.getElementById('password').addEventListener('input', function() {
+    if (this.value.trim() === '') {
+        showError(this, 'Password is required.');
+    } else {
+        clearError(this);
+    }
+});
+
+// Check if user is already logged in (optional)
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthStatus();
+});
+
+async function checkAuthStatus() {
+    try {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+            const response = await fetch('/api/current-user', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+            
+            if (response.ok) {
+                // User is already logged in, redirect to dashboard
+                window.location.href = '/customer_dashboard';
+            } else {
+                // Token is invalid, clear it
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user');
+            }
+        }
+    } catch (error) {
+        console.error('Auth check failed:', error);
+        // Clear invalid token
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user');
+    }
+}
 
