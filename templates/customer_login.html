@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshBite Kitchen</title>
+
+  <title data-i18n="page_title_customer_login">FreshBite Kitchen</title>
+
   <link rel="stylesheet" href="../static/css/customer_login.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="../static/images/icon.ico" type="image/x-icon">
@@ -15,11 +17,16 @@
     <div class="navbar">
       <a href="/" class="logo-link">
         <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
-        <span>FreshBite Kitchen</span>
+        <span data-i18n="logo_text">FreshBite Kitchen</span>
       </a>
       <nav>
         <ul>
-          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/" class="nav-link" data-i18n="nav_home">Home</a></li>
+
+          <!-- Language Switch -->
+          <li class="lang-switcher">
+            <button id="lang-switch">FI / EN</button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -29,23 +36,46 @@
   <div class="login-wrapper">
     <div class="login-logo">
       <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo">
-      <h2>FreshBite Kitchen</h2>
-        <p>Customer Login Portal</p>
+      <h2 data-i18n="logo_text">FreshBite Kitchen</h2>
+
+      <p data-i18n="customer_access">Customer Login Portal</p>
     </div>
 
     <form class="form active" id="loginForm">
+
       <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+        <label for="email" data-i18n="login_email_label">Email</label>
+        <input type="email"
+               id="email"
+               placeholder="Enter your email"
+               required
+               data-i18n-placeholder="login_email_placeholder">
       </div>
+
       <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <label for="password" data-i18n="login_password_label">Password</label>
+        <input type="password"
+               id="password"
+               placeholder="Enter your password"
+               required
+               data-i18n-placeholder="login_password_placeholder">
       </div>
-      <button type="submit" class="btn">Login</button>
-      <p class="small-text">Don't have an account? <a href="/customers_signup" id="switchToSignup">Sign Up</a></p>
+
+      <button type="submit" class="btn" data-i18n="login_button">Login</button>
+
+      <p class="small-text">
+        <span data-i18n="login_no_account">Don't have an account?</span>
+        <a href="/customers_signup" id="switchToSignup" data-i18n="login_signup">Sign Up</a>
+      </p>
+
+
     </form>
   </div>
-<script src="../static/js/login.js"></script>
+
+  <script src="../static/js/login.js"></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
 </body>
 </html>
+
