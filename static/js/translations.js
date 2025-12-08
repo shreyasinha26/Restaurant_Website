@@ -339,9 +339,24 @@ const translations = {
     login_password_placeholder: "Enter your password",
     login_button: "Login",
 
-        // ----- Customer login page (EN) -----
+    // ----- Customer login page (EN) -----
     page_title_customer_login: "FreshBite Kitchen | Customer Login",
     customer_access: "Customer Login Portal",
+
+    login_email_label: "Email",
+    login_email_placeholder: "Enter your email",
+
+    login_password_label: "Password",
+    login_password_placeholder: "Enter your password",
+
+    login_button: "Login",
+
+    login_no_account: "Don't have an account?",
+    login_signup: "Sign Up",
+
+    logo_text: "FreshBite Kitchen",
+    nav_home: "Home",
+
 
     // ===== Customer Dashboard (EN) =====
     nav_logout: "Logout",
@@ -364,7 +379,47 @@ const translations = {
     dashboard_empty_title: "Your Dashboard is Ready",
     dashboard_empty_text:
       "Start by exploring our menu or making a reservation. Your activity will appear here once you start using our services.",
+
+    // ----- Customer Signup page (EN) -----
+
+    page_title_customer_signup: "FreshBite Kitchen | Customer Signup",
+    logo_text_customer: "FreshBite Customer",
+
+    customer_signup_title: "Customer",
+    customer_signup_highlight: "Signup",
+    customer_signup_subtitle: "Create your FreshBite account to start ordering delicious meals.",
+
+    signup_fullname_label: "Full Name",
+    signup_fullname_placeholder: "Enter your full name",
+
+    signup_email_label: "Email Address",
+    signup_email_placeholder: "Enter your email",
+
+    signup_phone_label: "Phone Number",
+    signup_phone_placeholder: "Enter your phone number",
+
+    signup_address_label: "Delivery Address",
+    signup_address_placeholder: "Enter your delivery address",
+
+    signup_password_label: "Password",
+    signup_password_placeholder: "Create a password",
+
+    signup_confirm_password_label: "Confirm Password",
+    signup_confirm_password_placeholder: "Confirm your password",
+
+    signup_button: "Create Account",
+
+    signup_have_account_text: "Already have an account?",
+    signup_login_link: "Login here",
+
+    nav_login: "Login ▾",
+    login_user: "Users",
+    login_admin: "Admin",
+
   },
+
+
+
 
   fi: {
     // ----- Generic / Home -----
@@ -700,9 +755,24 @@ const translations = {
     login_password_placeholder: "Syötä salasanasi",
     login_button: "Kirjaudu",
 
-        // ----- Customer login page (FI) -----
-    page_title_customer_login: "FreshBite Kitchen | Asiakkaan kirjautuminen",
-    customer_access: "Asiakkaan kirjautumissivu",
+    // ----- Customer login page (FI) -----
+    page_title_customer_login: "FreshBite Kitchen | Asiakas Kirjautuminen",
+    customer_access: "Asiakkaan kirjautumisportaali",
+
+    login_email_label: "Sähköposti",
+    login_email_placeholder: "Syötä sähköpostisi",
+
+    login_password_label: "Salasana",
+    login_password_placeholder: "Syötä salasanasi",
+
+    login_button: "Kirjaudu",
+
+    login_no_account: "Eikö sinulla ole tiliä?",
+    login_signup: "Rekisteröidy",
+
+    logo_text: "FreshBite Kitchen",
+    nav_home: "Koti",
+
 
         // ===== Customer Dashboard (FI) =====
     nav_logout: "Kirjaudu ulos",
@@ -725,6 +795,44 @@ const translations = {
     dashboard_empty_title: "Hallintapaneelisi on valmis",
     dashboard_empty_text:
       "Aloita tutkimalla ruokalistaamme tai tekemällä pöytävarauksen. Aktiviteettisi näkyy täällä, kun alat käyttää palveluitamme.",
- 
+    
+
+    // ----- Customer Signup page (FI) -----
+
+    page_title_customer_signup: "FreshBite Kitchen | Asiakasrekisteröinti",
+    logo_text_customer: "FreshBite Asiakas",
+
+    customer_signup_title: "Asiakas",
+    customer_signup_highlight: "Rekisteröinti",
+    customer_signup_subtitle: "Luo FreshBite-tilisi ja ala tilata herkullisia aterioita.",
+
+    signup_fullname_label: "Koko nimi",
+    signup_fullname_placeholder: "Anna koko nimesi",
+
+    signup_email_label: "Sähköpostiosoite",
+    signup_email_placeholder: "Anna sähköpostiosoitteesi",
+
+    signup_phone_label: "Puhelinnumero",
+    signup_phone_placeholder: "Anna puhelinnumerosi",
+
+    signup_address_label: "Toimitusosoite",
+    signup_address_placeholder: "Anna toimitusosoitteesi",
+
+    signup_password_label: "Salasana",
+    signup_password_placeholder: "Luo salasana",
+
+    signup_confirm_password_label: "Vahvista salasana",
+    signup_confirm_password_placeholder: "Vahvista salasanasi",
+
+    signup_button: "Luo tili",
+
+    signup_have_account_text: "Onko sinulla jo tili?",
+    signup_login_link: "Kirjaudu tästä",
+
+    nav_login: "Kirjaudu ▾",
+    login_user: "Käyttäjät",
+    login_admin: "Ylläpito",
+
   },
+
 };
