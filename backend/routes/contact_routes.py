@@ -21,7 +21,6 @@ def contact():
         "name": data.get("name"),
         "email": data.get("email"),
         "phone": data.get("phone"),
-        "location": data.get("location"),
         "subject": data.get("subject"),
         "message": data.get("message"),
         "created_at": datetime.utcnow()
