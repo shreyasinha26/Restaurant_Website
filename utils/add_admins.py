@@ -17,6 +17,12 @@ def add_admins():
     # List of admins to add
     admins_to_add = [
         {
+            "full_name": "Admin",
+            "email": "admin@freshbite.com",
+            "password": "Admin@123",
+            "role": "owner"
+        },
+        {
             "full_name": "Manager Admin",
             "email": "manager@freshbite.com",
             "password": "Manager@123",
