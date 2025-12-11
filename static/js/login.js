@@ -16,7 +16,7 @@ function isValidEmail(email) {
 
 // Function to show error messages
 function showError(input, message) {
-    if (!input) return; // Prevent crash
+    if (!input) return;
 
     let errorElem = input.nextElementSibling;
     if (!errorElem || !errorElem.classList.contains('error-msg')) {
@@ -33,7 +33,7 @@ function showError(input, message) {
 
 // Function to clear error messages
 function clearError(input) {
-    if (!input) return; // Prevent crash
+    if (!input) return;
 
     let errorElem = input.nextElementSibling;
     if (errorElem && errorElem.classList.contains('error-msg')) {
@@ -158,7 +158,8 @@ if (loginForm) {
                     showMessage('Login successful! Redirecting...', false);
 
                     setTimeout(() => {
-                        window.location.href = '/customer_dashboard';
+                        // FIX: Correct server path
+                        window.location.href = '/app/customer_dashboard';
                     }, 1000);
                 } else {
                     showMessage(data.error || 'Login failed!', true);
@@ -201,7 +202,7 @@ if (passwordField) {
 }
 
 // -----------------------------
-// CHECK LOGIN STATUS (SAFE)
+// CHECK LOGIN STATUS
 // -----------------------------
 document.addEventListener('DOMContentLoaded', function() {
     checkAuthStatus();
@@ -219,7 +220,8 @@ async function checkAuthStatus() {
         });
 
         if (response.ok) {
-            window.location.href = '/customer_dashboard';
+            // FIX: Correct server path
+            window.location.href = '/app/customer_dashboard';
         } else {
             localStorage.removeItem('auth_token');
             localStorage.removeItem('user');

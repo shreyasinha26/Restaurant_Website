@@ -14,10 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function prepareErrorBoxes() {
         const groups = contactForm.querySelectorAll(".form-group");
         groups.forEach(group => {
-            if (!group.querySelector(".error-message")) {
+            const field = group.querySelector("input, textarea");
+            if (!group.querySelector(".error-message") && field) {
                 const div = document.createElement("div");
                 div.className = "error-message";
-                group.appendChild(div);
+                div.style.display = "none";
+
+                // FIXED: Insert directly after field
+                field.insertAdjacentElement("afterend", div);
             }
         });
     }
@@ -29,42 +33,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // -----------------------------
     function validateField(field) {
         const value = field.value.trim();
-        const errorBox = field.closest(".form-group").querySelector(".error-message");
+        const errorBox = field.parentElement.querySelector(".error-message");
         let error = "";
 
-        // Name required & min length
-        if (field.id === "name") {
-            if (value.length < 2) error = "Name must be at least 2 characters.";
+        if (field.id === "name" && value.length < 2) {
+            error = "Name must be at least 2 characters.";
         }
 
-        // Email required + format
         if (field.id === "email") {
-            if (value === "") error = "Email is required.";
-            else {
-                const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailReg.test(value)) error = "Enter a valid email address.";
-            }
+            if (!value) error = "Email is required.";
+            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+                error = "Enter a valid email.";
         }
 
-        // Phone must be exactly 10 digits
         if (field.id === "phone") {
             const digits = value.replace(/\D/g, "");
-            if (digits.length !== 10) {
-                error = "Phone number must be exactly 10 digits.";
-            }
+            if (digits.length !== 10) error = "Phone must be exactly 10 digits.";
         }
 
-        // Subject required
-        if (field.id === "subject" && value === "") {
+        if (field.id === "subject" && !value) {
             error = "Subject is required.";
         }
 
-        // Message required + min length
-        if (field.id === "message") {
-            if (value.length < 10) error = "Message must be at least 10 characters.";
+        if (field.id === "message" && value.length < 10) {
+            error = "Message must be at least 10 characters.";
         }
 
-        // Apply error or clear
+        // Apply validation output
         if (error) {
             field.classList.add("error-field");
             errorBox.textContent = error;
@@ -83,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         field.addEventListener("input", () => validateField(field));
     });
 
-    // Validate all fields before submit
+    // Validate all fields
     function validateForm() {
         let valid = true;
         contactForm.querySelectorAll("input, textarea").forEach(field => {
@@ -160,4 +155,3 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => note.remove(), 3000);
     }
 });
-

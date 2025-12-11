@@ -19,7 +19,6 @@ function showError(input, message) {
     input.style.borderColor = '#ff4d4d';
 }
 
-// Function to clear error messages
 function clearError(input) {
     let errorElem = input.nextElementSibling;
     if (errorElem && errorElem.classList.contains('error-msg')) {
@@ -28,7 +27,6 @@ function clearError(input) {
     input.style.borderColor = '#ddd';
 }
 
-// Function to show loading state
 function showLoading(show) {
     const submitBtn = loginForm.querySelector('button[type="submit"]');
     if (show) {
@@ -44,23 +42,18 @@ function showLoading(show) {
 function checkExistingLogin() {
     const token = localStorage.getItem('admin_token');
 
-    // FIXED PATH: /login → /app/login
     if (token && window.location.pathname === '/app/login') {
-
-        fetch('/api/check-auth', {
+        fetch('/app/api/check-auth', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
+        .then(r => r.json())
         .then(data => {
             if (data.authenticated) {
-
-                // FIXED PATH: redirect to /app/admin-dashboard
                 window.location.href = '/app/admin-dashboard';
-
             } else {
                 localStorage.removeItem('admin_token');
                 localStorage.removeItem('admin_email');
@@ -73,7 +66,6 @@ function checkExistingLogin() {
     }
 }
 
-// Clear autofill
 function clearAutoFill() {
     const emailField = document.getElementById('email');
     const passwordField = document.getElementById('password');
@@ -87,7 +79,7 @@ function clearAutoFill() {
     emailField.focus();
 }
 
-// Form submit event
+// Form submit
 loginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -116,7 +108,7 @@ loginForm.addEventListener('submit', async function(e) {
         showLoading(true);
 
         try {
-            const response = await fetch('/api/admin/login', {   // API stays same
+            const response = await fetch('/app/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -130,16 +122,12 @@ loginForm.addEventListener('submit', async function(e) {
             showLoading(false);
 
             if (data.success) {
-
                 if (data.token) {
                     localStorage.setItem('admin_token', data.token);
                     localStorage.setItem('admin_email', data.admin.email);
                     localStorage.setItem('admin_name', data.admin.full_name);
                 }
-
-                // FIXED PATH:
                 window.location.href = data.redirect || '/app/admin-dashboard';
-
             } else {
                 alert('Login failed: ' + (data.message || 'Invalid credentials'));
             }
@@ -152,7 +140,6 @@ loginForm.addEventListener('submit', async function(e) {
     }
 });
 
-// On page load
 window.addEventListener('DOMContentLoaded', function() {
     checkExistingLogin();
     clearAutoFill();

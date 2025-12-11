@@ -14,11 +14,11 @@ async function initializeDashboard() {
             setupNavigation();
             setupEventListeners();
         } else {
-            window.location.href = '/customer_login';
+            window.location.href = '/app/customer_login';
         }
     } catch (error) {
         console.error("Dashboard initialization failed:", error);
-        window.location.href = '/customer_login';
+        window.location.href = '/app/customer_login';
     }
 }
 
@@ -34,8 +34,8 @@ async function checkAuthentication() {
     }
     
     try {
-        // 🔥 FIXED PATH FOR METROPOLIA SERVER
-        const response = await fetch('/app/api/current-user', {
+        // FIXED PATH: backend uses /api/current-user
+        const response = await fetch('/api/current-user', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -110,66 +110,19 @@ function setupEventListeners() {
             logout();
         });
     }
-
-    if (window.innerWidth <= 768) {
-        addMobileMenuToggle();
-    }
-
-    window.addEventListener('resize', function() {
-        if (window.innerWidth <= 768) {
-            addMobileMenuToggle();
-        } else {
-            removeMobileMenuToggle();
-        }
-    });
 }
 
 function handleNavigation(card) {
-    const cardText = card.querySelector('h3').textContent.trim();
-    
-    const navigationMap = {
-        'View Menu': () => { window.location.href = '/menu'; },
-        'Make Reservation': () => { window.location.href = '/reservation'; },
-        'My Orders': () => { window.location.href = '/menu'; },
-        'My Reservations': () => { window.location.href = '/reservation'; }
+    const text = card.querySelector('h3').textContent.trim();
+
+    const routes = {
+        'View Menu': () => window.location.href = '/app/menu',
+        'Make Reservation': () => window.location.href = '/app/reservation',
+        'My Orders': () => window.location.href = '/app/menu',
+        'My Reservations': () => window.location.href = '/app/reservation'
     };
-    
-    if (navigationMap[cardText]) {
-        navigationMap[cardText]();
-    }
-}
 
-function addMobileMenuToggle() {
-    const navRight = document.querySelector('.nav-right');
-    if (!navRight) return;
-    
-    if (document.querySelector('.mobile-menu-toggle')) return;
-    
-    const menuToggle = document.createElement('button');
-    menuToggle.className = 'mobile-menu-toggle';
-    menuToggle.innerHTML = '☰';
-    menuToggle.setAttribute('aria-label', 'Toggle menu');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    
-    navRight.appendChild(menuToggle);
-    
-    menuToggle.addEventListener('click', function() {
-        const navList = navRight.querySelector('ul');
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        
-        if (navList) {
-            navList.classList.toggle('show');
-            menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
-        }
-    });
-}
-
-function removeMobileMenuToggle() {
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const navList = document.querySelector('.nav-right ul');
-    
-    if (menuToggle) menuToggle.remove();
-    if (navList) navList.classList.remove('show');
+    if (routes[text]) routes[text]();
 }
 
 async function logout() {
@@ -177,8 +130,8 @@ async function logout() {
     
     if (confirm('Are you sure you want to logout?')) {
         try {
-            // 🔥 PATH FOR METROPOLIA SERVER
-            const response = await fetch('/app/api/logout', {
+            // FIXED: Backend path
+            const response = await fetch('/api/logout', {
                 method: 'POST',
                 credentials: 'include'
             });
@@ -187,7 +140,7 @@ async function logout() {
                 showLogoutMessage();
                 setTimeout(() => {
                     clearAuthData();
-                    window.location.href = '/';
+                    window.location.href = '/app/';
                 }, 1000);
             } else {
                 throw new Error('Logout failed');
@@ -195,7 +148,7 @@ async function logout() {
         } catch (error) {
             console.error("Logout error:", error);
             clearAuthData();
-            window.location.href = '/';
+            window.location.href = '/app/';
         }
     }
 }
@@ -216,15 +169,12 @@ function showLogoutMessage() {
     
     document.body.appendChild(messageDiv);
     
-    setTimeout(() => {
-        messageDiv.remove();
-    }, 2000);
+    setTimeout(() => messageDiv.remove(), 2000);
 }
 
 function clearAuthData() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
-    localStorage.removeItem('isLoggedIn');
 }
 
 window.logout = logout;
