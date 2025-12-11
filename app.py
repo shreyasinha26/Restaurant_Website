@@ -159,16 +159,16 @@ def create_app():
 
     @app.route("/login")
     def login():
-        # If already logged in, redirect to dashboard
+        
         if is_authenticated():
-            return redirect('/admin-dashboard')
+            return redirect('/app/admin-dashboard')
         return render_template("login.html")
 
     @app.route("/admin-dashboard")
     def admin_dashboard():
         """PROTECTED ROUTE - Only accessible if logged in"""
         if not is_authenticated():
-            return redirect('/login')
+            return redirect('/app/login')
         
         return render_template("admin-dashboard.html")
 
@@ -240,7 +240,7 @@ def create_app():
                     "full_name": admin.get('full_name', 'Admin'),
                     "role": admin.get('role', 'admin')
                 },
-                "redirect": "/admin-dashboard"
+                "redirect": "/app/admin-dashboard"
             })
             
             # Set cookies
