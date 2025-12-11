@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
     if (!contactForm) return;
 
-    const BASE_URL = "http://127.0.0.1:5000/contact";
+    const BASE_URL = "/app/api/contact";
 
     // -----------------------------
     // CREATE ERROR MESSAGE BOXES

@@ -2,40 +2,58 @@ import requests
 import json
 
 def create_admin_account():
-    print("=== CREATING ADMIN ACCOUNT ===")
+    print("\n=== CREATE ADMIN ACCOUNT ===")
     
-    # Admin data - use the correct default credentials
+    # Default admin account details
     admin_data = {
         "full_name": "System Administrator",
         "email": "admin@freshbite.com",
         "password": "Admin@123"
     }
     
+    url = "http://127.0.0.1:5000/api/admin/signup"
+    print(f"➡ Sending POST request to: {url}")
+    
     try:
-        print("Sending signup request...")
         response = requests.post(
-            "http://127.0.0.1:5000/api/admin/signup",  # Changed to /api/admin/signup
+            url,
             json=admin_data,
             headers={"Content-Type": "application/json"}
         )
+
+        print(f"📡 Status Code: {response.status_code}")
+
+        # Handle empty JSON responses safely
+        try:
+            resp_json = response.json()
+        except ValueError:
+            resp_json = "No JSON response"
         
-        print(f"Status Code: {response.status_code}")
-        print(f"Response: {response.json() if response.content else 'No content'}")
-        
+        print(f"📨 Response Body: {resp_json}")
+
+        # Success: account created
         if response.status_code == 201:
-            print("✅ Admin account created successfully!")
-            print("You can now login with:")
-            print("Email: admin@freshbite.com")
-            print("Password: Admin@123")
+            print("\n✅ Admin account created successfully!")
+            print("Use these credentials to log in:")
+            print("   Email: admin@freshbite.com")
+            print("   Password: Admin@123")
+
+        # Admin already exists — not an error
         elif response.status_code == 400:
-            print("ℹ️ Admin already exists (this is okay)")
-            print("You can login with the existing account")
+            print("\nℹ️ Admin account already exists.")
+            print("You can log in using the same credentials.")
+
         else:
-            print("❌ Failed to create admin account")
-            
+            print("\n❌ Failed to create admin account. Check backend logs.")
+
+    except requests.exceptions.ConnectionError:
+        print("\n❌ ERROR: Could not connect to the backend.")
+        print("Make sure your Flask server is running at:")
+        print("➡ http://127.0.0.1:5000")
+
     except Exception as e:
-        print(f"❌ Error: {e}")
-        print("Make sure your Flask server is running on http://127.0.0.1:5000")
+        print(f"\n❌ Unexpected Error: {e}")
+
 
 if __name__ == "__main__":
     create_admin_account()

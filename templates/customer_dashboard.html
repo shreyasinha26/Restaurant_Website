@@ -15,14 +15,19 @@
   <!-- Header -->
   <header class="dashboard-header">
     <div class="navbar">
-      <a href="/" class="logo-link">
+
+      <!-- FIXED URL -->
+      <a href="/app/" class="logo-link">
         <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
         <span data-i18n="logo_text">FreshBite Kitchen</span>
       </a>
 
       <nav class="nav-right">
         <ul>
-          <li><a href="/" class="nav-link" data-i18n="nav_home">Home</a></li>
+          <!-- FIXED URL -->
+          <li><a href="/app/" class="nav-link" data-i18n="nav_home">Home</a></li>
+
+          <!-- Logout remains same -->
           <li><a href="#" class="nav-link logout" onclick="logout()" data-i18n="nav_logout">Logout</a></li>
 
           <!-- Language Switch -->
@@ -48,28 +53,28 @@
     <div class="quick-actions">
 
       <!-- View Menu -->
-      <div class="action-card" onclick="location.href='/menu'">
+      <div class="action-card" onclick="location.href='/app/menu'">
         <div class="action-icon">🍽️</div>
         <h3 data-i18n="dashboard_action_menu_title">View Menu</h3>
         <p data-i18n="dashboard_action_menu_text">Browse our delicious dishes and place orders</p>
       </div>
 
       <!-- Make Reservation -->
-      <div class="action-card" onclick="location.href='/reservation'">
+      <div class="action-card" onclick="location.href='/app/reservation'">
         <div class="action-icon">📅</div>
         <h3 data-i18n="dashboard_action_reservation_title">Make Reservation</h3>
         <p data-i18n="dashboard_action_reservation_text">Book your table online</p>
       </div>
 
       <!-- My Orders -->
-      <div class="action-card" onclick="location.href='/orders'">
+      <div class="action-card" onclick="location.href='/app/orders'">
         <div class="action-icon">📦</div>
         <h3 data-i18n="dashboard_action_orders_title">My Orders</h3>
         <p data-i18n="dashboard_action_orders_text">View your order history and status</p>
       </div>
 
       <!-- My Reservations -->
-      <div class="action-card" onclick="location.href='/my_reservations'">
+      <div class="action-card" onclick="location.href='/app/my_reservations'">
         <div class="action-icon">🏷️</div>
         <h3 data-i18n="dashboard_action_myreservations_title">My Reservations</h3>
         <p data-i18n="dashboard_action_myreservations_text">Manage your table bookings</p>
@@ -93,7 +98,7 @@
   <script>
     function logout() {
       if (confirm('Are you sure you want to logout?')) {
-        window.location.href = '/';
+        window.location.href = '/app/';
       }
     }
   </script>

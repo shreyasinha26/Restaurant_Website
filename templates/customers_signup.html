@@ -14,15 +14,20 @@
   <!-- Navbar -->
   <header class="signup-header">
     <div class="navbar">
-      <a href="/" class="logo-link">
+
+      <!-- FIXED URL -->
+      <a href="/app/" class="logo-link">
         <img src="../static/images/logo_sample.jpeg" alt="FreshBite Kitchen Logo" class="logo-img">
         <span data-i18n="logo_text_customer">FreshBite Customer</span>
       </a>
 
       <nav class="nav-right">
         <ul>
-          <li><a href="/" class="nav-link" data-i18n="nav_home">Home</a></li>
-          <li><a href="/customer_login" class="nav-link" data-i18n="nav_login">Login</a></li>
+          <!-- FIXED URL -->
+          <li><a href="/app/" class="nav-link" data-i18n="nav_home">Home</a></li>
+
+          <!-- FIXED URL -->
+          <li><a href="/app/customer_login" class="nav-link" data-i18n="nav_login">Login</a></li>
 
           <!-- Language Switch -->
           <li class="lang-switcher">
@@ -102,21 +107,24 @@
 
         <p class="switch-text">
           <span data-i18n="signup_have_account_text">Already have an account?</span>
-          <a href="/customer_login" data-i18n="signup_login_link">Login here</a>
+
+          <!-- FIXED URL -->
+          <a href="/app/customer_login" data-i18n="signup_login_link">Login here</a>
         </p>
 
       </form>
     </div>
   </div>
 
-<script src="../static/js/signup.js"></script>
+  <script src="../static/js/signup.js"></script>
   <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
   <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 
-<style>
-.field-error { border-color: #dc2626 !important; }
-</style>
+  <style>
+  .field-error { border-color: #dc2626 !important; }
+  </style>
 
 </body>
 </html>
+
 
