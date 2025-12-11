@@ -12,27 +12,64 @@ document.addEventListener("DOMContentLoaded", function () {
     setupDynamicMenu();
   }
 
-  // ============================================
-  //  NEW: Load menu from backend API
-  // ============================================
+  // =========================================================
+  // NEW: Load menu from backend API (Stable & Required)
+  // =========================================================
   async function loadMenuFromAPI() {
     try {
+      console.log("Fetching menu from backend...");
+
       const response = await fetch("/app/api/");
       const items = await response.json();
 
-      // Save into localStorage for existing logic
+      // Save into localStorage for existing rendering logic
       localStorage.setItem("menuItems", JSON.stringify(items));
 
-      console.log("Menu loaded from backend:", items);
-
+      console.log("Menu loaded:", items);
     } catch (err) {
       console.error("Failed to load menu:", err);
     }
   }
 
-  // ============================================
+  // =========================================================
+  // NEW: Load Today’s Special (Homepage only)
+  // =========================================================
+  async function loadTodaySpecial() {
+    const todaySpecialBox = document.getElementById("today-special");
+    if (!todaySpecialBox) return; // Not on homepage → skip
+
+    try {
+      const res = await fetch("/app/api/today");
+      const data = await res.json();
+
+      if (!data || !data.length) {
+        todaySpecialBox.innerHTML = `<p class='error'>No specials available today.</p>`;
+        return;
+      }
+
+      const item = data[0]; // Show first item of today's specials
+
+      todaySpecialBox.innerHTML = `
+        <div class="today-special-card">
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <strong>€${item.price.toFixed(2)}</strong>
+        </div>
+      `;
+
+    } catch (error) {
+      todaySpecialBox.innerHTML = `<p class='error'>Failed to load today's specials.</p>`;
+      console.error(error);
+    }
+  }
+
+  // Load today's menu (homepage only)
+  loadTodaySpecial();
+
+  // =========================================================
   // STATIC EXISTING MENU SETUP
-  // ============================================
+  // =========================================================
   function setupExistingMenu() {
     if (categorySelect) {
       categorySelect.addEventListener("change", function () {
@@ -52,9 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setupCart();
   }
 
-  // ============================================
-  // DYNAMIC MENU (LOCALSTORAGE LOADED ITEMS)
-  // ============================================
+  // =========================================================
+  // DYNAMIC MENU (LOCALSTORAGE + API)
+  // =========================================================
   async function setupDynamicMenu() {
 
     // ⭐ IMPORTANT: Load items from backend first
@@ -137,13 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    // ⭐ Render AFTER menu is guaranteed loaded
     renderMenu();
+
     setupCart();
   }
 
-  // ============================================
+  // =========================================================
   // CART SYSTEM (unchanged)
-  // ============================================
+  // =========================================================
   function setupCart() {
 
     let cart = [];
