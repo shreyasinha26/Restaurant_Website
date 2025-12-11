@@ -102,21 +102,20 @@ class AuthController:
             email = data.get("email", "").strip().lower()
             password = data.get("password", "")
 
-            # Fetch admin from users collection
+            # Fetch admin from users table
             admin = self.user_model.find_user_by_email(email)
 
-            # Must exist and be admin
+            # Must be super_admin
             if not admin or admin.get("role") != "super_admin":
                 return jsonify({"success": False, "message": "Admin not found"}), 401
 
-            # Verify password
+            # Check password
             if not self.user_model.check_password(password, admin["password"]):
                 return jsonify({"success": False, "message": "Invalid email or password"}), 401
 
-            # Generate ADMIN token
+            # Generate admin token
             token = self._generate_admin_token(str(admin["_id"]))
 
-            # Return format expected by admin.js
             return jsonify({
                 "success": True,
                 "token": token,
@@ -208,6 +207,7 @@ class AuthController:
             current_app.config["JWT_SECRET_KEY"],
             algorithm="HS256"
         )
+
 
     # ------------------------------------------------
     # TOKEN DECODER (UNCHANGED)
