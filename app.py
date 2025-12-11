@@ -16,6 +16,9 @@ sys.path.append(BASE_DIR)
 def create_app():
     app = Flask(__name__)
 
+    # FIX REDIRECT ISSUE (IMPORTANT!)
+    app.url_map.strict_slashes = False
+
     # -----------------------------
     # Flask Config
     # -----------------------------
@@ -31,9 +34,9 @@ def create_app():
     client = MongoClient(MONGO_URI)
     db = client.get_database(MONGO_DBNAME)
 
-    # Attach DB to Flask app object
     app.mongo_client = client
     app.mongo_db = db
+
 
     # -----------------------------
     # CORS
