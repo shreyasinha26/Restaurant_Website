@@ -14,16 +14,17 @@ function showError(element, message) {
 }
 
 // ----------------------------
-// Load Today's Specials
+// Load Today's Specials  (FIXED)
 // ----------------------------
 async function loadTodaysMenu() {
     try {
         const todaySpecialSection = document.querySelector('.special-items');
-        if (!todaySpecialSection) return; // Prevent crash
+        if (!todaySpecialSection) return;
 
         showLoading(todaySpecialSection);
 
-        const response = await fetch(`${API_BASE}/menu/today`);
+        // FIXED: Correct API endpoint
+        const response = await fetch(`${API_BASE}/today`);
         if (!response.ok) throw new Error(response.status);
 
         const menuItems = await response.json();
@@ -47,15 +48,9 @@ async function loadTodaysMenu() {
                                </div>`
                             : ''}
                         <span class="price">€${item.price.toFixed(2)}</span>
-                        <button class="add-cart-btn" 
-                                data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                                Add to Cart
-                        </button>
                     </div>
                 </div>
             `).join('');
-
-            attachCartEventListeners();
         } else {
             todaySpecialSection.innerHTML = '<div class="no-items">No specials today.</div>';
         }
@@ -119,7 +114,7 @@ async function loadAllMenuItems() {
     showLoading(container);
 
     try {
-        const response = await fetch(`${API_BASE}/menu`);
+        const response = await fetch(`${API_BASE}/`);
         if (!response.ok) throw new Error(response.status);
 
         const items = await response.json();
@@ -141,7 +136,7 @@ async function loadMenuByCategory(category) {
     showLoading(container);
 
     try {
-        const response = await fetch(`${API_BASE}/menu/category/${category}`);
+        const response = await fetch(`${API_BASE}/category/${category}`);
         if (!response.ok) throw new Error(response.status);
 
         const items = await response.json();
@@ -161,7 +156,7 @@ async function filterByDietaryRestrictions() {
     if (!container) return;
 
     try {
-        const response = await fetch(`${API_BASE}/menu`);
+        const response = await fetch(`${API_BASE}/`);
         if (!response.ok) throw new Error(response.status);
 
         const allItems = await response.json();
@@ -175,7 +170,7 @@ async function filterByDietaryRestrictions() {
 }
 
 // ----------------------------
-// Cart System (Safe)
+// Cart System
 // ----------------------------
 function attachCartEventListeners() {
     document.querySelectorAll('.add-cart-btn').forEach(btn => {
@@ -237,14 +232,17 @@ function updateCartBadge() {
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
 
+    // Today’s menu (home page)
     if (document.querySelector('.special-items')) {
         loadTodaysMenu();
     }
 
+    // Regular menu page
     if (document.getElementById('menu-items-container')) {
         loadAllMenuItems();
     }
 
+    // Category buttons
     const categoryButtons = document.querySelectorAll('.category-btn');
     categoryButtons.forEach(btn => {
         btn.addEventListener('click', () => {
