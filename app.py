@@ -403,24 +403,21 @@ def create_app():
 
     # Menu API
     from routes.menu_routes import menu_bp
-    app.register_blueprint(menu_bp)
-
+    app.register_blueprint(menu_bp, url_prefix="/api")
     # Auth API
     from routes.auth_routes import auth_bp
-    app.register_blueprint(auth_bp)
-
+    app.register_blueprint(auth_bp, url_prefix="/api")
     # Reservation API
     from routes.reservation_routes import reservation_bp
-    app.register_blueprint(reservation_bp)
+    app.register_blueprint(reservation_bp, url_prefix="/api")
 
     # Contact API
     from routes.contact_routes import contact_bp
-    app.register_blueprint(contact_bp)
+    app.register_blueprint(contact_bp, url_prefix="/api")
 
     # Admin API
     from routes.admin_routes import admin_bp
-    app.register_blueprint(admin_bp)
-
+    app.register_blueprint(admin_bp, url_prefix="/api")
     # -----------------------------
     # SEED DATABASE IF EMPTY
     # -----------------------------
