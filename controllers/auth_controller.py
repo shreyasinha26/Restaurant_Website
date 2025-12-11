@@ -14,13 +14,15 @@ class AuthController:
             self._user_model = UserModel(current_app.mongo_db)
         return self._user_model
 
+    # -----------------------------
+    # CUSTOMER SIGNUP (UNCHANGED)
+    # -----------------------------
     def signup(self):
         try:
             data = request.get_json()
             if not data:
                 return jsonify({"error": "No data provided"}), 400
 
-            # Centralized validation
             validation_result = UserSchema.validate_signup(data)
             if not validation_result.is_valid:
                 return jsonify({
@@ -28,7 +30,6 @@ class AuthController:
                     "details": validation_result.errors
                 }), 400
 
-            # Create user using model
             user_id = self.user_model.create_user(data)
             
             return jsonify({
@@ -41,13 +42,15 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Server error: " + str(e)}), 500
 
+    # -----------------------------
+    # CUSTOMER LOGIN (UNCHANGED)
+    # -----------------------------
     def login(self):
         try:
             data = request.get_json()
             if not data:
                 return jsonify({"error": "No data provided"}), 400
 
-            # Centralized validation
             validation_result = UserSchema.validate_login(data)
             if not validation_result.is_valid:
                 return jsonify({
@@ -58,17 +61,13 @@ class AuthController:
             email = data["email"].strip().lower()
             password = data["password"]
 
-            # Find user using model
             user = self.user_model.find_user_by_email(email)
-            
             if not user:
                 return jsonify({"error": "Invalid email or password"}), 401
 
-            # Check password using model
             if not self.user_model.check_password(password, user["password"]):
                 return jsonify({"error": "Invalid email or password"}), 401
 
-            # Generate JWT token
             token = self._generate_token(str(user["_id"]))
 
             response = make_response(jsonify({
@@ -77,7 +76,6 @@ class AuthController:
                 "user": self._user_to_dict(user)
             }))
 
-            # Set cookie
             response.set_cookie(
                 "auth_token",
                 token,
@@ -92,6 +90,49 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Server error: " + str(e)}), 500
 
+    # ------------------------------------------------
+    # ⭐ ADMIN LOGIN (ADDED — ONLY NEW CODE HERE)
+    # ------------------------------------------------
+    def admin_login(self):
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({"success": False, "message": "No data provided"}), 400
+
+            email = data.get("email", "").strip().lower()
+            password = data.get("password", "")
+
+            # Fetch admin from users collection
+            admin = self.user_model.find_user_by_email(email)
+
+            # Must exist and be admin
+            if not admin or admin.get("role") != "super_admin":
+                return jsonify({"success": False, "message": "Admin not found"}), 401
+
+            # Verify password
+            if not self.user_model.check_password(password, admin["password"]):
+                return jsonify({"success": False, "message": "Invalid email or password"}), 401
+
+            # Generate ADMIN token
+            token = self._generate_admin_token(str(admin["_id"]))
+
+            # Return format expected by admin.js
+            return jsonify({
+                "success": True,
+                "token": token,
+                "admin": {
+                    "email": admin["email"],
+                    "full_name": admin.get("name", "Admin User")
+                },
+                "redirect": "/app/admin-dashboard"
+            }), 200
+
+        except Exception as e:
+            return jsonify({"success": False, "message": "Server error: " + str(e)}), 500
+
+    # ------------------------------------------------
+    # CUSTOMER LOGOUT (UNCHANGED)
+    # ------------------------------------------------
     def logout(self):
         try:
             response = make_response(jsonify({"message": "Logout successful"}))
@@ -100,6 +141,9 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Logout failed: " + str(e)}), 500
 
+    # ------------------------------------------------
+    # CUSTOMER CURRENT USER (UNCHANGED)
+    # ------------------------------------------------
     def get_current_user(self):
         try:
             user_id = self._get_user_id_from_token()
@@ -117,6 +161,9 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Server error: " + str(e)}), 500
 
+    # ------------------------------------------------
+    # EMAIL CHECK (UNCHANGED)
+    # ------------------------------------------------
     def check_email(self, email):
         try:
             exists = self.user_model.find_user_by_email(email) is not None
@@ -124,6 +171,9 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Server error: " + str(e)}), 500
 
+    # ------------------------------------------------
+    # PHONE CHECK (UNCHANGED)
+    # ------------------------------------------------
     def check_phone(self, phone):
         try:
             exists = self.user_model.find_user_by_phone(phone) is not None
@@ -131,7 +181,9 @@ class AuthController:
         except Exception as e:
             return jsonify({"error": "Server error: " + str(e)}), 500
 
-    # Helper methods
+    # ------------------------------------------------
+    # HELPER: CUSTOMER TOKEN (UNCHANGED)
+    # ------------------------------------------------
     def _generate_token(self, user_id):
         payload = {
             "user_id": user_id,
@@ -143,6 +195,23 @@ class AuthController:
             algorithm="HS256"
         )
 
+    # ------------------------------------------------
+    # ⭐ HELPER: ADMIN TOKEN (ADDED)
+    # ------------------------------------------------
+    def _generate_admin_token(self, admin_id):
+        payload = {
+            "admin_id": admin_id,
+            "exp": datetime.utcnow() + timedelta(days=7)
+        }
+        return jwt.encode(
+            payload,
+            current_app.config["JWT_SECRET_KEY"],
+            algorithm="HS256"
+        )
+
+    # ------------------------------------------------
+    # TOKEN DECODER (UNCHANGED)
+    # ------------------------------------------------
     def _get_user_id_from_token(self):
         token = None
         auth_header = request.headers.get("Authorization")
@@ -160,10 +229,13 @@ class AuthController:
                 current_app.config["JWT_SECRET_KEY"],
                 algorithms=["HS256"]
             )
-            return decoded["user_id"]
+            return decoded.get("user_id")
         except:
             return None
 
+    # ------------------------------------------------
+    # USER STRUCT FORMATTER (UNCHANGED)
+    # ------------------------------------------------
     def _user_to_dict(self, user):
         return {
             "id": str(user["_id"]),
