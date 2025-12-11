@@ -1,212 +1,188 @@
-# 🍽️ FreshBite Kitchen – Restaurant Website  
+# 🍽️ FreshBite Kitchen – Full-Stack Restaurant Web Application  
 
-A modern restaurant web application for **FreshBite Kitchen**, focusing on fresh, healthy food, smooth UX, and a clean admin experience.  
-Built with **Flask + MongoDB + Vanilla JS** and designed for both **customers** and **restaurant staff (admins)**.
+A modern restaurant website built using **Flask**, **MongoDB**, and **Vanilla JavaScript**, designed for both customers and administrators.  
+The system includes real-time menu loading, today’s specials, table reservations, contact form storage, and an interactive admin dashboard.
 
 ---
 
-## 👥 1. Group Members
-
+# 👥 1. Group Members  
 - **Shreya Sinha**  
 - **Honey Harsh Jariwala**  
-- **Prajisha Kai Mangalath**  
+- **Prajisha Kai Mangalath**
 
 ---
 
-## 🎯 2. Application Idea & Target Audience
+# 🎯 2. Application Idea & Target Audience  
 
-### 💡 Idea  
-FreshBite Kitchen is a modern restaurant platform that lets customers:
+## 💡 Idea  
+FreshBite Kitchen provides an online restaurant experience that allows customers to:
 
-- Explore the menu and today’s specials  
-- Reserve a table online  
+- Browse a dynamic menu  
+- See Today’s Specials  
+- Make table reservations  
 - Contact the restaurant  
-- Use the site in **English or Finnish**
+- Switch between **English** and **Finnish** languages  
 
-Admins can log in to a secure dashboard and manage the menu.
+Admins can log in to a secure dashboard and manage menu data, specials, and item details.
 
-### 🎯 Target Audience
-
+## 🎯 Target Audience  
 - Health-conscious customers  
-- Food enthusiasts and students  
-- Restaurant administrators / staff  
-- International users (EN/FI)
+- Students & families  
+- Restaurant staff/administrators  
+- International users (EN/FI)  
+- Anyone wanting a modern food-ordering experience  
 
 ---
 
-## 🧩 3. Core Application Functionalities
+# 🧩 3. Application Functionalities  
 
-### 👨‍🍳 Customer-Facing Features
+## 👨‍🍳 Customer-Facing Features  
 
-- 🏠 **Home page with video hero section**  
-- ⭐ **Today’s specials** highlight  
-- 🍕 **Interactive menu**  
-  - Filter by categories (burgers, pizzas, salads, Finnish, healthy, drinks, etc.)  
-  - Dietary restriction tags (vegan, gluten-free, dairy-free, etc.)
-- 📅 **Table reservation system**
-  - Date & time selection (10:00–22:00)
-  - Guest limit (1–9 guests, with warning for >9)
-  - Special request field
-- 📬 **Contact form**
-  - Stores messages in MongoDB  
-  - Real-time inline validation (name, email, message, phone)
-- 🌍 **Find Us page**
-  - Address information  
-  - Direct link to **HSL Journey Planner** (`Location (Open in HSL)`)  
-- 🔐 **Customer authentication**
-  - Customer signup & login pages  
-  - Customer dashboard shell
-- 🌐 **Multi-language support (EN / FI)**
-  - Language switcher in navbar  
-  - Text loaded via `translations.js` + `language.js`
+### 🏠 Home Page  
+- Hero video background  
+- Today’s Special (auto-loaded via API)  
+- Smooth animations  
+- EN/FI language switcher  
 
----
+### 🍕 Interactive Menu Page  
+- Dynamic menu fetched from API  
+- Filter categories:  
+  **Burgers, Pizzas, Salads, Finnish, Healthy, Drinks**  
+- Dietary tags: vegan, gluten-free, dairy-free  
+- Add-to-cart button with UI feedback  
 
-## 🛠️ Admin Features
+### 📅 Table Reservation Page  
+- Date & time selection (10:00–22:00)  
+- Guest selection (1–9)  
+- Special request field  
+- Inline form validation  
+- Stores reservations in MongoDB  
 
-- 🔑 **Admin Login**  
-  - Email + password login  
-  - Admin credentials stored in MongoDB with hashed passwords  
-  - Only existing admins can log in (no public signup form)
+### 📬 Contact Page  
+- Validates input fields  
+- Submits message to database  
+- Clear success/error alerts  
 
-- 📊 **Admin Dashboard (`/admin-dashboard`)**  
-  - View all menu items  
-  - Add / edit / delete menu items (name, description, price, category, dietary restrictions, image, day)
+### 📍 Find Us Page  
+- Restaurant location  
+- One-click link to **HSL Journey Planner**  
 
-> 💡 Currently: Menu changes are managed on the dashboard side and will be integrated with the API/DB in the next iteration.
+### 🌍 Multi-Language Support  
+- EN / FI  
+- Handled by `translations.js` and `language.js`  
 
 ---
 
-## ⚙️ Technical Features
+## 🛠️ Admin Features  
 
-- 🐍 **Backend:** Flask (Python)  
-- 🍃 **Database:** MongoDB Atlas (`freshbite_db`)  
-- 🌐 **Frontend:** HTML, CSS, Vanilla JavaScript  
-- 🔐 **Auth & Security**
-  - Passwords stored as hashed values (no plaintext)  
-  - Admin JWT support ready in backend  
-- 🌍 **CORS enabled** for local testing  
-- 📱 **Fully responsive design** for desktop & mobile  
-- ✅ **Inline form validation** (contact + reservation)  
-- 📩 **Toast-style notifications** for success / error messages  
+### 🔐 Admin Authentication  
+- Login with email + hashed password  
+- Secure JWT support  
+- Admin session handling  
+
+### 📊 Admin Dashboard  
+- View menu items  
+- Add a menu item  
+- Edit an existing item  
+- Delete an item  
+- Dashboard stats (total items, specials count, etc.)
 
 ---
 
-## 🧪 4. Demo Overview (For Presentation)
+# ⚙️ 4. Technical Architecture  
 
-### 👥 Customer Flow (Demo)
+### Backend  
+- Flask (Python)  
+- Modular MVC structure  
+- JWT authentication  
+- Password hashing with bcrypt  
+- CORS enabled for local testing  
 
-1. Open **Home page** – explain hero video and today’s specials  
-2. Go to **Menu** – show category filters and dietary tags  
-3. Go to **Reservation**  
-   - Try invalid data (wrong email, bad phone, missing fields) → see **inline red error messages**  
-   - Make a **valid reservation** → success notification  
-4. Go to **Contact**  
-   - Show inline validation  
-   - Submit a message → “Message sent successfully” notification  
-5. Show **Find Us** → click **“Location (Open in HSL)”** (opens HSL reittiopas)
+### Database  
+- MongoDB Atlas (`freshbite_db`)  
+- Collections:  
+  - `menu_items`  
+  - `reservations`  
+  - `contacts`  
+  - `admins`  
+  - `users`  
 
-### 🛠️ Admin Flow (Demo)
+### Frontend  
+- HTML, CSS, Vanilla JavaScript  
+- Dynamic API-based rendering  
+- Responsive design  
 
-1. Open `/login`  
-2. Login with existing admin credentials, e.g.:  
+### Deployment  
+- Running on Metropolia cloud server  
+- Apache Reverse Proxy → Flask  
+- HTTPS enabled  
+
+---
+
+# 🧪 5. Demo Instructions (For Presentation)
+
+## 👥 Customer Demo  
+
+1. **Home Page**  
+   - Show video banner  
+   - Show Today’s Specials (fetched from `/app/api/today`)  
+   - Switch EN ↔ FI  
+
+2. **Menu Page**  
+   - Show category filters  
+   - Show dietary tags  
+   - Add-to-cart UI  
+
+3. **Reservation Page**  
+   - Try incorrect values → inline validation  
+   - Make a valid reservation → success toast  
+
+4. **Contact Page**  
+   - Inline validation  
+   - Submit to DB  
+
+5. **Find Us Page**  
+   - Click “Open in HSL” link  
+
+---
+
+## 🛠️ Admin Demo  
+
+1. Go to **Admin Login** (`/app/login`).  
+2. Enter credentials:  
    - Email: `admin@freshbite.com`  
-   - Password: `admin123`  
-3. On success, show redirect to **Admin Dashboard**  
-4. On dashboard:
-   - Add a new menu item  
-   - Edit an existing one  
-   - Delete an item  
-   - Show counters (today’s menu, total items, weekly specials)
+   - Password: `Admin@123`  
+3. Show redirect to **Admin Dashboard**  
+4. Add a menu item  
+5. Edit an item  
+6. Delete an item  
+7. Show dashboard statistics panel  
 
 ---
 
-## 📦 5. How to Test the Application
+# 🧪 6. How to Test the Application (Required for Teachers)
 
-### ✅ Prerequisites
+## ✔ **Live Server Testing (Metropolia Deployment)**  
+Use this IP address to test (as required):
 
-- Python **3.8+**  
-- A MongoDB Atlas account (or use the provided URI)  
-- Git  
-- Web browser (Chrome / Edge / Firefox)
+### 🌐 https://10.120.32.84/app/
 
----
+| Feature | URL |
+|--------|-----|
+| **Home Page** | https://10.120.32.84/app/ |
+| Menu | https://10.120.32.84/app/menu |
+| Today’s Specials | (scroll on home page) |
+| Reservation | https://10.120.32.84/app/reservation |
+| Contact | https://10.120.32.84/app/contact |
+| Find Us | https://10.120.32.84/app/find-us |
+| Customer Login | https://10.120.32.84/app/customer_login |
+| Customer Signup | https://10.120.32.84/app/customers_signup |
+| **Admin Login** | https://10.120.32.84/app/login |
+| **Admin Dashboard** | https://10.120.32.84/app/admin-dashboard |
 
-## 💾 6. Installation & Local Setup
+# 📦 7. Installation Instructions
 
+### 1. Clone  
 ```bash
-### 1. Clone the repository
-git clone [https://github.com/shreyasinha26/Restaurant_Website]
-
-### 2. Virtual environment
-
-### 3. Dependencies
-        Flask==2.3.3
-        pymongo==4.5.0
-        bcrypt==4.0.1
-        PyJWT==2.8.0
-        Flask-CORS==4.0.0
-### 4. Environment variables
-        SECRET_KEY=your-super-secret-key-here-change-in-production
-        MONGO_URI=mongodb+srv://hnjrwl_db_user:Honey12345@cluster0.w8sfktk.mongodb.net/freshbite_db?retryWrites=true&w=majority
-        JWT_SECRET_KEY=jwt-super-secret-key-change-this-too
-
-### 5. Run the application
-    python app.py
-
-
-## Customer Testing
-
-Home Page: /
-Signup: /customers_signup
-Login: /customer_login
-Menu: /menu (filter categories)
-contact: /contact
-find us: /find_us
-Language: Switch EN/FI
-
-## Admin Testing
-
-Admin Login: /login
-Dashboard: /admin-dashboard
-Menu Management: Add, edit, delete items
-Specials Management: Set today’s specials
-Logout: Test secure logout
-
-## API Testing
-http://localhost:5000/api/menu
-http://localhost:5000/api/menu/today
-
-## This project is useful:
-### For Customers
-
-Clear dietary information
-Multi-language support
-Modern, responsive UI
-
-### For Restaurant Owners
-
-Centralized menu management
-Easy updates to specials
-
-
-### Technical Advantages
-
-Follows MVC architecture
-Secure authentication
-Modular and scalable
-Clean and maintainable codebase
-
-### Future Enhancements
-
-Adding orders in cart
-Online payment integration
-Order tracking system
-Customer reviews and ratings
-Update from admin dasboard saved in DB
-
-## Troubleshooting
-
-MongoDB Connection Error : Check your MONGO_URI
-
-Python Module Errors : Ensure virtual environment is active, Reinstall dependencies
+git clone https://github.com/shreyasinha26/Restaurant_Website
+cd Restaurant_Website
