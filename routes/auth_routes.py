@@ -19,10 +19,10 @@ def signup():
     return auth_controller.signup()
 
 
-@auth_bp.route("/api/login", methods=["POST"])
-def login():
+@auth_bp.route("/api/admin/login", methods=["POST"])
+def admin_login():
     """User login route"""
-    return auth_controller.login()
+    return auth_controller.admin_login()
 
 
 @auth_bp.route("/api/logout", methods=["POST"])
