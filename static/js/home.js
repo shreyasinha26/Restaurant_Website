@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const dropdown = document.querySelector('.dropdown');
+  if (!dropdown) return; // Prevent errors on pages without dropdown
+
   const button = dropdown.querySelector('.dropbtn');
+  if (!button) return;
 
   button.addEventListener('click', (e) => {
     e.preventDefault();
@@ -13,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
 

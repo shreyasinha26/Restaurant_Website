@@ -1,271 +1,261 @@
 // API base URL
 const API_BASE = '/app/api';
 
-// Function to show loading state
+// Safe loading function
 function showLoading(element) {
+    if (!element) return;
     element.innerHTML = '<div class="loading">Loading menu items...</div>';
 }
 
-// Function to show error state
+// Safe error display
 function showError(element, message) {
+    if (!element) return;
     element.innerHTML = `<div class="error-message">${message}</div>`;
 }
 
-
-// Function to fetch and display today's menu
+// ----------------------------
+// Load Today's Specials
+// ----------------------------
 async function loadTodaysMenu() {
     try {
         const todaySpecialSection = document.querySelector('.special-items');
-        if (!todaySpecialSection) {
-            console.log('No special-items section found');
+        if (!todaySpecialSection) return; // Prevent crash
+
+        showLoading(todaySpecialSection);
+
+        const response = await fetch(`${API_BASE}/menu/today`);
+        if (!response.ok) throw new Error(response.status);
+
+        const menuItems = await response.json();
+
+        if (!Array.isArray(menuItems)) {
+            showError(todaySpecialSection, "Invalid server response.");
             return;
         }
-        
-        showLoading(todaySpecialSection);
-        
-        const response = await fetch(`${API_BASE}/menu/today`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const menuItems = await response.json();
-        console.log('Today\'s specials loaded:', menuItems);
-        
+
         if (menuItems.length > 0) {
             todaySpecialSection.innerHTML = menuItems.map(item => `
                 <div class="special-item">
-                    <img src="${item.image}" alt="${item.name}" onerror="this.src='/static/images/default.jpg'">
+                    <img src="${item.image}" alt="${item.name}" 
+                         onerror="this.src='/static/images/default.jpg'">
                     <div class="special-info">
                         <h3>${item.name}</h3>
                         <p>${item.description}</p>
-                        ${item.dietary && item.dietary.length > 0 ? 
-                            `<div class="dietary-tags">${item.dietary.map(tag => 
-                                `<span class="dietary-tag">${tag}</span>`
-                            ).join('')}</div>` : ''}
+                        ${item.dietary && item.dietary.length > 0
+                            ? `<div class="dietary-tags">
+                                ${item.dietary.map(tag => `<span class="dietary-tag">${tag}</span>`).join('')}
+                               </div>`
+                            : ''}
                         <span class="price">€${item.price.toFixed(2)}</span>
-                        <button class="add-cart-btn" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>Add to Cart</button>
+                        <button class="add-cart-btn" 
+                                data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                                Add to Cart
+                        </button>
                     </div>
                 </div>
             `).join('');
-            
-            // Re-attach cart event listeners
+
             attachCartEventListeners();
         } else {
-            todaySpecialSection.innerHTML = '<div class="no-items">No specials today. Check back tomorrow!</div>';
+            todaySpecialSection.innerHTML = '<div class="no-items">No specials today.</div>';
         }
+
     } catch (error) {
-        console.error('Error loading today\'s menu:', error);
-        const todaySpecialSection = document.querySelector('.special-items');
-        if (todaySpecialSection) {
-            showError(todaySpecialSection, 'Failed to load today\'s specials. Please try again later.');
-        }
+        console.error("Today's menu error:", error);
+        const section = document.querySelector('.special-items');
+        showError(section, 'Failed to load today\'s specials.');
     }
 }
 
-// Function to display menu items in the container
+// ----------------------------
+// Render Menu Items
+// ----------------------------
 function displayMenuItems(menuItems, container) {
-    if (menuItems.length > 0) {
-        container.innerHTML = menuItems.map(item => `
-            <div class="menu-item">
-                <div class="item-image">
-                    <img src="${item.image}" alt="${item.name}" 
-                         onerror="console.error('Failed to load image:', this.src); this.style.display='none'">
-                </div>
-                <div class="item-info">
-                    <h3>${item.name}</h3>
-                    <p>${item.description}</p>
-                    ${item.dietary && item.dietary.length > 0 ? 
-                        `<div class="dietary-tags">${item.dietary.map(tag => 
-                            `<span class="dietary-tag">${tag}</span>`
-                        ).join('')}</div>` : ''}
-                    <div class="price">€${item.price.toFixed(2)}</div>
-                    <button class="add-cart-btn" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>Add to Cart</button>
-                </div>
+    if (!container) return;
+
+    if (!Array.isArray(menuItems)) {
+        showError(container, "Invalid menu data.");
+        return;
+    }
+
+    if (menuItems.length === 0) {
+        container.innerHTML = '<p class="no-items">No items found.</p>';
+        return;
+    }
+
+    container.innerHTML = menuItems.map(item => `
+        <div class="menu-item">
+            <div class="item-image">
+                <img src="${item.image}" alt="${item.name}" 
+                    onerror="this.style.display='none'">
             </div>
-        `).join('');
-        
-        attachCartEventListeners();
-    } else {
-        container.innerHTML = '<p class="no-items">No items found in this category.</p>';
-    }
+            <div class="item-info">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                ${item.dietary && item.dietary.length > 0 
+                    ? `<div class="dietary-tags">
+                        ${item.dietary.map(tag => `<span class="dietary-tag">${tag}</span>`).join('')}
+                      </div>`
+                    : ''}
+                <div class="price">€${item.price.toFixed(2)}</div>
+                <button class="add-cart-btn"
+                        data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                        Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    attachCartEventListeners();
 }
 
-// Function to load all menu items
+// ----------------------------
+// Load All Menu Items
+// ----------------------------
 async function loadAllMenuItems() {
+    const container = document.getElementById('menu-items-container');
+    if (!container) return;
+
+    showLoading(container);
+
     try {
-        const menuContainer = document.getElementById('menu-items-container');
-        if (!menuContainer) return;
-        
-        showLoading(menuContainer);
-        
         const response = await fetch(`${API_BASE}/menu`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const menuItems = await response.json();
-        console.log('All menu items loaded:', menuItems);
-        
-        displayMenuItems(menuItems, menuContainer);
-        
+        if (!response.ok) throw new Error(response.status);
+
+        const items = await response.json();
+        displayMenuItems(items, container);
+
     } catch (error) {
-        console.error('Error loading menu items:', error);
-        const menuContainer = document.getElementById('menu-items-container');
-        if (menuContainer) {
-            showError(menuContainer, 'Failed to load menu items. Please try again later.');
-        }
+        console.error("Load all menu error:", error);
+        showError(container, "Failed to load menu items.");
     }
 }
 
-// Function to load menu by category
+// ----------------------------
+// Load by Category
+// ----------------------------
 async function loadMenuByCategory(category) {
+    const container = document.getElementById('menu-items-container');
+    if (!container) return;
+
+    showLoading(container);
+
     try {
-        const menuContainer = document.getElementById('menu-items-container');
-        if (!menuContainer) return;
-        
-        showLoading(menuContainer);
-        
         const response = await fetch(`${API_BASE}/menu/category/${category}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const menuItems = await response.json();
-        console.log(`Category ${category} items:`, menuItems);
-        
-        displayMenuItems(menuItems, menuContainer);
-        
+        if (!response.ok) throw new Error(response.status);
+
+        const items = await response.json();
+        displayMenuItems(items, container);
+
     } catch (error) {
-        console.error(`Error loading ${category} menu:`, error);
-        const menuContainer = document.getElementById('menu-items-container');
-        if (menuContainer) {
-            showError(menuContainer, `Failed to load ${category} menu. Please try again later.`);
-        }
+        console.error(`Category ${category} error:`, error);
+        showError(container, `Failed to load ${category} items.`);
     }
 }
 
-// Function to filter by dietary restrictions
+// ----------------------------
+// Dietary Filter
+// ----------------------------
 async function filterByDietaryRestrictions() {
+    const container = document.getElementById('menu-items-container');
+    if (!container) return;
+
     try {
-        const menuContainer = document.getElementById('menu-items-container');
-        if (!menuContainer) return;
-        
-        showLoading(menuContainer);
-        
         const response = await fetch(`${API_BASE}/menu`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
+        if (!response.ok) throw new Error(response.status);
+
         const allItems = await response.json();
-        const healthyItems = allItems.filter(item => item.dietary && item.dietary.length > 0);
-        
-        displayMenuItems(healthyItems, menuContainer);
-        
+        const healthy = allItems.filter(item => item.dietary && item.dietary.length > 0);
+
+        displayMenuItems(healthy, container);
+
     } catch (error) {
-        console.error('Error filtering dietary restrictions:', error);
-        const menuContainer = document.getElementById('menu-items-container');
-        if (menuContainer) {
-            showError(menuContainer, 'Failed to load dietary restriction items.');
-        }
+        showError(container, "Failed to load dietary items.");
     }
 }
 
-// Cart functionality
+// ----------------------------
+// Cart System (Safe)
+// ----------------------------
 function attachCartEventListeners() {
-    document.querySelectorAll('.add-cart-btn').forEach(button => {
-        button.addEventListener('click', function() {
+    document.querySelectorAll('.add-cart-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
             try {
-                const itemData = JSON.parse(this.getAttribute('data-item'));
-                addToCart(itemData);
-                
-                // Visual feedback
-                const originalText = this.textContent;
-                this.textContent = 'Added!';
-                this.style.backgroundColor = '#4CAF50';
-                
+                const item = JSON.parse(btn.getAttribute('data-item'));
+                addToCart(item);
+
+                const original = btn.textContent;
+                btn.textContent = "Added!";
+                btn.style.backgroundColor = "#4CAF50";
+
                 setTimeout(() => {
-                    this.textContent = originalText;
-                    this.style.backgroundColor = '';
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Error adding item to cart:', error);
+                    btn.textContent = original;
+                    btn.style.backgroundColor = "";
+                }, 800);
+
+            } catch (e) {
+                console.error("Cart error:", e);
             }
         });
     });
 }
 
 function addToCart(item) {
-    let cart = JSON.parse(localStorage.getItem('freshbite-cart')) || [];
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ ...item, quantity: 1 });
-    }
-    
-    localStorage.setItem('freshbite-cart', JSON.stringify(cart));
+    if (!item) return;
+
+    const cart = JSON.parse(localStorage.getItem("freshbite-cart")) || [];
+    const existing = cart.find(i => i.id === item.id);
+
+    if (existing) existing.quantity++;
+    else cart.push({ ...item, quantity: 1 });
+
+    localStorage.setItem("freshbite-cart", JSON.stringify(cart));
     updateCartBadge();
 }
 
 function updateCartBadge() {
     const cart = JSON.parse(localStorage.getItem('freshbite-cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    let badge = document.querySelector('.cart-badge');
+    const total = cart.reduce((sum, i) => sum + i.quantity, 0);
+
     const floatingCart = document.querySelector('.floating-cart');
-    
-    if (!badge && floatingCart) {
+    if (!floatingCart) return;
+
+    let badge = document.querySelector('.cart-badge');
+    if (!badge) {
         badge = document.createElement('span');
         badge.className = 'cart-badge';
         floatingCart.appendChild(badge);
     }
-    
-    if (badge) {
-        badge.textContent = totalItems;
-        badge.style.display = totalItems > 0 ? 'block' : 'none';
-    }
+
+    badge.textContent = total;
+    badge.style.display = total > 0 ? 'block' : 'none';
 }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing menu...');
-    
-    // Debug: Check what page we're on and what elements exist
-    console.log('Current page:', window.location.pathname);
-    console.log('Special items section:', document.querySelector('.special-items'));
-    console.log('Menu container:', document.getElementById('menu-items-container'));
-    
-    // Initialize cart badge
+// ----------------------------
+// INIT Page
+// ----------------------------
+document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
-    
-    // Load today's specials (only on home page)
+
     if (document.querySelector('.special-items')) {
-        console.log('Home page detected, loading today\'s specials...');
-        loadTodaysMenu(); // This function was missing!
+        loadTodaysMenu();
     }
-    
-    // Load all menu categories (only on menu page)
+
     if (document.getElementById('menu-items-container')) {
-        console.log('Menu page detected, loading all items...');
         loadAllMenuItems();
     }
-    
-    // Category buttons functionality (for menu.html)
+
     const categoryButtons = document.querySelectorAll('.category-btn');
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            const category = this.getAttribute('data-category');
-            console.log('Category button clicked:', category);
-            
-            if (category === 'all') {
-                loadAllMenuItems();
-            } else if (category === 'healthy') {
-                filterByDietaryRestrictions();
-            } else {
-                loadMenuByCategory(category);
-            }
+    categoryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoryButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cat = btn.getAttribute('data-category');
+
+            if (cat === 'all') loadAllMenuItems();
+            else if (cat === 'healthy') filterByDietaryRestrictions();
+            else loadMenuByCategory(cat);
         });
     });
 });

@@ -15,26 +15,35 @@
   <!-- Header -->
   <header class="site-header">
     <div class="logo">
-      <a href="/">
+
+      <!-- FIXED -->
+      <a href="/app/">
         <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen logo" />
       </a>
+
       <span data-i18n="logo_text">FreshBite Kitchen</span>
     </div>
 
     <nav>
       <ul>
-        <li><a data-i18n="nav_home" href="/">Home</a></li>
-        <li><a data-i18n="nav_menu" href="/menu">Menu</a></li>
-        <li><a data-i18n="nav_reservation" href="/reservation">Table Reservation</a></li>
-        <li><a data-i18n="nav_contact" href="/contact">Contact</a></li>
-        <li><a data-i18n="nav_findus" href="/find_us" class="active">Find Us</a></li>
+
+        <!-- FIXED -->
+        <li><a data-i18n="nav_home" href="/app/">Home</a></li>
+        <li><a data-i18n="nav_menu" href="/app/menu">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="/app/reservation">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="/app/contact">Contact</a></li>
+
+        <!-- FIXED (the page itself) -->
+        <li><a data-i18n="nav_findus" href="/app/find-us" class="active">Find Us</a></li>
 
         <!-- Dropdown Menu -->
         <li class="dropdown">
           <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a data-i18n="login_user" href="/customer_login">Users</a></li>
-            <li><a data-i18n="login_admin" href="/login">Admin</a></li>
+
+            <!-- FIXED -->
+            <li><a data-i18n="login_user" href="/app/customer_login">Users</a></li>
+            <li><a data-i18n="login_admin" href="/app/login">Admin</a></li>
           </ul>
         </li>
 
@@ -42,6 +51,7 @@
         <li class="lang-switcher">
           <button id="lang-switch">FI / EN</button>
         </li>
+
       </ul>
     </nav>
   </header>
@@ -158,7 +168,9 @@
     <section class="travel-section">
       <div class="travel-header">
         <h2 data-i18n="findus_travel_title">How to get here</h2>
-        <p data-i18n="findus_travel_text">Whether you’re coming by tram, bus, or car, getting to FreshBite Kitchen is simple.</p>
+        <p data-i18n="findus_travel_text">
+          Whether you’re coming by tram, bus, or car, getting to FreshBite Kitchen is simple.
+        </p>
       </div>
 
       <div class="travel-grid">

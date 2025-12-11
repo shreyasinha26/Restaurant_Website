@@ -1,5 +1,12 @@
-// Select the login form
+// ---------- SAFE LOGIN.JS ----------
+
+// Try to get login form
 const loginForm = document.getElementById('loginForm');
+
+// Stop everything if form is not present (Prevents page breaking)
+if (!loginForm) {
+    console.warn("⚠ login.js loaded but no #loginForm found.");
+}
 
 // Function to validate email format
 function isValidEmail(email) {
@@ -9,6 +16,8 @@ function isValidEmail(email) {
 
 // Function to show error messages
 function showError(input, message) {
+    if (!input) return; // Prevent crash
+
     let errorElem = input.nextElementSibling;
     if (!errorElem || !errorElem.classList.contains('error-msg')) {
         errorElem = document.createElement('div');
@@ -24,6 +33,8 @@ function showError(input, message) {
 
 // Function to clear error messages
 function clearError(input) {
+    if (!input) return; // Prevent crash
+
     let errorElem = input.nextElementSibling;
     if (errorElem && errorElem.classList.contains('error-msg')) {
         errorElem.textContent = '';
@@ -31,21 +42,25 @@ function clearError(input) {
     input.style.borderColor = '#ddd';
 }
 
-// Function to clear all input fields
+// Clear all input fields
 function clearInputFields() {
     const email = document.getElementById('email');
     const password = document.getElementById('password');
-    
-    if (email) email.value = '';
-    if (password) password.value = '';
-    
-    // Also clear any error messages
-    clearError(email);
-    clearError(password);
+
+    if (email) {
+        email.value = '';
+        clearError(email);
+    }
+    if (password) {
+        password.value = '';
+        clearError(password);
+    }
 }
 
-// Function to show loading state
+// Loading state
 function setLoading(button, isLoading) {
+    if (!button) return;
+
     if (isLoading) {
         button.disabled = true;
         button.textContent = 'Logging in...';
@@ -57,153 +72,163 @@ function setLoading(button, isLoading) {
     }
 }
 
-// Function to show success/error messages
+// Show success/error message
 function showMessage(message, isError = false) {
-    // Remove existing message
-    const existingMessage = document.querySelector('.form-message');
-    if (existingMessage) {
-        existingMessage.remove();
-    }
+    if (!loginForm) return;
 
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${isError ? 'error' : 'success'}`;
-    messageDiv.textContent = message;
-    messageDiv.style.padding = '10px';
-    messageDiv.style.borderRadius = '8px';
-    messageDiv.style.marginBottom = '15px';
-    messageDiv.style.textAlign = 'center';
-    messageDiv.style.fontWeight = '600';
-    messageDiv.style.backgroundColor = isError ? '#ffebee' : '#e8f5e8';
-    messageDiv.style.color = isError ? '#c62828' : '#2e7d32';
-    messageDiv.style.border = isError ? '1px solid #ffcdd2' : '1px solid #c8e6c9';
+    const existing = document.querySelector('.form-message');
+    if (existing) existing.remove();
 
-    loginForm.insertBefore(messageDiv, loginForm.firstChild);
+    const msg = document.createElement('div');
+    msg.className = 'form-message';
+    msg.textContent = message;
+
+    msg.style.cssText = `
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: 600;
+        background-color: ${isError ? '#ffebee' : '#e8f5e8'};
+        color: ${isError ? '#c62828' : '#2e7d32'};
+        border: ${isError ? '1px solid #ffcdd2' : '1px solid #c8e6c9'};
+    `;
+
+    loginForm.insertBefore(msg, loginForm.firstChild);
 }
 
-// Form submit event
-loginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
+// -----------------------------
+// SUBMIT HANDLER (SAFE)
+// -----------------------------
+if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const loginButton = this.querySelector('button[type="submit"]');
-    let valid = true;
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const loginButton = this.querySelector('button[type="submit"]');
 
-    // Validate email
-    if (email.value.trim() === '') {
-        showError(email, 'Email is required.');
-        valid = false;
-    } else if (!isValidEmail(email.value.trim())) {
-        showError(email, 'Please enter a valid email.');
-        valid = false;
-    } else {
-        clearError(email);
-    }
+        let valid = true;
 
-    // Validate password
-    if (password.value.trim() === '') {
-        showError(password, 'Password is required.');
-        valid = false;
-    } else {
-        clearError(password);
-    }
-
-    // If validation passes, make API call
-    if (valid) {
-        setLoading(loginButton, true);
-        
-        try {
-            const loginData = {
-                email: email.value.trim(),
-                password: password.value
-            };
-
-            const response = await fetch('/api/customer/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include', // Important for cookies
-                body: JSON.stringify(loginData)
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Store token and user data in localStorage
-                localStorage.setItem('auth_token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                
-                showMessage('Login successful! Redirecting...', false);
-                
-                // Redirect to dashboard after 1 second
-                setTimeout(() => {
-                    window.location.href = '/customer_dashboard';
-                }, 1000);
-                
-            } else {
-                // Login failed - clear input fields and show error
-                showMessage(data.error || 'Login failed!', true);
-                clearInputFields(); // Clear fields on failed login
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            showMessage('An error occurred during login. Please try again.', true);
-            clearInputFields(); // Clear fields on error
-        } finally {
-            setLoading(loginButton, false);
+        if (!email || !password) {
+            console.warn("⚠ Missing email or password fields.");
+            return;
         }
-    }
-});
 
-// Real-time validation
-document.getElementById('email').addEventListener('input', function() {
-    if (this.value.trim() !== '' && !isValidEmail(this.value.trim())) {
-        showError(this, 'Please enter a valid email.');
-    } else {
-        clearError(this);
-    }
-});
+        // Validate email
+        if (email.value.trim() === '') {
+            showError(email, 'Email is required.');
+            valid = false;
+        } else if (!isValidEmail(email.value.trim())) {
+            showError(email, 'Please enter a valid email.');
+            valid = false;
+        } else {
+            clearError(email);
+        }
 
-document.getElementById('password').addEventListener('input', function() {
-    if (this.value.trim() === '') {
-        showError(this, 'Password is required.');
-    } else {
-        clearError(this);
-    }
-});
+        // Validate password
+        if (password.value.trim() === '') {
+            showError(password, 'Password is required.');
+            valid = false;
+        } else {
+            clearError(password);
+        }
 
-// Check if user is already logged in (optional)
+        // Make API call
+        if (valid) {
+            setLoading(loginButton, true);
+
+            try {
+                const response = await fetch('/api/customer/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        email: email.value.trim(),
+                        password: password.value.trim()
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    showMessage('Login successful! Redirecting...', false);
+
+                    setTimeout(() => {
+                        window.location.href = '/customer_dashboard';
+                    }, 1000);
+                } else {
+                    showMessage(data.error || 'Login failed!', true);
+                    clearInputFields();
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                showMessage('Server error. Please try again.', true);
+                clearInputFields();
+            } finally {
+                setLoading(loginButton, false);
+            }
+        }
+    });
+}
+
+// -----------------------------
+// REAL-TIME VALIDATION (SAFE)
+// -----------------------------
+const emailField = document.getElementById('email');
+if (emailField) {
+    emailField.addEventListener('input', function() {
+        if (this.value.trim() !== '' && !isValidEmail(this.value.trim())) {
+            showError(this, 'Please enter a valid email.');
+        } else {
+            clearError(this);
+        }
+    });
+}
+
+const passwordField = document.getElementById('password');
+if (passwordField) {
+    passwordField.addEventListener('input', function() {
+        if (this.value.trim() === '') {
+            showError(this, 'Password is required.');
+        } else {
+            clearError(this);
+        }
+    });
+}
+
+// -----------------------------
+// CHECK LOGIN STATUS (SAFE)
+// -----------------------------
 document.addEventListener('DOMContentLoaded', function() {
     checkAuthStatus();
 });
 
 async function checkAuthStatus() {
+    const token = localStorage.getItem('auth_token');
+    if (!token) return;
+
     try {
-        const token = localStorage.getItem('auth_token');
-        if (token) {
-            const response = await fetch('/api/current-user', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-                credentials: 'include'
-            });
-            
-            if (response.ok) {
-                // User is already logged in, redirect to dashboard
-                window.location.href = '/customer_dashboard';
-            } else {
-                // Token is invalid, clear it
-                localStorage.removeItem('auth_token');
-                localStorage.removeItem('user');
-            }
+        const response = await fetch('/api/current-user', {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            window.location.href = '/customer_dashboard';
+        } else {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
         }
-    } catch (error) {
-        console.error('Auth check failed:', error);
-        // Clear invalid token
+    } catch (err) {
+        console.error('Auth check failed:', err);
         localStorage.removeItem('auth_token');
         localStorage.removeItem('user');
     }
 }
+
 

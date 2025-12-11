@@ -2,10 +2,9 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Log for debugging
   console.log("Find-Us page loaded ✔");
 
-  // Add smooth hover animation to each map button
+  // Button hover animation
   const mapButtons = document.querySelectorAll(".map-btn");
 
   mapButtons.forEach((btn) => {
@@ -20,8 +19,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fix dropdown behaviour ONLY on this page (Safari issue fix too)
+  // Dropdown behaviour (Safari fix)
   const dropBtn = document.querySelector(".dropbtn");
   const dropContent = document.querySelector(".dropdown-content");
 
-  });
+  if (dropBtn && dropContent) {
+    dropBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropContent.classList.toggle("show");
+    });
+
+    // Close dropdown if clicked outside
+    window.addEventListener("click", (e) => {
+      if (!dropBtn.contains(e.target)) {
+        dropContent.classList.remove("show");
+      }
+    });
+  }
+
+});
+

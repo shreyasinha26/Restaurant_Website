@@ -72,14 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
   closeModal.addEventListener('click', closeItemModal);
   cancelBtn.addEventListener('click', closeItemModal);
   
-  // Close modal when clicking outside
   window.addEventListener('click', function(event) {
     if (event.target === itemModal) {
       closeItemModal();
     }
   });
   
-  // Form submission
   itemForm.addEventListener('submit', function(e) {
     e.preventDefault();
     saveMenuItem();
@@ -140,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
       menuItemsContainer.appendChild(itemCard);
     });
     
-    // Add event listeners to edit and delete buttons
     document.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const id = this.getAttribute('data-id');
@@ -179,12 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('item-image').value = item.image || '';
       document.getElementById('item-day').value = item.day || '';
       
-      // Reset checkboxes
       document.querySelectorAll('input[name="dietary"]').forEach(checkbox => {
         checkbox.checked = false;
       });
       
-      // Set dietary checkboxes
       if (item.dietary) {
         item.dietary.forEach(diet => {
           const checkbox = document.querySelector(`input[name="dietary"][value="${diet}"]`);
@@ -227,6 +222,8 @@ document.addEventListener('DOMContentLoaded', function() {
     closeItemModal();
     loadMenuItems();
     updateDashboardStats();
+
+    showNotification('Menu item saved successfully!', 'success');
   }
   
   function deleteMenuItem(id) {
@@ -247,74 +244,42 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('specials-count').textContent = `${specials.length} items`;
   }
 });
-function saveMenuItem() {
-    const formData = new FormData(itemForm);
-    const dietary = [];
-    document.querySelectorAll('input[name="dietary"]:checked').forEach(checkbox => {
-        dietary.push(checkbox.value);
-    });
-    
-    const itemData = {
-        name: document.getElementById('item-name').value,
-        description: document.getElementById('item-description').value,
-        price: parseFloat(document.getElementById('item-price').value),
-        category: document.getElementById('item-category').value,
-        dietary: dietary,
-        image: document.getElementById('item-image').value,
-        day: document.getElementById('item-day').value
-    };
-    
-    if (editingItemId) {
-        menuAPI.updateMenuItem(editingItemId, itemData);
-    } else {
-        menuAPI.addMenuItem(itemData);
-    }
-    
-    closeItemModal();
-    loadMenuItems();
-    updateDashboardStats();
-    
-    // Show success message
-    showNotification('Menu item saved successfully!', 'success');
-}
 
-// Add notification function
+// Notification system
 function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    // Add styles if not exists
-    if (!document.getElementById('notification-styles')) {
-        const styles = `
-            <style id="notification-styles">
-            .notification {
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                padding: 15px 20px;
-                border-radius: 8px;
-                color: white;
-                font-weight: 600;
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-            }
-            .notification-success { background: #4CAF50; }
-            .notification-error { background: #F44336; }
-            .notification-info { background: #2196F3; }
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            </style>
-        `;
-        document.head.insertAdjacentHTML('beforeend', styles);
-    }
-    
-    document.body.appendChild(notification);
-    
-    // Remove after 3 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+
+  if (!document.getElementById('notification-styles')) {
+    const styles = `
+      <style id="notification-styles">
+      .notification {
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          padding: 15px 20px;
+          border-radius: 8px;
+          color: white;
+          font-weight: 600;
+          z-index: 10000;
+          animation: slideIn 0.3s ease;
+      }
+      .notification-success { background: #4CAF50; }
+      .notification-error { background: #F44336; }
+      .notification-info { background: #2196F3; }
+      @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+      }
+      </style>
+    `;
+    document.head.insertAdjacentHTML('beforeend', styles);
+  }
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+      notification.remove();
+  }, 3000);
 }

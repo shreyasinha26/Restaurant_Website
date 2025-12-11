@@ -16,7 +16,8 @@
   <!-- Header -->
   <header class="site-header">
     <div class="logo">
-      <a href="/">
+      <!-- FIXED: link -->
+      <a href="/app/">
         <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen logo">
       </a>
       <span data-i18n="logo_text">FreshBite Kitchen</span>
@@ -24,19 +25,20 @@
 
     <nav>
       <ul>
-        <li><a data-i18n="nav_home" href="/">Home</a></li>
-        <li><a data-i18n="nav_menu" href="/menu">Menu</a></li>
-        <li><a data-i18n="nav_reservation" href="/reservation">Table Reservation</a></li>
-        <li><a data-i18n="nav_contact" href="/contact" class="active">Contact</a></li>
-        <li><a data-i18n="nav_findus" href="/find-us">Find Us</a></li>
-
+        <!-- FIXED: changed to /app/... -->
+        <li><a data-i18n="nav_home" href="/app/">Home</a></li>
+        <li><a data-i18n="nav_menu" href="/app/menu">Menu</a></li>
+        <li><a data-i18n="nav_reservation" href="/app/reservation">Table Reservation</a></li>
+        <li><a data-i18n="nav_contact" href="/app/contact" class="active">Contact</a></li>
+        <li><a data-i18n="nav_findus" href="/app/find-us">Find Us</a></li>
 
         <!-- Dropdown Menu -->
         <li class="dropdown">
           <a href="#" class="dropbtn" data-i18n="login">Login ▾</a>
           <ul class="dropdown-content">
-            <li><a data-i18n="login_user" href="/customer_login">Users</a></li>
-            <li><a data-i18n="login_admin" href="/login">Admin</a></li>
+            <!-- FIXED -->
+            <li><a data-i18n="login_user" href="/app/customer_login">Users</a></li>
+            <li><a data-i18n="login_admin" href="/app/login">Admin</a></li>
           </ul>
         </li>
 
@@ -157,6 +159,7 @@
   <section class="faq-section">
     <div class="faq-container">
       <h2 data-i18n="contact_faq_title">Frequently Asked Questions</h2>
+
       <div class="faq-grid">
         <div class="faq-item">
           <h3 data-i18n="faq_q1">Do you offer delivery?</h3>
@@ -195,3 +198,4 @@
 
 </body>
 </html>
+
