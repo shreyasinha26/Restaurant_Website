@@ -1,5 +1,5 @@
 // API base URL
-const API_BASE = '/api';
+const API_BASE = '/app/api';
 
 // Function to show loading state
 function showLoading(element) {
