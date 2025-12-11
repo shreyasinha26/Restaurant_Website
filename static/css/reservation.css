@@ -334,5 +334,74 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ================================
+   RESTORE ORIGINAL LAYOUT
+   ================================ */
+
+.table-reservation {
+    padding: 40px 0;
+    background-color: #faeedf;
+}
+
+.reservation-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.reservation-text {
+    flex: 1;
+    background: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.reservation-form {
+    flex: 1;
+    background: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.reservation-form form label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    width: 100%;
+    background: #ff7a00;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #ff8f26;
+}
+
+
 
 
