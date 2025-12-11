@@ -127,7 +127,7 @@ loginForm.addEventListener('submit', async function(e) {
                     localStorage.setItem('admin_email', data.admin.email);
                     localStorage.setItem('admin_name', data.admin.full_name);
                 }
-                window.location.href = data.redirect || '/app/admin-dashboard';
+                window.location.href = '/app/admin-dashboard';
             } else {
                 alert('Login failed: ' + (data.message || 'Invalid credentials'));
             }
