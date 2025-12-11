@@ -13,6 +13,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================
+  //  NEW: Load menu from backend API
+  // ============================================
+  async function loadMenuFromAPI() {
+    try {
+      const response = await fetch("/app/api/");
+      const items = await response.json();
+
+      // Save into localStorage for existing logic
+      localStorage.setItem("menuItems", JSON.stringify(items));
+
+      console.log("Menu loaded from backend:", items);
+
+    } catch (err) {
+      console.error("Failed to load menu:", err);
+    }
+  }
+
+  // ============================================
   // STATIC EXISTING MENU SETUP
   // ============================================
   function setupExistingMenu() {
@@ -37,7 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================
   // DYNAMIC MENU (LOCALSTORAGE LOADED ITEMS)
   // ============================================
-  function setupDynamicMenu() {
+  async function setupDynamicMenu() {
+
+    // ⭐ IMPORTANT: Load items from backend first
+    await loadMenuFromAPI();
 
     function renderMenu(filtered = "all") {
       const items = JSON.parse(localStorage.getItem("menuItems")) || [];
@@ -105,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
         menuContainer.appendChild(card);
       });
 
-      // Re-attach cart button listeners
       document.querySelectorAll(".add-cart-btn").forEach(btn => {
         btn.addEventListener("click", addToCart);
       });
@@ -122,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================
-  // CART SYSTEM
+  // CART SYSTEM (unchanged)
   // ============================================
   function setupCart() {
 
@@ -222,7 +242,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 900);
     }
 
-    // Attach cart listeners on load
     document.querySelectorAll(".add-cart-btn").forEach(btn => {
       btn.addEventListener("click", addToCart);
     });
@@ -236,7 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Checkout
     const checkout = document.querySelector(".checkout-btn");
     if (checkout) {
       checkout.addEventListener("click", function () {
@@ -254,7 +272,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Close cart when clicking outside
     document.addEventListener("click", function (e) {
       if (
         cartSidebar &&
@@ -267,3 +284,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
