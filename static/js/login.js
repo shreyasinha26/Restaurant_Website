@@ -139,7 +139,7 @@ if (loginForm) {
             setLoading(loginButton, true);
 
             try {
-                const response = await fetch('/api/customer/login', {
+                const response = await fetch('/app/api/customer/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
@@ -213,14 +213,14 @@ async function checkAuthStatus() {
     if (!token) return;
 
     try {
-        const response = await fetch('/api/current-user', {
+        const response = await fetch('/app/api/current-user', {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` },
             credentials: 'include'
         });
 
         if (response.ok) {
-            // FIX: Correct server path
+            
             window.location.href = '/app/customer_dashboard';
         } else {
             localStorage.removeItem('auth_token');

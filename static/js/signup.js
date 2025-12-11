@@ -10,7 +10,7 @@ if (!signupForm) {
 
 // Auto-detect API prefix (local vs Apache /app/)
 const API_PREFIX = window.location.pathname.startsWith("/app") ? "/app" : "";
-const SIGNUP_URL = `${API_PREFIX}/api/signup`;
+const SIGNUP_URL = `${API_PREFIX}/api/api/signup`;
 
 // --------------------------
 // VALIDATION HELPERS
