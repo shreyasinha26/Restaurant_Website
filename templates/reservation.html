@@ -13,19 +13,14 @@
 <!-- Header -->
 <header class="site-header">
   <div class="logo">
-
-    <!-- FIXED -->
     <a href="/app/">
       <img src="{{ url_for('static', filename='images/logo_sample.jpeg') }}" alt="FreshBite Kitchen logo" />
     </a>
-
     <span data-i18n="logo_text">FreshBite Kitchen</span>
   </div>
 
   <nav>
     <ul>
-
-      <!-- FIXED LINKS -->
       <li><a data-i18n="nav_home" href="/app/">Home</a></li>
       <li><a data-i18n="nav_menu" href="/app/menu">Menu</a></li>
       <li><a data-i18n="nav_reservation" href="/app/reservation" class="active">Table Reservation</a></li>
@@ -45,7 +40,6 @@
       <li class="lang-switcher">
         <button id="lang-switch">FI / EN</button>
       </li>
-
     </ul>
   </nav>
 </header>
@@ -62,8 +56,8 @@
 <!-- Table Reservation Section -->
 <section class="table-reservation">
   <div class="reservation-container">
-
-    <!-- Left Side -->
+    
+    <!-- Left Side: Guidelines -->
     <div class="reservation-text">
       <h2 data-i18n="reservation_guidelines_title">Reservation Guidelines</h2>
       <ul>
@@ -74,70 +68,70 @@
       </ul>
     </div>
 
-    <!-- Right Side: Reservation Form -->
-    <div class="reservation-form"> <!-- ADD THIS DIV with class -->
+    <!-- Right Side: Form -->
+    <div class="reservation-form">
+      <h2 data-i18n="reservation_form_title">Make a Reservation</h2>
       <form id="reservationForm" novalidate>
-
+        
         <div class="form-group">
-          <label for="name" data-i18n="reservation_label_name">Full Name</label>
+          <label for="name" data-i18n="reservation_label_name">Full Name *</label>
           <input type="text" id="name" name="full_name" placeholder="Your Name" required>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
-          <label for="email" data-i18n="reservation_label_email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <label for="email" data-i18n="reservation_label_email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
-          <label for="phone" data-i18n="reservation_label_phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+          <label for="phone" data-i18n="reservation_label_phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="0412345678" required>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
-          <label for="guests" data-i18n="reservation_label_guests">Number of Guests</label>
+          <label for="guests" data-i18n="reservation_label_guests">Number of Guests *</label>
           <select id="guests" name="guests" required>
-            <option value="">Select</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
+            <option value="">Select number of guests</option>
+            <option value="1">1 person</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6 people</option>
+            <option value="7">7 people</option>
+            <option value="8">8 people</option>
+            <option value="9">9 people</option>
           </select>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
-          <label for="date" data-i18n="reservation_label_date">Date</label>
+          <label for="date" data-i18n="reservation_label_date">Date *</label>
           <input type="date" id="date" name="date" required>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
-          <label for="time" data-i18n="reservation_label_time">Time</label>
-          <input type="time" id="time" name="time" required>
+          <label for="time" data-i18n="reservation_label_time">Time *</label>
+          <input type="time" id="time" name="time" min="10:00" max="22:00" required>
           <span class="error-message"></span>
         </div>
 
         <div class="form-group">
           <label for="requests" data-i18n="reservation_label_requests">Special Requests</label>
-          <textarea id="requests" name="notes" placeholder="Any special requests"></textarea>
+          <textarea id="requests" name="notes" placeholder="Any allergies, celebrations, or special requirements..."></textarea>
           <span class="error-message"></span>
         </div>
 
         <button type="submit" class="submit-btn" data-i18n="reservation_submit_btn">
           Reserve Table
         </button>
-
       </form>
-    </div> 
-
+    </div>
+    
   </div>
 </section>
 
@@ -155,13 +149,10 @@
 </footer>
 
 <!-- Scripts -->
- <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 <script src="{{ url_for('static', filename='js/reservation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
 <script src="{{ url_for('static', filename='js/language.js') }}"></script>
-<script>
-  console.log('HTML loaded');
-  console.log('Form element:', document.getElementById('reservationForm'));
-</script>
+
 </body>
 </html>
