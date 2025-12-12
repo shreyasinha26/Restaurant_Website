@@ -316,12 +316,12 @@ footer {
 
 /* --- Inline Error Styles --- */
 .error-field {
-  border-color: #ff3b3b !important;
-  background-color: #fff1f1 !important;
+  border: 2px solid #ff4444 ;
+  background-color: #fff5f5 ;
 }
 
 .error-message {
-  color: #ff3b3b !important;
+  color: #ff4444 !important;
   font-size: 0.85rem;
   margin-top: 5px;
   font-weight: 500;
