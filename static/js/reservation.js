@@ -256,86 +256,28 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => div.remove(), 3000);
   }
 
-// ------------------------------
-// VALIDATION LOGIC (same as contact.js)
-// ------------------------------
-function validateField(field) {
-    const value = field.value.trim();
-    const errorBox = field.nextElementSibling; // <div class="error-message"></div>
-    let error = "";
-
-    // Find the label text dynamically (supports data-i18n)
-    let label = document.querySelector(`label[for="${field.id}"]`);
-    let name = label ? label.textContent.replace("*", "").trim() : "This field";
-
-    // Required check
-    if (field.required && !value) {
-        error = `${name} is required`;
+  // ------------------------------
+  // INLINE ERROR STYLES
+  // ------------------------------
+  const style = document.createElement("style");
+  style.textContent = `
+    .error-field {
+      border-color: #ff4444 !important;
+      background-color: #fff5f5;
     }
-
-    // Name validation
-    if (!error && field.id === "name" && value.length < 2) {
-        error = "Name must be at least 2 characters";
+    .error-container {
+      margin-top: 2px;
+      display: none;
     }
-
-    // Email validation
-    if (!error && field.type === "email") {
-        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!pattern.test(value)) error = "Please enter a valid email address";
+    .error-message {
+      color: #ff4444;
+      font-size: 0.85rem;
     }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  `;
+  document.head.appendChild(style);
 
-    // Phone validation
-    if (!error && field.id === "phone") {
-        const digits = value.replace(/\D/g, "");
-        if (digits.length !== 10) error = "Please enter a valid 10-digit phone number";
-    }
-
-    // Guests validation
-    if (!error && field.id === "guests") {
-        let g = parseInt(value);
-        if (!g || g < 1 || g > 9) error = "Guests must be between 1 and 9";
-    }
-
-    // Date validation
-    if (!error && field.id === "date") {
-        const picked = new Date(value);
-        const today = new Date();
-        today.setHours(0,0,0,0);
-
-        if (picked < today) error = "Date cannot be in the past";
-    }
-
-    // Time validation
-    if (!error && field.id === "time") {
-        if (value < "10:00" || value > "22:00") {
-            error = "Time must be between 10:00–22:00";
-        }
-    }
-
-    // Show / hide error
-    if (error) {
-        field.classList.add("error-field");
-        errorBox.textContent = error;
-        errorBox.style.display = "block";
-        return false;
-    } else {
-        field.classList.remove("error-field");
-        errorBox.textContent = "";
-        errorBox.style.display = "none";
-        return true;
-    }
-}
-
-
-// ------------------------------
-// REAL-TIME VALIDATION
-// ------------------------------
-form.querySelectorAll("input, select, textarea").forEach(field => {
-    field.addEventListener("input", () => validateField(field));
-    field.addEventListener("blur", () => validateField(field));
-
-    if (field.tagName === "SELECT") {
-        field.addEventListener("change", () => validateField(field));
-    }
 });
+
+
 
