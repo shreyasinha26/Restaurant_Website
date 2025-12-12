@@ -30,7 +30,7 @@ Admins can log in to a secure dashboard and manage menu data, specials, and item
 - Students & families  
 - Restaurant staff/administrators  
 - International users (EN/FI)  
-- Anyone wanting a modern food-ordering experience  
+- Anyone wanting a modern food-website experience  
 
 ---
 
@@ -48,24 +48,23 @@ Admins can log in to a secure dashboard and manage menu data, specials, and item
 - Dynamic menu fetched from API  
 - Filter categories:  
   **Burgers, Pizzas, Salads, Finnish, Healthy, Drinks**  
-- Dietary tags: vegan, gluten-free, dairy-free  
-- Add-to-cart button with UI feedback  
+- Dietary tags: vegan, gluten-free, dairy-free 
 
 ### 📅 Table Reservation Page  
 - Date & time selection (10:00–22:00)  
 - Guest selection (1–9)  
-- Special request field  
-- Inline form validation  
+- Special request field   
 - Stores reservations in MongoDB  
 
 ### 📬 Contact Page  
 - Validates input fields  
 - Submits message to database  
 - Clear success/error alerts  
+- Inline form validation 
 
 ### 📍 Find Us Page  
 - Restaurant location  
-- One-click link to **HSL Journey Planner**  
+- One-click link to **HSL Journey Planner** ,**Goodle Maps**,**Apple Maps**
 
 ### 🌍 Multi-Language Support  
 - EN / FI  
@@ -108,7 +107,7 @@ Admins can log in to a secure dashboard and manage menu data, specials, and item
   - `users`  
 
 ### Frontend  
-- HTML, CSS, Vanilla JavaScript  
+- HTML, CSS, JavaScript  
 - Dynamic API-based rendering  
 - Responsive design  
 
@@ -142,7 +141,7 @@ Admins can log in to a secure dashboard and manage menu data, specials, and item
    - Submit to DB  
 
 5. **Find Us Page**  
-   - Click “Open in HSL” link  
+   - Click “Open in HSL” or “Google Maps” or “Apple Maps” link  
 
 ---
 
