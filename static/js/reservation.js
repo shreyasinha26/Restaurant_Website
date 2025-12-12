@@ -1,69 +1,85 @@
-// reservation.js - Simple Working Version
+// reservation.js - Complete working version with inline validation
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Reservation page loaded');
   
+  // Get the form
   const form = document.getElementById('reservationForm');
   if (!form) {
-    console.error('Form not found!');
+    console.error('Form not found');
     return;
   }
   
-  // Set today as min date
+  // Get form elements
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const guestsInput = document.getElementById('guests');
   const dateInput = document.getElementById('date');
   const timeInput = document.getElementById('time');
+  const requestsInput = document.getElementById('requests');
   
+  // Set minimum date to today
   if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-    dateInput.value = today; // Default to today
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    dateInput.min = `${year}-${month}-${day}`;
   }
   
+  // Set time constraints
   if (timeInput) {
-    // Set time constraints
     timeInput.min = '10:00';
     timeInput.max = '22:00';
-    
-    // Set default time (next hour or 12:00)
-    const now = new Date();
-    let nextHour = now.getHours() + 1;
-    if (nextHour < 10) nextHour = 12;
-    if (nextHour > 22) nextHour = 12;
-    
-    timeInput.value = nextHour.toString().padStart(2, '0') + ':00';
   }
   
-  // Simple validation on blur
+  // Real-time validation for each field
   const inputs = form.querySelectorAll('input, select, textarea');
+  
   inputs.forEach(input => {
+    // Validate when user leaves the field
     input.addEventListener('blur', function() {
-      validateSingleField(this);
+      validateField(this);
     });
     
-    // Clear error when typing
-    input.addEventListener('input', function() {
-      const errorSpan = this.parentElement.querySelector('.error-message');
-      if (errorSpan) {
-        errorSpan.style.display = 'none';
-        this.classList.remove('error-field');
-      }
-    });
+    // Clear error when user starts typing (for required fields)
+    if (input.hasAttribute('required')) {
+      input.addEventListener('input', function() {
+        if (this.classList.contains('error-field')) {
+          clearError(this);
+        }
+      });
+    }
+    
+    // For select elements, validate on change
+    if (input.tagName === 'SELECT') {
+      input.addEventListener('change', function() {
+        validateField(this);
+      });
+    }
   });
   
-  // Validation function for single field
-  function validateSingleField(field) {
+  // Validation functions
+  function validateField(field) {
     const value = field.value.trim();
     const errorSpan = field.parentElement.querySelector('.error-message');
     
     if (!errorSpan) return true;
     
     // Clear previous error
+    errorSpan.textContent = '';
     errorSpan.style.display = 'none';
     field.classList.remove('error-field');
     
-    // Check if required and empty
+    // Required field validation
     if (field.hasAttribute('required') && !value) {
       showError(field, 'This field is required');
       return false;
+    }
+    
+    // Skip further validation if field is empty but not required
+    if (!value && !field.hasAttribute('required')) {
+      return true;
     }
     
     // Field-specific validations
@@ -76,43 +92,37 @@ document.addEventListener('DOMContentLoaded', function() {
         break;
         
       case 'email':
-        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          showError(field, 'Enter a valid email address');
+        if (!isValidEmail(value)) {
+          showError(field, 'Please enter a valid email address');
           return false;
         }
         break;
         
       case 'phone':
-        if (value && value.replace(/\D/g, '').length !== 10) {
-          showError(field, 'Enter a 10-digit phone number');
+        if (!isValidPhone(value)) {
+          showError(field, 'Please enter a valid phone number (10 digits)');
           return false;
         }
         break;
         
       case 'guests':
         const guests = parseInt(value);
-        if (value && (guests < 1 || guests > 9)) {
-          showError(field, 'Select 1-9 guests');
+        if (isNaN(guests) || guests < 1 || guests > 9) {
+          showError(field, 'Please select 1-9 guests');
           return false;
         }
         break;
         
       case 'date':
-        if (value) {
-          const selected = new Date(value);
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          
-          if (selected < today) {
-            showError(field, 'Date cannot be in the past');
-            return false;
-          }
+        if (!isValidDate(value)) {
+          showError(field, 'Please select a valid date');
+          return false;
         }
         break;
         
       case 'time':
-        if (value && (value < '10:00' || value > '22:00')) {
-          showError(field, 'Time must be 10:00-22:00');
+        if (!isValidTime(value)) {
+          showError(field, 'Please select time between 10:00-22:00');
           return false;
         }
         break;
@@ -121,6 +131,35 @@ document.addEventListener('DOMContentLoaded', function() {
     return true;
   }
   
+  // Helper validation functions
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
+  function isValidPhone(phone) {
+    // Remove all non-digit characters
+    const digits = phone.replace(/\D/g, '');
+    return digits.length === 10;
+  }
+  
+  function isValidDate(dateString) {
+    const date = new Date(dateString);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Check if date is valid and not in the past
+    return date instanceof Date && !isNaN(date) && date >= today;
+  }
+  
+  function isValidTime(timeString) {
+    if (!timeString) return false;
+    const time = timeString.split(':');
+    const hour = parseInt(time[0]);
+    return hour >= 10 && hour <= 22;
+  }
+  
+  // Error display functions
   function showError(field, message) {
     const errorSpan = field.parentElement.querySelector('.error-message');
     if (errorSpan) {
@@ -130,50 +169,65 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Form submission
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+  function clearError(field) {
+    const errorSpan = field.parentElement.querySelector('.error-message');
+    if (errorSpan) {
+      errorSpan.textContent = '';
+      errorSpan.style.display = 'none';
+      field.classList.remove('error-field');
+    }
+  }
+  
+  // Form submission handler
+  form.addEventListener('submit', async function(event) {
+    event.preventDefault();
     console.log('Form submission started');
     
-    // Validate all fields
-    let isValid = true;
+    // Validate all fields before submission
+    let formIsValid = true;
     const requiredFields = form.querySelectorAll('[required]');
     
     requiredFields.forEach(field => {
-      if (!validateSingleField(field)) {
-        isValid = false;
+      if (!validateField(field)) {
+        formIsValid = false;
       }
     });
     
-    if (!isValid) {
-      showPopup('Please fix errors in form', 'error');
+    if (!formIsValid) {
+      // Show error message and scroll to first error
+      showNotification('Please fix all errors before submitting.', 'error');
+      const firstError = document.querySelector('.error-field');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
     
-    // Prepare data
+    // Prepare form data
     const formData = {
-      full_name: document.getElementById('name').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      guests: document.getElementById('guests').value,
-      date: document.getElementById('date').value,
-      time: document.getElementById('time').value,
-      notes: document.getElementById('requests').value.trim()
+      full_name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      guests: guestsInput.value,
+      date: dateInput.value,
+      time: timeInput.value,
+      notes: requestsInput.value.trim()
     };
     
-    console.log('Submitting:', formData);
+    console.log('Form data:', formData);
     
-    // Disable submit button
+    // Disable submit button to prevent double submission
     const submitBtn = form.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Processing...';
     
     try {
-      // API endpoint
+      // Determine API endpoint
       const API_PREFIX = window.location.pathname.startsWith('/app') ? '/app' : '';
       const BASE_URL = API_PREFIX + '/api/reservations';
       
+      // Send reservation data
       const response = await fetch(BASE_URL, {
         method: 'POST',
         headers: {
@@ -185,76 +239,90 @@ document.addEventListener('DOMContentLoaded', function() {
       const result = await response.json();
       
       if (response.ok) {
-        showPopup('Reservation created successfully!', 'success');
+        // Success
+        showNotification('Reservation created successfully!', 'success');
+        
+        // Reset form
         form.reset();
         
-        // Reset date/time defaults
+        // Clear all error messages
+        inputs.forEach(input => clearError(input));
+        
+        // Reset date to today
         if (dateInput) {
-          dateInput.value = new Date().toISOString().split('T')[0];
-        }
-        if (timeInput) {
-          const now = new Date();
-          let nextHour = now.getHours() + 1;
-          if (nextHour < 10) nextHour = 12;
-          if (nextHour > 22) nextHour = 12;
-          timeInput.value = nextHour.toString().padStart(2, '0') + ':00';
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = String(today.getMonth() + 1).padStart(2, '0');
+          const day = String(today.getDate()).padStart(2, '0');
+          dateInput.value = `${year}-${month}-${day}`;
         }
         
-        // Clear all errors
-        form.querySelectorAll('.error-message').forEach(el => {
-          el.style.display = 'none';
-        });
-        form.querySelectorAll('.error-field').forEach(el => {
-          el.classList.remove('error-field');
-        });
+        // Reset time to default
+        if (timeInput) {
+          timeInput.value = '12:00';
+        }
         
       } else {
-        showPopup(result.message || 'Reservation failed', 'error');
+        // Server error
+        showNotification(result.message || 'Failed to create reservation. Please try again.', 'error');
       }
       
     } catch (error) {
+      // Network error
       console.error('Error:', error);
-      showPopup('Network error. Please try again.', 'error');
+      showNotification('Network error. Please check your connection and try again.', 'error');
     } finally {
+      // Re-enable submit button
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
     }
   });
   
-  // Popup notification
-  function showPopup(message, type) {
-    // Remove existing popups
-    document.querySelectorAll('.popup-notification').forEach(el => el.remove());
+  // Notification system
+  function showNotification(message, type) {
+    // Remove any existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
     
-    const popup = document.createElement('div');
-    popup.className = `popup-notification ${type}`;
-    popup.textContent = message;
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
     
-    popup.style.cssText = `
+    // Style the notification
+    notification.style.cssText = `
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 15px 20px;
-      background: ${type === 'success' ? '#4CAF50' : '#E74C3C'};
+      padding: 15px 25px;
+      background-color: ${type === 'success' ? '#4CAF50' : '#f44336'};
       color: white;
       border-radius: 8px;
       font-weight: 600;
-      z-index: 9999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      animation: slideIn 0.3s ease;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      animation: slideIn 0.3s ease-out;
+      max-width: 400px;
     `;
     
-    document.body.appendChild(popup);
+    // Add to body
+    document.body.appendChild(notification);
     
+    // Auto-remove after 5 seconds
     setTimeout(() => {
-      popup.remove();
-    }, 4000);
+      notification.style.animation = 'slideOut 0.3s ease-out';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 5000);
   }
   
-  // Add animation CSS
-  if (!document.querySelector('#popup-animation')) {
+  // Add animation styles if not already present
+  if (!document.querySelector('#notification-styles')) {
     const style = document.createElement('style');
-    style.id = 'popup-animation';
+    style.id = 'notification-styles';
     style.textContent = `
       @keyframes slideIn {
         from {
@@ -266,7 +334,29 @@ document.addEventListener('DOMContentLoaded', function() {
           transform: translateX(0);
         }
       }
+      
+      @keyframes slideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
     `;
     document.head.appendChild(style);
   }
+  
+  // Initialize the form with today's date
+  if (dateInput) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    dateInput.value = `${year}-${month}-${day}`;
+  }
+  
+  console.log('Reservation form initialized successfully');
 });
