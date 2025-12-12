@@ -75,20 +75,27 @@
     </div>
 
     <!-- Right Side: Reservation Form -->
-    <div class="reservation-form">
-      <h2 data-i18n="reservation_form_title">Reserve a Table</h2>
+    <form id="reservationForm" novalidate>
 
-      <form id="reservationForm">
-
+      <div class="form-group">
         <label for="name" data-i18n="reservation_label_name">Full Name</label>
         <input type="text" id="name" name="full_name" placeholder="Your Name" required>
+        <div class="error-message"></div>
+      </div>
 
+      <div class="form-group">
         <label for="email" data-i18n="reservation_label_email">Email</label>
         <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <div class="error-message"></div>
+      </div>
 
+      <div class="form-group">
         <label for="phone" data-i18n="reservation_label_phone">Phone Number</label>
         <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+        <div class="error-message"></div>
+      </div>
 
+      <div class="form-group">
         <label for="guests" data-i18n="reservation_label_guests">Number of Guests</label>
         <select id="guests" name="guests" required>
           <option value="">Select</option>
@@ -102,24 +109,36 @@
           <option value="8">8</option>
           <option value="9">9</option>
         </select>
+        <div class="error-message"></div>
+      </div>
 
-        <span class="guest-warning" style="display:none;">
-          Groups over 9 cannot reserve online.
-        </span>
+      <span class="guest-warning" style="display:none;">
+        Groups over 9 cannot reserve online.
+      </span>
 
+      <div class="form-group">
         <label for="date" data-i18n="reservation_label_date">Date</label>
         <input type="date" id="date" name="date" required>
+        <div class="error-message"></div>
+      </div>
 
+      <div class="form-group">
         <label for="time" data-i18n="reservation_label_time">Time</label>
         <input type="time" id="time" name="time" required>
+        <div class="error-message"></div>
+      </div>
 
+      <div class="form-group">
         <label for="requests" data-i18n="reservation_label_requests">Special Requests</label>
         <textarea id="requests" name="notes" placeholder="Any special requests"></textarea>
+        <div class="error-message"></div>
+      </div>
 
-        <button type="submit" class="submit-btn" data-i18n="reservation_submit_btn">
-          Reserve Table
-        </button>
-      </form>
+      <button type="submit" class="submit-btn" data-i18n="reservation_submit_btn">
+        Reserve Table
+      </button>
+
+    </form>
 
     </div>
   </div>
@@ -139,10 +158,10 @@
 </footer>
 
 <!-- Scripts -->
+ <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 <script src="{{ url_for('static', filename='js/reservation.js') }}"></script>
 <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
 <script src="{{ url_for('static', filename='js/language.js') }}"></script>
-<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 
 </body>
 </html>
