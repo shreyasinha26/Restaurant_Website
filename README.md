@@ -1,4 +1,6 @@
-# 🍽️ FreshBite Kitchen – Full-Stack Restaurant Web Application  
+# 🍽️ FreshBite Kitchen – Full-Stack Restaurant Web 
+
+Application  Testing 🌐 https://10.120.32.84/app/
 
 A modern restaurant website built using **Flask**, **MongoDB**, and **Vanilla JavaScript**, designed for both customers and administrators.  
 The system includes real-time menu loading, today’s specials, table reservations, contact form storage, and an interactive admin dashboard.
