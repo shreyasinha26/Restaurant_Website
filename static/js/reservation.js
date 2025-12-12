@@ -1,95 +1,110 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("reservationForm");
-  if (!form) return;
-
-  const API_PREFIX = window.location.pathname.startsWith("/app") ? "/app" : "";
-  const BASE_URL = API_PREFIX + "/api/reservations";
-
-  // Set min date to today
-  const dateInput = document.getElementById("date");
-  const timeInput = document.getElementById("time");
+// reservation.js - Simple Working Version
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Reservation page loaded');
+  
+  const form = document.getElementById('reservationForm');
+  if (!form) {
+    console.error('Form not found!');
+    return;
+  }
+  
+  // Set today as min date
+  const dateInput = document.getElementById('date');
+  const timeInput = document.getElementById('time');
   
   if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.min = today;
+    dateInput.value = today; // Default to today
   }
   
   if (timeInput) {
-    timeInput.min = "10:00";
-    timeInput.max = "22:00";
-  }
-
-  // Validation functions
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function validatePhone(phone) {
-    const digits = phone.replace(/\D/g, '');
-    return digits.length === 10;
-  }
-
-  function validateField(field) {
-    const value = field.value.trim();
-    const errorDiv = field.parentNode.querySelector('.error-message');
+    // Set time constraints
+    timeInput.min = '10:00';
+    timeInput.max = '22:00';
     
-    if (!errorDiv) return true;
+    // Set default time (next hour or 12:00)
+    const now = new Date();
+    let nextHour = now.getHours() + 1;
+    if (nextHour < 10) nextHour = 12;
+    if (nextHour > 22) nextHour = 12;
+    
+    timeInput.value = nextHour.toString().padStart(2, '0') + ':00';
+  }
+  
+  // Simple validation on blur
+  const inputs = form.querySelectorAll('input, select, textarea');
+  inputs.forEach(input => {
+    input.addEventListener('blur', function() {
+      validateSingleField(this);
+    });
+    
+    // Clear error when typing
+    input.addEventListener('input', function() {
+      const errorSpan = this.parentElement.querySelector('.error-message');
+      if (errorSpan) {
+        errorSpan.style.display = 'none';
+        this.classList.remove('error-field');
+      }
+    });
+  });
+  
+  // Validation function for single field
+  function validateSingleField(field) {
+    const value = field.value.trim();
+    const errorSpan = field.parentElement.querySelector('.error-message');
+    
+    if (!errorSpan) return true;
     
     // Clear previous error
-    errorDiv.textContent = '';
+    errorSpan.style.display = 'none';
     field.classList.remove('error-field');
     
-    // Required field check
-    if (field.required && !value) {
-      errorDiv.textContent = 'This field is required';
-      field.classList.add('error-field');
+    // Check if required and empty
+    if (field.hasAttribute('required') && !value) {
+      showError(field, 'This field is required');
       return false;
     }
     
     // Field-specific validations
     switch(field.id) {
+      case 'name':
+        if (value.length < 2) {
+          showError(field, 'Name must be at least 2 characters');
+          return false;
+        }
+        break;
+        
       case 'email':
-        if (value && !validateEmail(value)) {
-          errorDiv.textContent = 'Please enter a valid email address';
-          field.classList.add('error-field');
+        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          showError(field, 'Enter a valid email address');
           return false;
         }
         break;
         
       case 'phone':
-        if (value && !validatePhone(value)) {
-          errorDiv.textContent = 'Please enter a valid 10-digit phone number';
-          field.classList.add('error-field');
-          return false;
-        }
-        break;
-        
-      case 'name':
-        if (value.length < 2) {
-          errorDiv.textContent = 'Name must be at least 2 characters';
-          field.classList.add('error-field');
+        if (value && value.replace(/\D/g, '').length !== 10) {
+          showError(field, 'Enter a 10-digit phone number');
           return false;
         }
         break;
         
       case 'guests':
         const guests = parseInt(value);
-        if (guests < 1 || guests > 9) {
-          errorDiv.textContent = 'Number of guests must be 1-9';
-          field.classList.add('error-field');
+        if (value && (guests < 1 || guests > 9)) {
+          showError(field, 'Select 1-9 guests');
           return false;
         }
         break;
         
       case 'date':
         if (value) {
-          const selectedDate = new Date(value);
+          const selected = new Date(value);
           const today = new Date();
           today.setHours(0, 0, 0, 0);
           
-          if (selectedDate < today) {
-            errorDiv.textContent = 'Date cannot be in the past';
-            field.classList.add('error-field');
+          if (selected < today) {
+            showError(field, 'Date cannot be in the past');
             return false;
           }
         }
@@ -97,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
       case 'time':
         if (value && (value < '10:00' || value > '22:00')) {
-          errorDiv.textContent = 'Time must be between 10:00 and 22:00';
-          field.classList.add('error-field');
+          showError(field, 'Time must be 10:00-22:00');
           return false;
         }
         break;
@@ -106,41 +120,37 @@ document.addEventListener("DOMContentLoaded", () => {
     
     return true;
   }
-
-  // Real-time validation on blur
-  form.querySelectorAll('input, select, textarea').forEach(field => {
-    field.addEventListener('blur', () => validateField(field));
-    
-    // For select elements, validate on change
-    if (field.tagName === 'SELECT') {
-      field.addEventListener('change', () => validateField(field));
+  
+  function showError(field, message) {
+    const errorSpan = field.parentElement.querySelector('.error-message');
+    if (errorSpan) {
+      errorSpan.textContent = message;
+      errorSpan.style.display = 'block';
+      field.classList.add('error-field');
     }
-  });
-
+  }
+  
   // Form submission
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    console.log('Form submission started');
     
     // Validate all fields
     let isValid = true;
-    form.querySelectorAll('input[required], select[required]').forEach(field => {
-      if (!validateField(field)) {
+    const requiredFields = form.querySelectorAll('[required]');
+    
+    requiredFields.forEach(field => {
+      if (!validateSingleField(field)) {
         isValid = false;
       }
     });
     
     if (!isValid) {
-      showNotification('Please fix all errors before submitting.', 'error');
+      showPopup('Please fix errors in form', 'error');
       return;
     }
     
-    // Submit form
-    const submitBtn = form.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing...';
-    
+    // Prepare data
     const formData = {
       full_name: document.getElementById('name').value.trim(),
       email: document.getElementById('email').value.trim(),
@@ -151,44 +161,112 @@ document.addEventListener("DOMContentLoaded", () => {
       notes: document.getElementById('requests').value.trim()
     };
     
+    console.log('Submitting:', formData);
+    
+    // Disable submit button
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Processing...';
+    
     try {
+      // API endpoint
+      const API_PREFIX = window.location.pathname.startsWith('/app') ? '/app' : '';
+      const BASE_URL = API_PREFIX + '/api/reservations';
+      
       const response = await fetch(BASE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData)
       });
       
       const result = await response.json();
       
       if (response.ok) {
-        showNotification('Reservation created successfully!', 'success');
+        showPopup('Reservation created successfully!', 'success');
         form.reset();
-        // Clear all error messages
+        
+        // Reset date/time defaults
+        if (dateInput) {
+          dateInput.value = new Date().toISOString().split('T')[0];
+        }
+        if (timeInput) {
+          const now = new Date();
+          let nextHour = now.getHours() + 1;
+          if (nextHour < 10) nextHour = 12;
+          if (nextHour > 22) nextHour = 12;
+          timeInput.value = nextHour.toString().padStart(2, '0') + ':00';
+        }
+        
+        // Clear all errors
         form.querySelectorAll('.error-message').forEach(el => {
-          el.textContent = '';
-          el.previousElementSibling?.classList.remove('error-field');
+          el.style.display = 'none';
         });
+        form.querySelectorAll('.error-field').forEach(el => {
+          el.classList.remove('error-field');
+        });
+        
       } else {
-        showNotification(result.message || 'Failed to create reservation.', 'error');
+        showPopup(result.message || 'Reservation failed', 'error');
       }
+      
     } catch (error) {
-      showNotification('Network error. Please try again.', 'error');
+      console.error('Error:', error);
+      showPopup('Network error. Please try again.', 'error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
     }
   });
-
-  // Notification function
-  function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
+  
+  // Popup notification
+  function showPopup(message, type) {
+    // Remove existing popups
+    document.querySelectorAll('.popup-notification').forEach(el => el.remove());
     
-    document.body.appendChild(notification);
+    const popup = document.createElement('div');
+    popup.className = `popup-notification ${type}`;
+    popup.textContent = message;
+    
+    popup.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background: ${type === 'success' ? '#4CAF50' : '#E74C3C'};
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(popup);
     
     setTimeout(() => {
-      notification.remove();
-    }, 3000);
+      popup.remove();
+    }, 4000);
+  }
+  
+  // Add animation CSS
+  if (!document.querySelector('#popup-animation')) {
+    const style = document.createElement('style');
+    style.id = 'popup-animation';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
   }
 });
